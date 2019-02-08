@@ -5,11 +5,18 @@
   "repository": "git@github.com:aguairon/project-03.git",
   "author": "Begona Fernandez <boadicea1979@yahoo.es>",
   "license": "MIT",
+  "scripts": {
+  "serve": "webpack-dev-server --mode=development",
+  "start": "node index",
+  "seed": "node db/seeds",
+  "test": "mocha test/**/*_spec.js --require test/spec_helper --recursive --exit"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongoose": "^5.4.10",
+    "mongoose-unique-validator": "^2.0.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-router-dom": "^4.3.1"
