@@ -22,8 +22,8 @@ router.route('/projects')
   .get(projectsController.index)
   .post(projectsController.create)
 
-// router.route('/projects/:id')
-//   .get(projectsController.show)
+router.route('/projects/:id')
+  .get(projectsController.show)
 //   .put(secureRoute, projectsController.update)
 //   .delete(secureRoute, projectsController.delete)
 
