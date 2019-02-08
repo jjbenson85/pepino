@@ -20,10 +20,10 @@ router.post('/login', authController.login)
 
 router.route('/projects')
   .get(projectsController.index)
-//   .post(secureRoute, projectsController.create)
+  .post(projectsController.create)
 
-// router.route('/projects/:id')
-//   .get(projectsController.show)
+router.route('/projects/:id')
+  .get(projectsController.show)
 //   .put(secureRoute, projectsController.update)
 //   .delete(secureRoute, projectsController.delete)
 
@@ -31,8 +31,8 @@ router.route('/packages')
   .get(packagesController.index)
   // .post(secureRoute, packagesController.create)
 
-// router.route('/packages/:id')
-//   .get(packagesController.show)
+router.route('/packages/:name')
+  .get(packagesController.show)
 // .put(secureRoute, packagesController.update)
 // .delete(secureRoute, packagesController.delete)
 
