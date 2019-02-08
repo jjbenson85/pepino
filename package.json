@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "seed": "node db/seeds",
-    "start": "node index",
+    "start": "yarn build && node index",
     "build": "webpack -p",
     "serve": "webpack-dev-server --mode=development"
   },
