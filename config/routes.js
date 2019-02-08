@@ -1,6 +1,6 @@
 const router = require('express').Router()
 
-// const secureRoute = require('../lib/secureRoute')
+//const secureRoute = require('../lib/secureRoute')
 const authController = require('../controllers/auth')
 const usersController = require('../controllers/users')
 const projectsController = require('../controllers/projects')
@@ -15,7 +15,7 @@ router.route('/users')
 
 router.route('/users/:id')
   .get(usersController.show)
-//   .put(secureRoute, usersController.update)
+//  .put(secureRoute, usersController.update)
 //   .delete(secureRoute, usersController.delete)
 
 router.route('/projects')

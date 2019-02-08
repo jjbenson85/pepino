@@ -14,7 +14,6 @@ function showRoute(req, res, next) {
     .catch(next)
 }
 
-
 module.exports = {
   index: indexRoute,
   show: showRoute
