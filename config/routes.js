@@ -1,6 +1,6 @@
 const router = require('express').Router()
 
-//const secureRoute = require('../lib/secureRoute')
+const secureRoute = require('../lib/secureRoute')
 const authController = require('../controllers/auth')
 const usersController = require('../controllers/users')
 const projectsController = require('../controllers/projects')
@@ -20,11 +20,11 @@ router.route('/users/:id')
 
 router.route('/projects')
   .get(projectsController.index)
-  .post(projectsController.create)
+  .post(secureRoute, projectsController.create)
 
 router.route('/projects/:id')
   .get(projectsController.show)
-  .put(projectsController.update)
+  .put(secureRoute, projectsController.update)
 //   .delete(secureRoute, projectsController.delete)
 
 router.route('/packages')
