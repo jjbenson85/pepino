@@ -10,6 +10,20 @@ const userSchema = new mongoose.Schema({
   bio: {type: String}
 })
 
+
+userSchema.virtual('project', {
+  ref: 'Project',
+  localField: '_id',
+  foreignField: 'user'
+})
+
+
+userSchema.virtual('passwordConfirmation')
+  .set(function setPasswordConfirmation(passwordConfirmation){
+    this._passwordConfirmation = passwordConfirmation
+  })
+
+
 userSchema.plugin(uniqueValidator)
 
 userSchema.virtual('passwordConfirmation')
@@ -34,5 +48,16 @@ userSchema.pre('save', function hashPassword(next){
 userSchema.methods.validatePassword = function(password){
   return bcrypt.compareSync(password,this.password)
 }
+
+
+userSchema.set('toJSON', {
+  virtuals: true,
+  transform(doc, json) {
+    delete json.__v
+    delete json.id
+
+    return json
+  }
+})
 
 module.exports =  mongoose.model('User', userSchema)
