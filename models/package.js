@@ -10,7 +10,7 @@ const packageSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
   description: { type: String, required: true },
   keywords: [{ type: String}],
-  downloads: { type: Number}
+  downloadsCount: { type: Number}
   // comments: [commentSchema]
 })
 
