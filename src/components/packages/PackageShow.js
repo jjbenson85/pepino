@@ -14,41 +14,55 @@ class PackageShow extends React.Component{
   getPackageData(){
     axios.get(`/api/packages/${this.props.match.params.name}`)
       .then( res =>{
-        console.log('axios \n',res)
         this.setState({ package: res.data})
       })
       .catch((err)=>console.log(err.message))
   }
 
   componentDidMount(){
-    console.log('didmount')
     this.getPackageData()
   }
 
   render(){
     if(!this.state.package) return null
-    console.log('render',this.state.package)
     const {
       name,
       description,
       author,
       publisher,
-      repository,
       links,
-      license,
-      comments
+      license
     } = this.state.package.collected.metadata
-    // linksArr = 
+    const {comments} = this.state.package
+    function arrFromObj(obj){
+      const arr = []
+      for (const key in obj) arr.push([key, obj[key]])
+      return arr
+    }
+
     return(
       <section>
         <h1>Packages</h1>
         <h2>{name}</h2>
         <p>{description}</p>
-        <p>{`author:${author}`}</p>
-        <p>{`publisher:${publisher}`}</p>
+        <p>{`author:${author.name}`}</p>
+        <p>{`license:${license}`}</p>
+        <p>{`publisher:${publisher.username}, ${publisher.email}`}</p>
         <h3>links:</h3>
-        {}
-        <h2>{/*this.state.package.name*/}</h2>
+        <ul>
+          {arrFromObj(links).map( (link,i) => {
+            return <li key={i}><a  href={link[1]}>{link[0]}</a></li>
+          })}
+        </ul>
+        <h3>Comments</h3>
+        <ul>
+          {comments.map( (comment, i) =>
+            <li key={i}>
+              <p>{comment.text}</p>
+              <p>{`Posted by ${comment.user.username}`}</p>
+            </li>
+          )}
+        </ul>
       </section>
     )
   }

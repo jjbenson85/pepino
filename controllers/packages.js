@@ -8,7 +8,6 @@ function indexRoute(req, res) {
     .then(packages => res.json(packages))
 }
 function showRoute(req, res) {
-  console.log('name',req.params.name)
   const name = req.params.name
   var options = {
     uri: `https://api.npms.io/v2/package/${req.params.name}`,
@@ -22,22 +21,11 @@ function showRoute(req, res) {
         .populate({
           path: 'comments.user',
           select: 'username image'
-          //Populate the name of the series
-          // populate: {
-          //   path: 'user',
-          //   select: 'name'
-          // }
         })
         .then(_package => {
           console.log(_package)
-          const newData = {...data, commments: _package.comments}
+          const newData = {...data, comments: _package.comments}
           res.json(newData)
-          // const showPackage = {
-          //   pepino: _package[0],
-          //   npms: data
-          //
-          // }
-          // res.json(showPackage)
         })
     })
 }
