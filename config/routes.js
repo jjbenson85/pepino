@@ -20,7 +20,7 @@ const packagesController = require('../controllers/packages')
 
 router.route('/projects')
   .get(projectsController.index)
-//   .post(secureRoute, projectsController.create)
+  .post(projectsController.create)
 
 // router.route('/projects/:id')
 //   .get(projectsController.show)
