@@ -7,7 +7,7 @@ const projectsController = require('../controllers/projects')
 const packagesController = require('../controllers/packages')
 
 router.post('/register', authController.register)
-// router.post('/login', authController.login)
+router.post('/login', authController.login)
 
 // router.route('/users')
 //   .get(usersController.index)
