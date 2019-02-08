@@ -1,21 +1,21 @@
 const router = require('express').Router()
 
-// const secureRoute = require('../lib/secureRoute')
+//const secureRoute = require('../lib/secureRoute')
 const authController = require('../controllers/auth')
-// const usersController = require('../controllers/users')
+const usersController = require('../controllers/users')
 const projectsController = require('../controllers/projects')
 const packagesController = require('../controllers/packages')
 
 router.post('/register', authController.register)
 router.post('/login', authController.login)
 
-// router.route('/users')
-//   .get(usersController.index)
+router.route('/users')
+  .get(usersController.index)
 //   .post(secureRoute, usersController.create)
 
-// router.route('/users/:id')
-//   .get(usersController.show)
-//   .put(secureRoute, usersController.update)
+router.route('/users/:id')
+  .get(usersController.show)
+//  .put(secureRoute, usersController.update)
 //   .delete(secureRoute, usersController.delete)
 
 router.route('/projects')
