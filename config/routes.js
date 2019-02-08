@@ -1,12 +1,12 @@
 const router = require('express').Router()
 
 // const secureRoute = require('../lib/secureRoute')
-// const authController = require('../controllers/auth')
+const authController = require('../controllers/auth')
 // const usersController = require('../controllers/users')
 const projectsController = require('../controllers/projects')
 const packagesController = require('../controllers/packages')
 
-// router.post('/register', authController.register)
+router.post('/register', authController.register)
 // router.post('/login', authController.login)
 
 // router.route('/users')
