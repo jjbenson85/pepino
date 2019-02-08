@@ -6,18 +6,45 @@ const Promise = require('bluebird')
 mongoose.Promise = Promise
 
 const Package = require('../models/package')
+const User = require('../models/user')
+const Project = require('../models/project')
 
-
+// let user1
+// let user2
 
 mongoose.connect(process.env.MONGODB_URI, (err, db) => {
   db.dropDatabase()
-
-    .then(()=>{
+    .then( ()=>{
+      return User.create({
+        username: 'James',
+        password: 'pass',
+        passwordConfirmation: 'pass',
+        email: 'james@email.com',
+        image: 'https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/13592585_820157962567_7587254174743103700_n.jpg?_nc_cat=107&_nc_ht=scontent-lhr3-1.xx&oh=aeb90d73de4bda5f560059b37658a67f&oe=5CE8FD2F',
+        bio: 'I love packages!'
+      })
+    })
+    .then( (user)=>{
+      return Project.create({
+        name: 'Beautiful project',
+        description: 'The most Beautiful Project in the world',
+        user: user,
+        public: true        
+      })
+    })
+    .then((user)=>{
       return Package.create({
         name: 'webpack',
         description: 'Packs CommonJs/AMD modules for the browser. Allows to split your codebase into multiple bundles, which can be loaded on demand. Support loaders to preprocess files, i.e. json, jsx, es7, css, less, ... and your custom stuff.',
         keywords: ['webpack'],
-        downloadsCount: 22629569
+        downloadsCount: 22629569,
+        comments: [{
+          text: 'This is great!',
+          user: user
+        },{
+          text: 'Best package ever!',
+          user: user
+        }]
       })
     })
     .then(()=>{

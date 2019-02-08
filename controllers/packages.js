@@ -17,16 +17,27 @@ function showRoute(req, res) {
   //
   rp(options)
     .then((data)=>{
-      // console.log(data)
       Package
-        .find({name})
+        .findOne({name})
+        .populate({
+          path: 'comments.user',
+          select: 'username image'
+          //Populate the name of the series
+          // populate: {
+          //   path: 'user',
+          //   select: 'name'
+          // }
+        })
         .then(_package => {
-          const showPackage = {
-            pepino: {_package},
-            npms: {data}
-
-          }
-          res.json(showPackage)
+          console.log(_package)
+          const newData = {...data, commments: _package.comments}
+          res.json(newData)
+          // const showPackage = {
+          //   pepino: _package[0],
+          //   npms: data
+          //
+          // }
+          // res.json(showPackage)
         })
     })
 }
