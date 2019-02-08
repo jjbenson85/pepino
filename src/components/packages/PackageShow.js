@@ -25,6 +25,7 @@ class PackageShow extends React.Component{
 
   render(){
     if(!this.state.package) return null
+    console.log('package', this.state.package)
     const {
       name,
       description,
