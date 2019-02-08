@@ -18,18 +18,13 @@ userSchema.virtual('project', {
 })
 
 
-userSchema.virtual('passwordConfirmation')
-  .set(function setPasswordConfirmation(passwordConfirmation){
-    this._passwordConfirmation = passwordConfirmation
-  })
-
-
 userSchema.plugin(uniqueValidator)
 
 userSchema.virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation){
     this._passwordConfirmation = passwordConfirmation
   })
+
 
 userSchema.pre('validate', function checkPasswordsMatch(next){
   if(this.isModified('password') && this.password !== this._passwordConfirmation){
