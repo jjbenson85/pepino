@@ -31,7 +31,7 @@ router.route('/packages')
   .get(packagesController.index)
   // .post(secureRoute, packagesController.create)
 
-  // router.route('/packages/:id')
+// router.route('/packages/:id')
 //   .get(packagesController.show)
 // .put(secureRoute, packagesController.update)
 // .delete(secureRoute, packagesController.delete)
