@@ -1,20 +1,13 @@
 import React from 'react'
 import RegisterForm from './auth/RegisterForm'
 
-//import axios from 'axios'
-
-
 class Home extends React.Component{
 
   constructor(){
     super()
-    this.state = {}
-
   }
-  
-  render(){
-  //  if(!this.state.package) return null
 
+  render(){
     return(
       <section className="section">
         <div className="container">

@@ -22,6 +22,9 @@ class Auth{
   static getUserID(){
     return this.getPayload().sub
   }
+  static getUserName(){
+    return this.getPayload().username
+  }
 
   static isAuthenticated(){
     const payload = this.getPayload()
