@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 class Register extends React.Component {
 
@@ -60,7 +60,7 @@ class Register extends React.Component {
           </div>
         </div>
         <div className="field">
-          <button className="button is-primary home-button">Submit</button>
+          <button className="button is-primary home-button">Register</button>
           <Link className="button is-primary home-button" to="/login">Log in</Link>
         </div>
       </form>
@@ -68,4 +68,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register
+export default withRouter(Register)
