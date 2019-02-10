@@ -1,4 +1,5 @@
 import React from 'react'
+import RegisterForm from './auth/RegisterForm'
 
 //import axios from 'axios'
 
@@ -19,7 +20,18 @@ class Home extends React.Component{
   //  if(!this.state.package) return null
 
     return(
-      <h1>Home</h1>
+      <section className="section">
+        <div className="container">
+          <div className="columns">
+            <div className="column is-half">
+              <h2>Built for Developers</h2>
+            </div>
+            <div className="column is-half">
+              <RegisterForm />
+            </div>
+          </div>
+        </div>
+      </section>
     )
   }
 }
