@@ -22,16 +22,41 @@ class Login extends React.Component {
   }
   handleSubmit(e){
     e.preventDefault(e)
-    // axios
-    //   .post('api/register', this.state.data)
-    //   .then(() => this.props.history.push('/login'))
-    //   .catch(err => console.log(err.message))
+    axios
+      .post('api/login', this.state.data)
+      .then(data => console.log(data))
+      // .then(() => this.props.history.push('/login'))
+      // .catch(err => console.log(err.message))
   }
 
   render(){
-    //const{username, email, password, passwordConfirmation} = this.state.data
+    const{email, password} = this.state.data
     return(
-      <h1>Log in</h1>
+      <section className="section">
+        <div className="container">
+          <div className="columns">
+            <div className="column is-half">
+
+              <form onSubmit={this.handleSubmit}>
+                <div className="field">
+                  <label className="label">Email</label>
+                  <div className="control">
+                    <input className="input" type="text" placeholder="Email" name="email" onChange={this.handleChange} value={email}/>
+                  </div>
+                </div>
+                <div className="field">
+                  <label className="label">Password</label>
+                  <div className="control">
+                    <input className="input" type="password" placeholder="Password" name="password" onChange={this.handleChange} value={password}/>
+                  </div>
+                </div>
+                <button className="button is-primary home-button">Submit</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </section>
     )
   }
 }
