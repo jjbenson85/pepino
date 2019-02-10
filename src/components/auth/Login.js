@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import Auth from '../../lib/Auth'
 
 class Login extends React.Component {
 
@@ -24,9 +25,9 @@ class Login extends React.Component {
     e.preventDefault(e)
     axios
       .post('api/login', this.state.data)
-      .then(data => console.log(data))
-      // .then(() => this.props.history.push('/login'))
-      // .catch(err => console.log(err.message))
+      .then(res => Auth.setToken(res.data.token))
+      //.then(() => this.props.history.push('/login'))
+      .catch(err => console.log(err.message))
   }
 
   render(){
@@ -50,7 +51,9 @@ class Login extends React.Component {
                     <input className="input" type="password" placeholder="Password" name="password" onChange={this.handleChange} value={password}/>
                   </div>
                 </div>
-                <button className="button is-primary home-button">Submit</button>
+                <div className="field">
+                  <button className="button is-primary home-button">Submit</button>
+                </div>
               </form>
 
             </div>

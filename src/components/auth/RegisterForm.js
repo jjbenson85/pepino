@@ -59,8 +59,10 @@ class Register extends React.Component {
             <input className="input" type="password" placeholder="Password Confirmation" name="passwordConfirmation" onChange={this.handleChange} value={passwordConfirmation}/>
           </div>
         </div>
-        <button className="button is-primary home-button">Submit</button>
-        <Link className="button is-primary home-button" to="/login">Log in</Link>
+        <div className="field">
+          <button className="button is-primary home-button">Submit</button>
+          <Link className="button is-primary home-button" to="/login">Log in</Link>
+        </div>
       </form>
     )
   }

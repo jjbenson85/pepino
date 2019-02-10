@@ -11,11 +11,7 @@ class Home extends React.Component{
     this.state = {}
 
   }
-
-  // componentDidMount(){
-  //   this.getPackageData()
-  // }
-
+  
   render(){
   //  if(!this.state.package) return null
 
