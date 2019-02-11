@@ -3,25 +3,21 @@ import axios from 'axios'
 
 import ProjectForm from './ProjectForm'
 import ProjectCard from './ProjectCard'
+import Auth from '../../lib/Auth'
+import {withRouter} from 'react-router-dom'
 
 class ProjectsIndex extends React.Component {
 
   constructor() {
     super()
     this.state = {
-      projects: null,
       addProject: false,
       data: {},
-      refreshProjectList: false
+      newProjectId: null
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleClick = this.handleClick.bind(this)
-  }
-
-  componentDidMount() {
-    axios.get('/api/projects')
-      .then(res => this.setState({ projects: res.data }))
   }
 
   handleChange({ target: { name, value } }) {
@@ -38,16 +34,17 @@ class ProjectsIndex extends React.Component {
     e.preventDefault()
     axios
       .post('/api/projects', this.state.data, {
-        // headers: { Authorization: `Bearer ${Auth.getToken()}` }
-        headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzVmNGNlN2RmZGIzNWFjZTAwZjJmNjAiLCJpYXQiOjE1NDk4Nzk0NDIsImV4cCI6MTU0OTkwMTA0Mn0.h9BSLlB2-RUita9mrwkOTkDwhcFz9B9AmD8a5DXDuJk' }
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
-      // .then(() => this.props.history.push('/projects'))
-      .then(() => this.setState({addProject: false, refreshProjectList: !this.state.refreshProjectList}))
+      .then((res) => {
+        console.log(`/projects/${res.data._id}`)
+        this.props.history.push(`/projects/${res.data._id}`)
+      })
       .catch(() => this.setState({ error: 'An error occured' }))
   }
 
   render() {
-    if(!this.state.projects) return (
+    if(!this.props) return (
       <section className="section">
         <div className="container">
           <h4 className="title is-4">Loading...</h4>
@@ -65,11 +62,12 @@ class ProjectsIndex extends React.Component {
               handleSubmit={this.handleSubmit}
             />}
           <hr />
-          <ProjectCard projects ={this.state.projects}/>
+          {this.props.projects.length > 0 && <ProjectCard projects ={this.props.projects}/> }
+          {!this.props.projects.length > 0 && <div>No projects have been added </div> }
         </div>
       </section>
     )
   }
 }
 
-export default ProjectsIndex
+export default withRouter(ProjectsIndex)
