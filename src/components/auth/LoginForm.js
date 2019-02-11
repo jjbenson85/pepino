@@ -2,7 +2,6 @@ import React from 'react'
 
 
 const Login  = ({ data, handleChange, handleSubmit, changeState }) =>  {
-
   const{email, password} = data
   return(
     <form onSubmit={handleSubmit} name="login">

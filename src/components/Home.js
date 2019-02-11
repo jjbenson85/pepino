@@ -27,7 +27,7 @@ class Home extends React.Component{
   registerFunction(){
     axios
       .post('api/register', this.state.data)
-      .then(this.setState({...this.state, register: false, data: {}}))
+      .then(this.setState({...this.state,  data: {}}))
       .catch(err => console.log(err.message))
   }
 

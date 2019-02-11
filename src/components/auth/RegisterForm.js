@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Register  = ({ data, handleChange, handleSubmit, changeState }) =>  {
-  console.log(data)
   return(
     <form onSubmit={handleSubmit} name="register">
       <div className="field">
