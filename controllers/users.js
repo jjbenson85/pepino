@@ -16,8 +16,12 @@ function showRoute(req, res, next) {
 
 
 function updateRoute(req, res, next) {
-  console.log(req.body)
-  res.status(200).json({message: 'here'})
+  User
+    .findById(req.params.id)
+    .then(user => user.set(req.body))
+    .then(user => user.save())
+    .then(user => res.status(200).json(user))
+    .catch(next)
 }
 
 module.exports = {

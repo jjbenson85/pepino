@@ -35,10 +35,7 @@ class UsersEdit extends React.Component{
       {
         headers: { Authorization: `Bearer ${Auth.getToken()}`}
       })
-      .then( res =>{
-        console.log(res)
-        //this.setState({ data: res.data})
-      })
+      .then(() => this.props.history.push(`/users/${Auth.getUserID()}`))
       .catch((err)=>console.log(err.message))
   }
 
