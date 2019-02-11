@@ -14,7 +14,6 @@ function showRoute(req, res, next) {
     .catch(next)
 }
 
-
 function updateRoute(req, res, next) {
   User
     .findById(req.params.id)

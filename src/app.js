@@ -8,6 +8,7 @@ import PackageShow from './components/packages/PackageShow'
 import ProjectShow from './components/projects/ProjectShow'
 import PackageIndex from './components/packages/PackageIndex'
 
+import FlashMessages from './components/common/FlashMessages'
 
 import Home from './components/Home'
 import UsersShow from './components/users/UsersShow'
@@ -23,6 +24,8 @@ class App extends React.Component {
       <BrowserRouter>
         <main>
           <Header />
+          <FlashMessages />
+
           <Switch>
             <Route path="/projects/:id" component={ProjectShow} />
             <Route path="/packages/:name" component={PackageShow} />
