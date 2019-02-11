@@ -55,6 +55,7 @@ class Home extends React.Component{
   }
 
   render(){
+    console.log(this.props)
     return(
       <section className="section">
         <div className="container">
@@ -71,7 +72,7 @@ class Home extends React.Component{
               />}
 
               {!this.state.register && <LoginForm
-                handleSubmit={this.handleSubmit}
+                handleSubmit={(e)=>this.props.handleLogin(e, this.state.data)}
                 handleChange={this.handleChange}
                 data={this.state.data}
                 changeState={this.changeState}

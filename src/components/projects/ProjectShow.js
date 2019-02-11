@@ -24,7 +24,7 @@ class ProjectShow extends React.Component {
   }
 
   handleSaveClick(){
-    console.log('handleSaveClick', this.state.project)
+
     axios.put(`/api/projects/${this.props.match.params.id}`,
       {...this.state.project},
       {
