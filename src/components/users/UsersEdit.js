@@ -18,7 +18,8 @@ class UsersEdit extends React.Component{
   componentDidMount(){
     axios.get(`/api/users/${Auth.getUserID()}`)
       .then( res =>{
-        this.setState({ data: res.data})
+        const {email, username, bio, image} = res.data
+        this.setState({ data: {email, username, bio, image}})
       })
       .catch((err)=>console.log(err.message))
   }
