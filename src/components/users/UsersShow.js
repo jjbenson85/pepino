@@ -24,7 +24,6 @@ class UsersShow extends React.Component{
 
   render(){
     if(!this.state.data) return null
-    // {console.log('bego', this.state.data)}
 
     const {
       username,

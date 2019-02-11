@@ -9,6 +9,7 @@ function indexRoute(req, res) {
 function showRoute(req, res, next) {
   Project
     .findById(req.params.id)
+    .populate('packages')
     .then(projects => res.json(projects))
     .catch(next)
 }
