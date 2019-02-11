@@ -7,7 +7,7 @@ import Header from './components/common/header'
 import PackageShow from './components/packages/packageShow'
 import ProjectShow from './components/projects/projectShow'
 import Home from './components/Home'
-import Login from './components/auth/Login'
+//import Login from './components/auth/LoginF'
 import UsersShow from './components/users/UsersShow'
 
 import 'bulma'
@@ -24,7 +24,6 @@ class App extends React.Component {
             <Route path="/projects/:id" component={ProjectShow} />
             <Route path="/packages/:name" component={PackageShow} />
             <Route path="/users/:id" component={UsersShow} />
-            <Route path="/login" component={Login} />
             <Route path="/" component={Home} />
           </Switch>
         </main>
