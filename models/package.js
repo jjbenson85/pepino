@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const User = require('../models/user')
+// const User = require('../models/user')
 
 //Add comments as feature later
 const commentSchema = new mongoose.Schema({
