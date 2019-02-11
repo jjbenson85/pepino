@@ -52,7 +52,7 @@ class ProjectsIndex extends React.Component {
       </section>
     )
     return(
-      <section className="section">
+      <section className="">
         <div className="container">
           {!this.state.addProject && <button onClick={this.handleClick} className="button is-primary">Add project</button>}
           {this.state.addProject &&

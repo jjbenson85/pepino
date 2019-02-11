@@ -68,7 +68,7 @@ class ProjectShow extends React.Component {
           <div className="columns">
             <div className="column is-one-quarter project">
               <h1 className="title is-1">{name}</h1>
-                <button
+              <button
                 className="button is-danger is-outlined is-fullwidth "
                 name="save"
                 onClick={this.handleSaveClick}>Save Project</button>
