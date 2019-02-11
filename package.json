@@ -10,8 +10,7 @@
     "start": "yarn build && node index",
     "build": "webpack -p",
     "serve": "webpack-dev-server --mode=development",
-    "test": "mocha test/**/*_spec.js --require test/spec_helper --recursive --exit"
-
+    "test": "nyc mocha test/**/*_spec.js --require test/spec_helper --recursive --exit"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -40,6 +39,7 @@
     "html-webpack-plugin": "^3.2.0",
     "mocha": "^5.2.0",
     "node-sass": "^4.11.0",
+    "nyc": "^13.2.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "supertest": "^3.4.2",

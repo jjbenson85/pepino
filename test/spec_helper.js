@@ -1,4 +1,4 @@
-process.env.MONGODB_URI = 'mongodb://localhost/test'
+process.env.MONGODB_URI = 'mongodb://localhost/pepinotest'
 process.env.PORT = 3000
 
 global.Promise = require('bluebird')

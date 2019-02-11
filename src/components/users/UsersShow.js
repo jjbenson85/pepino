@@ -3,6 +3,8 @@ import Auth from '../../lib/Auth'
 
 import axios from 'axios'
 
+import ProjectsIndex from '../projects/ProjectsIndex'
+
 
 class UsersShow extends React.Component{
 
@@ -22,11 +24,11 @@ class UsersShow extends React.Component{
 
   render(){
     if(!this.state.data) return null
-    {console.log(this.state.data.project)}
 
     const {
       username,
       image,
+      project,
       email,
       bio
     } = this.state.data
@@ -42,7 +44,7 @@ class UsersShow extends React.Component{
                 <p>{bio}</p>
               </div>
               <div className="column ">
-
+                <ProjectsIndex projects={project}/>
               </div>
             </div>
           </div>

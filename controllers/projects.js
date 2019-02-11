@@ -1,4 +1,6 @@
 const Project = require('../models/project')
+const User = require('../models/user')
+const Package = require('../models/package')
 
 function indexRoute(req, res) {
   Project
@@ -9,6 +11,8 @@ function indexRoute(req, res) {
 function showRoute(req, res, next) {
   Project
     .findById(req.params.id)
+    .populate('user')
+    .populate('packages')
     .then(projects => res.json(projects))
     .catch(next)
 }

@@ -7,3 +7,28 @@
   height: 400px;
   width: 300px;
 }
+
+.package-index{
+  .card{
+    .control{
+      display: flex;
+    }
+    .buttons.is-fullwidth{
+
+      .button{
+        width:50%;
+      }
+    }
+    .card-header{
+      padding-right:10px;
+      padding-left:10px;
+    }
+    .card-image{
+      height: 40px;
+      width: 30px;
+      .image{
+        height:100%;
+      }
+    }
+  }
+}
