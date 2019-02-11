@@ -1,7 +1,8 @@
 import React from 'react'
-// import axios from 'axios'
-// import Auth from '../lib/Auth'
+import axios from 'axios'
+import Auth from '../../lib/Auth'
 
+import UsersEditForm from './UsersEditForm'
 
 class UsersEdit extends React.Component{
 
@@ -12,38 +13,26 @@ class UsersEdit extends React.Component{
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.changeState = this.changeState.bind(this)
-
   }
 
+  componentDidMount(){
+    axios.get(`/api/users/${Auth.getUserID()}`)
+      .then( res =>{
+        this.setState({ data: res.data})
+      })
+      .catch((err)=>console.log(err.message))
+  }
+  
   handleChange({target: {name, value}}){
     const data = {...this.state.data, [name]: value}
     this.setState({data})
   }
 
-  // registerFunction(){
-  //   axios
-  //     .post('api/register', this.state.data)
-  //     .then(this.setState({...this.state,  data: {}}))
-  //     .catch(err => console.log(err.message))
-  // }
-  //
-  // loginFunction(){
-  //   axios
-  //     .post('api/login', this.state.data)
-  //     .then(res => Auth.setToken(res.data.token))
-  //     .then(() => this.props.history.push(`/users/${Auth.getUserID()}`))
-  //     .catch(err => console.log(err.message))
-  // }
-
-  changeState(){
-    this.setState({...this.state, register: !this.state.register })
-  }
-
   handleSubmit(e){
     e.preventDefault(e)
-
   }
+
+
 
   render(){
     return(
@@ -51,7 +40,11 @@ class UsersEdit extends React.Component{
         <div className="container">
           <div className="columns">
             <div className="column is-half">
-              <h1>Edit</h1>
+              <UsersEditForm
+                handleSubmit={this.handleSubmit}
+                handleChange={this.handleChange}
+                data={this.state.data}
+              />
             </div>
           </div>
         </div>
