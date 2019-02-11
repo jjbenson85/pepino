@@ -22,7 +22,7 @@ class UsersEdit extends React.Component{
       })
       .catch((err)=>console.log(err.message))
   }
-  
+
   handleChange({target: {name, value}}){
     const data = {...this.state.data, [name]: value}
     this.setState({data})
@@ -30,6 +30,15 @@ class UsersEdit extends React.Component{
 
   handleSubmit(e){
     e.preventDefault(e)
+    axios.put(`/api/users/${Auth.getUserID()}`, this.state.data,
+      {
+        headers: { Authorization: `Bearer ${Auth.getToken()}`}
+      })
+      .then( res =>{
+        console.log(res)
+        //this.setState({ data: res.data})
+      })
+      .catch((err)=>console.log(err.message))
   }
 
 

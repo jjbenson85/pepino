@@ -15,6 +15,8 @@ router.route('/users')
 
 router.route('/users/:id')
   .get(usersController.show)
+  .put(secureRoute, usersController.update)
+//  .put(secureRoute, usersController.update)
 //  .put(secureRoute, usersController.update)
 //   .delete(secureRoute, usersController.delete)
 

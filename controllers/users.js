@@ -14,7 +14,14 @@ function showRoute(req, res, next) {
     .catch(next)
 }
 
+
+function updateRoute(req, res, next) {
+
+  res.status(200).json({message: 'here'})
+}
+
 module.exports = {
   index: indexRoute,
-  show: showRoute
+  show: showRoute,
+  update: updateRoute
 }
