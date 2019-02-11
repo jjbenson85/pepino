@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Header from './components/common/header'
-import PackageShow from './components/packages/packageShow'
-import ProjectShow from './components/projects/projectShow'
-import PackageIndex from './components/packages/packageIndex'
+import PackageShow from './components/packages/PackageShow'
+import ProjectShow from './components/projects/ProjectShow'
+import PackageIndex from './components/packages/PackageIndex'
 
 
 import Home from './components/Home'

@@ -3,6 +3,8 @@ import axios from 'axios'
 
 import PackageIndex from '../packages/PackageIndex'
 
+import Auth from '../../lib/Auth'
+
 
 class ProjectShow extends React.Component {
   constructor() {
@@ -13,6 +15,7 @@ class ProjectShow extends React.Component {
     }
 
     this.handleClick = this.handleClick.bind(this)
+    this.handleSaveClick = this.handleSaveClick.bind(this)
   }
 
   componentDidMount() {
@@ -20,7 +23,18 @@ class ProjectShow extends React.Component {
       .then(res => this.setState({ project: res.data }))
   }
 
-
+  handleSaveClick(){
+    console.log('handleSaveClick', this.state.project)
+    axios.put(`/api/projects/${this.props.match.params.id}`,
+      {...this.state.project},
+      {
+        headers: {
+          Authorization: `Bearer ${Auth.getToken()}`
+        }
+      })
+      .then(res => console.log(res))
+      .catch( err => console.log(err.errors))
+  }
   handleClick(_package) {
     const index = this.state.project.packages.indexOf(_package)
     console.log(this.state.project.packages.indexOf(_package))
@@ -54,6 +68,10 @@ class ProjectShow extends React.Component {
           <div className="columns">
             <div className="column is-one-quarter project">
               <h1 className="title is-1">{name}</h1>
+                <button
+                className="button is-danger is-outlined is-fullwidth "
+                name="save"
+                onClick={this.handleSaveClick}>Save Project</button>
               <div>{description}</div>
               <section className="section">
                 <div className="container">
