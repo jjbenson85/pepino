@@ -29,12 +29,13 @@ class App extends React.Component {
 
   componentDidMount(){
 
-
-    axios.get(`/api/users/${Auth.getUserID()}`)
-      .then( res =>{
-        this.setState({ user: res.data})
-      })
-      .catch((err)=>console.log(err.message))
+    if(Auth.getUserID()){
+      axios.get(`/api/users/${Auth.getUserID()}`)
+        .then( res =>{
+          this.setState({ user: res.data})
+        })
+        .catch((err)=>console.log(err.message))
+    }
   }
 
   render(){
