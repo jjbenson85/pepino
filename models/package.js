@@ -12,6 +12,8 @@ const commentSchema = new mongoose.Schema({
 const packageSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
   description: { type: String, required: true },
+  icon: { type: String },
+  version: {type: String},
   keywords: [{ type: String}],
   downloadsCount: { type: Number},
   comments: [commentSchema]

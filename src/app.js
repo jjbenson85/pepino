@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Header from './components/common/header'
 import PackageShow from './components/packages/packageShow'
-// import BooksIndex from './components/books/BooksIndex'
+import PackageIndex from './components/packages/packageIndex'
 
 
 import Home from './components/Home'
@@ -25,6 +25,7 @@ class App extends React.Component {
           <Header />
           <Switch>
             <Route path="/packages/:name" component={PackageShow} />
+            <Route path="/packages" component={PackageIndex} />
             <Route path="/users/:id" component={UsersShow} />
             <Route path="/login" component={Login} />
             <Route path="/" component={Home} />
