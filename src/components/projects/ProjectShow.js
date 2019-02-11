@@ -36,9 +36,9 @@ class ProjectShow extends React.Component {
                 <div className="container">
                   <h2 className='title is-5'>Installed packages</h2>
                   {packages.length === 0 && <div>no packages yet</div>}
-                  {packages.map(packageUnit => {
-                    <div>{packageUnit._id}</div>
-                  })}
+                  {packages.map(packageUnit =>
+                    <div key={packageUnit._id}>{packageUnit.name}</div>
+                  )}
                 </div>
               </section>
               <hr />
