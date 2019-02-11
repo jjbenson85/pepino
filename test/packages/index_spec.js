@@ -46,12 +46,24 @@ describe('GET /packages', () => {
       .get('/api/packages')
       .end((err, res) => {
         res.body.forEach((_package, i) => {
+
           expect(_package.name).to.eq(packageData[i].name)
+
+
           expect(_package.icon).to.eq(packageData[i].icon)
-          expect(_package.version).to.deep.eq(packageData[i].version)
-          expect(_package.keywords).to.eq(packageData[i].keywords)
+
+
+          expect(_package.version).to.eq(packageData[i].version)
+
+
+          expect(_package.keywords).to.deep.eq(packageData[i].keywords)
+
+
           expect(_package.downloadsCount).to.eq(packageData[i].downloadsCount)
-          expect(_package.comments).to.eq(packageData[i].comments)
+
+
+          expect(_package.comments).to.deep.eq(packageData[i].comments)
+
         })
         done()
       })

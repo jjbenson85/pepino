@@ -4,14 +4,17 @@ const packageData = [{
   icon: 'https://webpack.js.org/assets/icon-square-big.svg',
   version: '3.1.14',
   keywords: ['webpack'],
-  downloadsCount: 22629569
+  downloadsCount: 22629569,
+  comments: []
 },{
   name: 'webpack-dev-server',
   description: 'Serves a webpack app. Updates the browser on changes.',
   icon: 'https://webpack.js.org/assets/icon-square-big.svg',
   version: '3.1.14',
   keywords: ['webpack', 'server', 'development'],
-  downloadsCount: 13643230
+  downloadsCount: 13643230,
+  comments: []
+  
 }]
 
 const userData = {
