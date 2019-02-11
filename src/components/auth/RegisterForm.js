@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Register  = ({ data, handleChange, handleSubmit }) =>  {
+const Register  = ({ data, handleChange, handleSubmit, changeState }) =>  {
   console.log(data)
   return(
     <form onSubmit={handleSubmit} name="register">
@@ -30,6 +30,7 @@ const Register  = ({ data, handleChange, handleSubmit }) =>  {
       </div>
       <div className="field">
         <button className="button is-primary home-button" >Register</button>
+        <button className="button is-primary home-button" onClick={changeState}>Already a User</button>
       </div>
     </form>
   )

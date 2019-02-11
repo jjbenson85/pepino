@@ -13,9 +13,10 @@ class Home extends React.Component{
       data: {},
       register: true
     }
-
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.changeState = this.changeState.bind(this)
+
   }
 
   handleChange({target: {name, value}}){
@@ -26,7 +27,7 @@ class Home extends React.Component{
   registerFunction(){
     axios
       .post('api/register', this.state.data)
-      .then(this.setState({...this.state.data, register: false}))
+      .then(this.setState({...this.state, register: false, data: {}}))
       .catch(err => console.log(err.message))
   }
 
@@ -38,12 +39,19 @@ class Home extends React.Component{
       .catch(err => console.log(err.message))
   }
 
+  changeState(){
+    this.setState({...this.state, register: !this.state.register })
+  }
+
   handleSubmit(e){
     e.preventDefault(e)
     const command = e.target.name
     if(command === 'register' ) this.registerFunction()
     else this.loginFunction()
+  }
 
+  componentDidMount(){
+    if(Auth.isAuthenticated()) this.props.history.push(`/users/${Auth.getUserID()}`)
   }
 
   render(){
@@ -59,12 +67,14 @@ class Home extends React.Component{
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
                 data={this.state.data}
+                changeState={this.changeState}
               />}
 
               {!this.state.register && <LoginForm
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
                 data={this.state.data}
+                changeState={this.changeState}
               />}
             </div>
           </div>

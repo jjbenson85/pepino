@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const Login  = ({ data, handleChange, handleSubmit }) =>  {
+const Login  = ({ data, handleChange, handleSubmit, changeState }) =>  {
 
   const{email, password} = data
   return(
@@ -20,6 +20,8 @@ const Login  = ({ data, handleChange, handleSubmit }) =>  {
       </div>
       <div className="field">
         <button className="button is-primary home-button" >Submit</button>
+        <button className="button is-primary home-button" onClick={changeState}>Registerr</button>
+
       </div>
     </form>
   )
