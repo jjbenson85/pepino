@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 
+const User = require('../models/user')
+const Package = require('../models/package')
+
 const commentSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.ObjectId, ref: 'User' },
   text: { type: String, required: true, maxlength: 250 }
