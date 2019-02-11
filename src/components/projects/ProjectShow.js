@@ -1,19 +1,42 @@
 import React from 'react'
 import axios from 'axios'
 
+import PackageIndex from '../packages/PackageIndex'
+
 
 class ProjectShow extends React.Component {
   constructor() {
     super()
 
-    this.state = {}
+    this.state = {
+      edited: false
+    }
 
-
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
     axios.get(`/api/projects/${this.props.match.params.id}`)
       .then(res => this.setState({ project: res.data }))
+  }
+
+
+  handleClick(_package) {
+    const index = this.state.project.packages.indexOf(_package)
+    console.log(this.state.project.packages.indexOf(_package))
+
+    const packages = (index === -1) ? (
+      this.state.project.packages.concat(_package)
+    ) : (
+      this.state.project.packages
+      // [
+      //   ...this.state.project.packages.slice(0, index),
+      //   ...this.state.project.packages.slice(index+1)
+      // ]
+    )
+
+    const project = {...this.state.project, packages }
+    this.setState({ project })
   }
 
   render() {
@@ -29,7 +52,7 @@ class ProjectShow extends React.Component {
       <section className="section">
         <div className="container">
           <div className="columns">
-            <div className="column project">
+            <div className="column is-one-quarter project">
               <h1 className="title is-1">{name}</h1>
               <div>{description}</div>
               <section className="section">
@@ -45,8 +68,10 @@ class ProjectShow extends React.Component {
               <div>Created at: {createdAt}</div>
               <div>Updated at: {updatedAt}</div>
             </div>
+            <div className="column is-half">
+              <PackageIndex handleClick={this.handleClick}/>
+            </div>
             <div className="column">
-            packages
             </div>
           </div>
         </div>
