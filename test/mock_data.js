@@ -14,7 +14,7 @@ const packageData = [{
   keywords: ['webpack', 'server', 'development'],
   downloadsCount: 13643230,
   comments: []
-  
+
 }]
 
 const userData = {
