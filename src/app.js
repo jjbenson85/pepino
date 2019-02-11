@@ -5,9 +5,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Header from './components/common/header'
 import PackageShow from './components/packages/packageShow'
-// import BooksIndex from './components/books/BooksIndex'
-// import Home from './components/Home'
-// import SecureRoute from './components/common/SecureRoute'
+import Home from './components/Home'
+import Login from './components/auth/Login'
+import UsersShow from './components/users/UsersShow'
 import ProjectsIndex from './components/projects/projectsIndex'
 import ProjectNew from './components/projects/projectNew'
 
@@ -25,6 +25,9 @@ class App extends React.Component {
             <Route path="/projects/new" component={ProjectNew} />
             <Route path="/projects" component={ProjectsIndex} />
             <Route path="/packages/:name" component={PackageShow} />
+            <Route path="/users/:id" component={UsersShow} />
+            <Route path="/login" component={Login} />
+            <Route path="/" component={Home} />
           </Switch>
         </main>
       </BrowserRouter>

@@ -13,10 +13,8 @@ function loginRoute(req, res) {
       if(!user || !user.validatePassword(req.body.password)) {
         return res.status(401).json({ message: 'Unauthorized' })
       }
-
       const payload = { sub: user._id }
       const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '6h' })
-
       res.json({
         token,
         message: `Welcome back ${user.username}!`

@@ -23,7 +23,7 @@ function showRoute(req, res) {
           select: 'username image'
         })
         .then(_package => {
-          console.log(_package)
+          //console.log(_package)
           const newData = {...data, comments: _package.comments}
           res.json(newData)
         })
