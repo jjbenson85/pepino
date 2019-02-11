@@ -14,6 +14,7 @@ function showRoute(req, res, next) {
 }
 
 function createRoute(req, res, next) {
+  req.body.user = req.currentUser
   Project
     .create(req.body)
     .then(project => res.status(201).json(project))
