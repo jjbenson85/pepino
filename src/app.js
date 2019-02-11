@@ -9,7 +9,7 @@ import PackageShow from './components/packages/packageShow'
 
 
 import Home from './components/Home'
-import Login from './components/auth/Login'
+//import Login from './components/auth/LoginF'
 import UsersShow from './components/users/UsersShow'
 
 
@@ -26,7 +26,6 @@ class App extends React.Component {
           <Switch>
             <Route path="/packages/:name" component={PackageShow} />
             <Route path="/users/:id" component={UsersShow} />
-            <Route path="/login" component={Login} />
             <Route path="/" component={Home} />
           </Switch>
         </main>
