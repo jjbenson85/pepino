@@ -11,11 +11,12 @@ class ProjectShow extends React.Component {
     super()
 
     this.state = {
-      edited: false
+      editing: false
     }
 
     this.handleClick = this.handleClick.bind(this)
     this.handleSaveClick = this.handleSaveClick.bind(this)
+    this.handlePackageDelete = this.handlePackageDelete.bind(this)
   }
 
   componentDidMount() {
@@ -24,7 +25,6 @@ class ProjectShow extends React.Component {
   }
 
   handleSaveClick(){
-    console.log('handleSaveClick', this.state.project)
     axios.put(`/api/projects/${this.props.match.params.id}`,
       {...this.state.project},
       {
@@ -33,20 +33,37 @@ class ProjectShow extends React.Component {
         }
       })
       .then(res => console.log(res))
+      .then(() => this.setState({editing: false}))
       .catch( err => console.log(err.errors))
   }
+
   handleClick(_package) {
     const index = this.state.project.packages.indexOf(_package)
-    console.log(this.state.project.packages.indexOf(_package))
+    console.log(index)
 
     const packages = (index === -1) ? (
+      this.setState({editing: true}),
       this.state.project.packages.concat(_package)
     ) : (
       this.state.project.packages
-      // [
-      //   ...this.state.project.packages.slice(0, index),
-      //   ...this.state.project.packages.slice(index+1)
-      // ]
+    )
+
+    const project = {...this.state.project, packages }
+    this.setState({ project })
+  }
+
+  handlePackageDelete(_package) {
+    const index = this.state.project.packages.indexOf(_package)
+    console.log(index)
+
+    const packages = (index !== -1) ? (
+      this.setState({editing: true}),
+      [
+        ...this.state.project.packages.slice(0, index),
+        ...this.state.project.packages.slice(index+1)
+      ]
+    ) : (
+      this.state.project.packages
     )
 
     const project = {...this.state.project, packages }
@@ -68,26 +85,33 @@ class ProjectShow extends React.Component {
           <div className="columns">
             <div className="column is-one-quarter project">
               <h1 className="title is-1">{name}</h1>
-                <button
-                className="button is-danger is-outlined is-fullwidth "
-                name="save"
-                onClick={this.handleSaveClick}>Save Project</button>
               <div>{description}</div>
               <section className="section">
-                <div className="container">
-                  <h2 className='title is-5'>Installed packages</h2>
-                  {packages.length === 0 && <div>no packages yet</div>}
-                  {packages.map(packageUnit =>
-                    <div key={packageUnit._id}>{packageUnit.name}</div>
-                  )}
-                </div>
+                <h2 className='title is-5'>Installed packages</h2>
+                {packages.length === 0 && <div>no packages yet</div>}
+                {packages.map(packageUnit =>
+                  <div
+                    className="tag"
+                    key={packageUnit._id}
+                    id={packageUnit._id}>
+                    {packageUnit.name}
+                    <button
+                      className="delete is-small"
+                      onClick={() => this.handlePackageDelete(packageUnit)}>
+                    </button>
+                  </div>
+                )}
               </section>
+              {this.state.editing && <button
+                className="button is-danger is-outlined is-fullwidth "
+                name="save"
+                onClick={this.handleSaveClick}>Save Project</button> }
               <hr />
-              <div>Created at: {createdAt}</div>
-              <div>Updated at: {updatedAt}</div>
+              <div>Created at: {createdAt.split('T')[0]}</div>
+              <div>Updated at: {updatedAt.split('T')[0]}</div>
             </div>
             <div className="column is-half">
-              <PackageIndex handleClick={this.handleClick}/>
+              <PackageIndex handleClick={this.handleClick} packages={this.state.project.packages}/>
             </div>
             <div className="column">
             </div>

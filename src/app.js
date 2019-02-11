@@ -10,7 +10,6 @@ import PackageIndex from './components/packages/PackageIndex'
 
 
 import Home from './components/Home'
-//import Login from './components/auth/LoginF'
 import UsersShow from './components/users/UsersShow'
 
 import 'bulma'
