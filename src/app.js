@@ -28,7 +28,6 @@ class App extends React.Component {
             <Route path="/users/:id" component={UsersShow} />
             <Route path="/login" component={Login} />
             <Route path="/" component={Home} />
-
           </Switch>
         </main>
       </BrowserRouter>

@@ -50,6 +50,7 @@ userSchema.set('toJSON', {
   transform(doc, json) {
     delete json.__v
     delete json.id
+    delete json.password
 
     return json
   }
