@@ -62,6 +62,8 @@ class ProjectShow extends React.Component {
       </section>
     )
     const { name, description, createdAt, updatedAt, packages } = this.state.project
+    const createdDate =new Date(createdAt).toLocaleString()
+    const updatedDate =new Date(updatedAt).toLocaleString()
     return(
       <section className="section">
         <div className="container">
@@ -83,8 +85,8 @@ class ProjectShow extends React.Component {
                 </div>
               </section>
               <hr />
-              <div>Created at: {createdAt}</div>
-              <div>Updated at: {updatedAt}</div>
+              <div>Created at: {createdDate}</div>
+              <div>Updated at: {updatedDate}</div>
             </div>
             <div className="column is-half">
               <PackageIndex handleClick={this.handleClick}/>

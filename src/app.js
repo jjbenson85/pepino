@@ -14,7 +14,7 @@ import Home from './components/Home'
 import UsersShow from './components/users/UsersShow'
 import Auth from './lib/Auth'
 
-import 'bulma'
+// import 'bulma'
 import './scss/style.scss'
 import axios from 'axios'
 

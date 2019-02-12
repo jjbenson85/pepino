@@ -19,7 +19,7 @@ const Login  = ({ data, handleChange, handleSubmit, changeState }) =>  {
       </div>
       <div className="field">
         <button className="button is-primary home-button" >Submit</button>
-        <button className="button is-primary home-button" onClick={changeState}>Registerr</button>
+        <button className="button is-primary home-button" onClick={changeState}>Register</button>
 
       </div>
     </form>

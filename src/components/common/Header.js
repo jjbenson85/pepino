@@ -27,8 +27,10 @@ class Header extends React.Component{
   BuildDropDownLinks(){
     return this.props.user.project
       .sort( (A,B)=>{
-        const Adate = new Date(A.updatedAt).getTime()
-        const Bdate = new Date(B.updatedAt).getTime()
+        // const Adate = new Date(A.updatedAt).getTime()
+        // const Bdate = new Date(B.updatedAt).getTime()
+        const Adate = Date.parse(A.updatedAt)
+        const Bdate = Date.parse(B.updatedAt)
         return Bdate-Adate
       })
       .map( (project,i) =>
