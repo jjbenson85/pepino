@@ -7,7 +7,7 @@ class PackageIndex extends React.Component{
   constructor(){
     super()
     this.state = {
-      usedPackagesId: []
+
     }
   }
 
@@ -24,7 +24,7 @@ class PackageIndex extends React.Component{
   }
 
   getUsedPackagesIds() {
-    this.props.packages.forEach(_package => this.state.usedPackagesId.push(_package._id))
+    return this.props.packages.map((_package)=> _package._id)
   }
 
 
@@ -69,15 +69,15 @@ class PackageIndex extends React.Component{
               </div>
               <div className='card-content'>
                 <div className="buttons has-addons is-fullwidth">
-                  {!this.state.usedPackagesId.includes(_package._id) &&
-                    <button
-                      className="button is-success is-outlined "
-                      name="package"
-                      value={_package._id}
-                      onClick={() => this.props.handleAddClick(_package)}
-                    >
-                      +Add to project
-                    </button> }
+                  <button
+                    className="button is-success is-outlined "
+                    name="package"
+                    value={_package._id}
+                    onClick={() => this.props.handleAddClick(_package)}
+                    disabled={this.getUsedPackagesIds().includes(_package._id)}
+                  >
+                    +Add to project
+                  </button>
                   <button
                     className="button is-info is-outlined"
                     name='viewPackage'

@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import debounce from 'lodash/debounce'
 
 import PackageIndex from '../packages/PackageIndex'
 import PackageShow from '../packages/PackageShow'
@@ -13,13 +14,15 @@ class ProjectShow extends React.Component {
 
     this.state = {
       editing: false,
-      selectedPackage: null
+      selectedPackage: null,
+      error: null
     }
 
+    this.delayedCallback = debounce(this.putProject, 1000)
     this.handleAddClick = this.handleAddClick.bind(this)
     this.handleViewClick = this.handleViewClick.bind(this)
-    this.handleSaveClick = this.handleSaveClick.bind(this)
     this.handlePackageDelete = this.handlePackageDelete.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
 
@@ -37,8 +40,7 @@ class ProjectShow extends React.Component {
       this.getProject()
     }
   }
-
-  handleSaveClick(){
+  putProject() {
     axios.put(`/api/projects/${this.props.match.params.id}`,
       {...this.state.project},
       {
@@ -53,6 +55,7 @@ class ProjectShow extends React.Component {
 
   handleViewClick(_package){
     console.log(_package)
+    document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'})
     this.setState({ selectedPackage: _package })
   }
 
@@ -69,11 +72,11 @@ class ProjectShow extends React.Component {
 
     const project = {...this.state.project, packages }
     this.setState({ project })
+    this.delayedCallback()
   }
 
   handlePackageDelete(_package) {
     const index = this.state.project.packages.indexOf(_package)
-    console.log(index)
 
     const packages = (index !== -1) ? (
       this.setState({editing: true}),
@@ -87,6 +90,14 @@ class ProjectShow extends React.Component {
 
     const project = {...this.state.project, packages }
     this.setState({ project })
+    this.delayedCallback()
+  }
+
+  handleChange({ target: { name, value } }) {
+    const project = {...this.state.project, [name]: value }
+    const errors = {...this.state.errors, [name]: null }
+    this.setState({ project, errors, editing: true })
+    this.delayedCallback()
   }
 
   render() {
@@ -101,10 +112,22 @@ class ProjectShow extends React.Component {
     return(
       <section className="section">
         <div className="container">
-          <div className="columns">
-            <div className="column is-one-quarter project">
-              <h1 className="title is-1">{name}</h1>
-              <div>{description}</div>
+          <div className="columns scroll">
+            <div className="column is-half project">
+              <input
+                className="title is-1 input hidden-input"
+                placeholder="Name"
+                name="name"
+                onChange={this.handleChange}
+                value={name}
+              />
+              <textarea
+                className="textarea hidden-input"
+                name="description"
+                onChange={this.handleChange}
+                value={description}
+              >
+              </textarea>
               <section className="section">
                 <h2 className='title is-5'>Installed packages</h2>
                 {packages.length === 0 && <div>no packages yet</div>}
@@ -121,10 +144,6 @@ class ProjectShow extends React.Component {
                   </div>
                 )}
               </section>
-              {this.state.editing && <button
-                className="button is-danger is-outlined is-fullwidth "
-                name="save"
-                onClick={this.handleSaveClick}>Save Project</button> }
               <hr />
               <div>Created at: {createdAt.split('T')[0]}</div>
               <div>Updated at: {updatedAt.split('T')[0]}</div>
@@ -132,8 +151,9 @@ class ProjectShow extends React.Component {
             <div className="column is-half">
               <PackageIndex handleAddClick={this.handleAddClick} packages={this.state.project.packages} handleViewClick={this.handleViewClick}/>
             </div>
-            <div className="column">
-              <PackageShow packageName={this.state.selctedPackage} />
+            <div id="package-show" className="column is-half">
+              <PackageShow
+                selectedPackage={this.state.selectedPackage} />
             </div>
           </div>
         </div>
