@@ -28,8 +28,13 @@ class Home extends React.Component{
   registerFunction(){
     axios
       .post('api/register', this.state.data)
-      .then(this.setState({...this.state,  data: {}}))
-      .catch(err => console.log(err.message))
+      .then(res => {
+        console.log(res)
+        Flash.setMessage('success', res.data.message)
+        this.setState({...this.state,  data: {}})
+        this.props.history.push('/')
+      })
+      .catch(err => console.log(err.response))
   }
 
   loginFunction(){
@@ -37,10 +42,10 @@ class Home extends React.Component{
       .post('api/login', this.state.data)
       .then(res => {
         Auth.setToken(res.data.token)
-        Flash.setMessage('success', `Welcome back ${this.state.data.username}`)
+        Flash.setMessage('success', res.data.message)
         this.props.history.push(`/users/${Auth.getUserID()}`)
       } )
-      .catch(err => console.log(err.message))
+      .catch(err => console.log(err.response))
   }
 
   changeState(){

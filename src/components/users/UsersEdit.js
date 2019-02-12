@@ -39,8 +39,6 @@ class UsersEdit extends React.Component{
       .catch((err)=>console.log(err.message))
   }
 
-
-
   render(){
     return(
       <section className="section">
