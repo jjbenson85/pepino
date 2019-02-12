@@ -19,13 +19,23 @@ class ProjectShow extends React.Component {
     this.handlePackageDelete = this.handlePackageDelete.bind(this)
   }
 
-  componentDidMount() {
+
+  getProject() {
     axios.get(`/api/projects/${this.props.match.params.id}`)
       .then(res => this.setState({ project: res.data }))
   }
 
-  handleSaveClick(){
+  componentDidMount() {
+    this.getProject()
+  }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.location.pathname !== prevProps.location.pathname) {
+      this.getProject()
+    }
+  }
+
+  handleSaveClick(){
     axios.put(`/api/projects/${this.props.match.params.id}`,
       {...this.state.project},
       {
@@ -80,8 +90,6 @@ class ProjectShow extends React.Component {
       </section>
     )
     const { name, description, createdAt, updatedAt, packages } = this.state.project
-    const createdDate =new Date(createdAt).toLocaleString()
-    const updatedDate =new Date(updatedAt).toLocaleString()
     return(
       <section className="section">
         <div className="container">
