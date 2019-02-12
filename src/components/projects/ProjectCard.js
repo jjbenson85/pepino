@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ProjectCard = ({project, handleDelete}) => {
+const ProjectCard = ({project, handleDelete, logged}) => {
   const {_id, name, description, updatedAt} = project
   return(
     <div className="card">
@@ -17,10 +17,10 @@ const ProjectCard = ({project, handleDelete}) => {
           </div>
         </div>
       </Link>
-      <footer className="card-footer">
+      {logged && <footer className="card-footer">
         <a href={`/projects/${_id}`} className="card-footer-item">Edit</a>
         <a onClick={() => handleDelete(_id)} className="card-footer-item">Delete</a>
-      </footer>
+      </footer>}
     </div>
   )
 }

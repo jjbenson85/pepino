@@ -130,6 +130,12 @@ $navbar-breakpoint: 600px;
     border: 1px solid black;
   }
 }
+.hidden-input[disabled] {
+  border: none;
+  background-color: white;
+  box-shadow: none;
+  color: black;
+}
 
 .columns.scroll{
   overflow: scroll;

@@ -11,7 +11,7 @@ class ProjectsIndex extends React.Component {
   constructor() {
     super()
     this.state = {
-      addProject: false,
+      addingProject: false,
       data: {},
       newProjectId: null
     }
@@ -28,7 +28,7 @@ class ProjectsIndex extends React.Component {
   }
 
   handleClick() {
-    this.setState({ addProject: true })
+    this.setState({ addingProject: true })
   }
 
   handleSubmit(e) {
@@ -64,18 +64,18 @@ class ProjectsIndex extends React.Component {
     return(
       <section className="">
         <div className="">
-          {!this.state.addProject && this.props.status && <button onClick={this.handleClick} className="button is-primary">Add project</button>}
-          {this.state.addProject &&
+          {!this.state.addingProject && this.props.logged && <button onClick={this.handleClick} className="button is-primary">Add project</button>}
+          {this.state.addingProject &&
             <ProjectForm
               data={this.state.data}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
             />}
-          <hr />
+          {!this.state.addingProject && this.props.logged && <hr /> }
           <div className="columns is-multiline">
             {this.props.projects.map(project =>
               <div key={project._id} className="column is-one-third">
-                {this.props.projects.length > 0 && <ProjectCard project ={project} handleDelete={this.handleDelete}/> }
+                {this.props.projects.length > 0 && <ProjectCard project = {project} handleDelete={this.handleDelete} logged={this.props.logged}/> }
                 {!this.props.projects.length > 0 && <div>No projects have been added </div> }
               </div>
             )}

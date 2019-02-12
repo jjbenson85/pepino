@@ -1,7 +1,7 @@
 import React from 'react'
 
 import axios from 'axios'
-
+import Auth from '../../lib/Auth'
 
 class PackageIndex extends React.Component{
   constructor(){
@@ -74,7 +74,7 @@ class PackageIndex extends React.Component{
                     name="package"
                     value={_package._id}
                     onClick={() => this.props.handleAddClick(_package)}
-                    disabled={this.getUsedPackagesIds().includes(_package._id)}
+                    disabled={!Auth.checkAvailability(this.props.userId) || this.getUsedPackagesIds().includes(_package._id)}
                   >
                     +Add to project
                   </button>
