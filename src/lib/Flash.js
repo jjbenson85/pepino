@@ -1,0 +1,15 @@
+class Flash{
+  static setMessage(type, message){
+    console.log('here')
+    this._messages = this._messages || {}
+    this._messages[type] = message
+  }
+  static getMessages(){
+    return this._messages
+  }
+  static clearMessages(){
+    this._messages = null
+  }
+}
+
+export default Flash

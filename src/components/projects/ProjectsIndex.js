@@ -62,8 +62,14 @@ class ProjectsIndex extends React.Component {
               handleSubmit={this.handleSubmit}
             />}
           <hr />
-          {this.props.projects.length > 0 && <ProjectCard projects ={this.props.projects}/> }
-          {!this.props.projects.length > 0 && <div>No projects have been added </div> }
+          <div className="columns is-multiline">
+            {this.props.projects.map(project =>
+              <div key={project._id} className="column is-one-third">
+                {this.props.projects.length > 0 && <ProjectCard project ={project}/> }
+                {!this.props.projects.length > 0 && <div>No projects have been added </div> }
+              </div>
+            )}
+          </div>
         </div>
       </section>
     )

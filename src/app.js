@@ -4,14 +4,16 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Redirect } from 'react-router'
 
-import Header from './components/common/header'
+import Header from './components/common/Header'
 import PackageShow from './components/packages/PackageShow'
 import ProjectShow from './components/projects/ProjectShow'
 import PackageIndex from './components/packages/PackageIndex'
 
+import FlashMessages from './components/common/FlashMessages'
 
 import Home from './components/Home'
 import UsersShow from './components/users/UsersShow'
+import UsersEdit from './components/users/UsersEdit'
 import Auth from './lib/Auth'
 
 // import 'bulma'
@@ -90,10 +92,13 @@ class App extends React.Component {
             user={this.state.user}
             handleLogout={this.handleLogout}
           />
+          <FlashMessages />
+
           <Switch>
             <Route path="/projects/:id" component={ProjectShow} />
             <Route path="/packages/:name" component={PackageShow} />
             <Route path="/packages" component={PackageIndex} />
+            <Route path="/users/:id/edit" component={UsersEdit} />
             <Route path="/users/:id" component={UsersShow} />
             <Route path="/" handleLogin={this.handleLogin} component={_Home} />
           </Switch>

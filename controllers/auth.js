@@ -1,13 +1,13 @@
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 
-function registerRoute(req, res){
+function registerRoute(req, res, next){
   User.create(req.body)
-    .then(() => res.status(201).json({ message: 'Users has been created sucessfully' }))
-    .catch(err => res.status(422).json(err.errors))
+    .then(() => res.status(201).json({ message: `${req.body.username} has been created sucessfully` }))
+    .catch(next)
 }
 
-function loginRoute(req, res) {
+function loginRoute(req, res,next) {
   User.findOne({ email: req.body.email })
     .then(user => {
       if(!user || !user.validatePassword(req.body.password)) {
@@ -20,6 +20,7 @@ function loginRoute(req, res) {
         message: `Welcome back ${user.username}!`
       })
     })
+    .catch(next)
 }
 
 module.exports = {

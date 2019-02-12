@@ -3,6 +3,7 @@ import RegisterForm from './auth/RegisterForm'
 import LoginForm from './auth/LoginForm'
 import axios from 'axios'
 import Auth from '../lib/Auth'
+import Flash from '../lib/Flash'
 
 
 class Home extends React.Component{
@@ -27,16 +28,24 @@ class Home extends React.Component{
   registerFunction(){
     axios
       .post('api/register', this.state.data)
-      .then(this.setState({...this.state,  data: {}}))
-      .catch(err => console.log(err.message))
+      .then(res => {
+        console.log(res)
+        Flash.setMessage('success', res.data.message)
+        this.setState({...this.state,  data: {}})
+        this.props.history.push('/')
+      })
+      .catch(err => console.log(err.response))
   }
 
   loginFunction(){
     axios
       .post('api/login', this.state.data)
-      .then(res => Auth.setToken(res.data.token))
-      .then(() => this.props.history.push(`/users/${Auth.getUserID()}`))
-      .catch(err => console.log(err.message))
+      .then(res => {
+        Auth.setToken(res.data.token)
+        Flash.setMessage('success', res.data.message)
+        this.props.history.push(`/users/${Auth.getUserID()}`)
+      } )
+      .catch(err => console.log(err.response))
   }
 
   changeState(){
