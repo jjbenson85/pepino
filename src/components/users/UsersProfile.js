@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const UsersProfile  = ({ username, email, bio, image}) =>  {
+const UsersProfile  = ({ username, email, bio, image, changeState}) =>  {
 
   return(
     <div className="field" >
@@ -10,7 +10,7 @@ const UsersProfile  = ({ username, email, bio, image}) =>  {
       <p>Email: {email}</p>
       <p>{bio}</p>
       <div className="field">
-        <button className="button is-primary home-button" >Edit Profile</button>
+        <button className="button is-primary home-button" onClick={changeState}>Edit Profile</button>
       </div>
     </div>
 

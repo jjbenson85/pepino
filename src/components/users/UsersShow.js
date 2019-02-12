@@ -19,6 +19,7 @@ class UsersShow extends React.Component{
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.changeState = this.changeState.bind(this)
   }
 
   componentDidMount(){
@@ -40,8 +41,12 @@ class UsersShow extends React.Component{
       {
         headers: { Authorization: `Bearer ${Auth.getToken()}`}
       })
-      .then(() => this.props.history.push(`/users/${Auth.getUserID()}`))
+      .then(() => this.changeState())
       .catch((err)=> this.setState({ error: err.response.data }))
+  }
+
+  changeState(){
+    this.setState({...this.state, edit: !this.state.edit })
   }
 
   render(){
@@ -53,23 +58,25 @@ class UsersShow extends React.Component{
       bio
     } = this.state.data
     if(!this.state.data.email) return null
+    {console.log(this.state.edit)}
     return(
       <section className="section">
         <div className="container">
           <div className="columns">
             <div className="column is-one-quarter">
-              <UsersProfile
+              {!this.state.edit &&  <UsersProfile
                 username={username}
                 image={image}
                 email={email}
                 bio={bio}
-              />
-              <UsersEditForm
+                changeState={this.changeState}
+              />}
+              {this.state.edit && <UsersEditForm
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
                 data={this.state.data}
                 error={this.state.error}
-              />
+              />}
             </div>
             <div className="column ">
               <ProjectsIndex projects={project}/>
