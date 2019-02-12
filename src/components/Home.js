@@ -12,7 +12,8 @@ class Home extends React.Component{
     super()
     this.state = {
       data: {},
-      register: true
+      register: true,
+      error: {}
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -21,8 +22,9 @@ class Home extends React.Component{
   }
 
   handleChange({target: {name, value}}){
-    const data = {...this.state.data, [name]: value}
-    this.setState({data})
+    const data = {...this.state.data, [name]: value }
+    const errors = {...this.state.errors, [name]: null }
+    this.setState({ data, errors })
   }
 
   registerFunction(){
@@ -34,18 +36,7 @@ class Home extends React.Component{
         this.setState({...this.state,  data: {}})
         this.props.history.push('/')
       })
-      .catch(err => console.log(err.response))
-  }
-
-  loginFunction(){
-    axios
-      .post('api/login', this.state.data)
-      .then(res => {
-        Auth.setToken(res.data.token)
-        Flash.setMessage('success', res.data.message)
-        this.props.history.push(`/users/${Auth.getUserID()}`)
-      } )
-      .catch(err => console.log(err.response))
+      .catch(err =>this.setState({...this.state, error: err.response.data }))
   }
 
   changeState(){
@@ -61,10 +52,12 @@ class Home extends React.Component{
 
   componentDidMount(){
     if(Auth.isAuthenticated()) this.props.history.push(`/users/${Auth.getUserID()}`)
+    this.setState({...this.state, register: this.props.register })
+
   }
 
   render(){
-    console.log(this.props)
+    console.log(this.props.error)
     return(
       <section className="section">
         <div className="container">
@@ -77,6 +70,7 @@ class Home extends React.Component{
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
                 data={this.state.data}
+                errors={this.state.error}
                 changeState={this.changeState}
               />}
 
@@ -85,6 +79,7 @@ class Home extends React.Component{
                 handleChange={this.handleChange}
                 data={this.state.data}
                 changeState={this.changeState}
+                errors={this.props.error}
               />}
             </div>
           </div>
