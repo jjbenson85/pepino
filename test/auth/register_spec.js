@@ -12,7 +12,6 @@ describe('POST /register', () => {
       .post('/api/register')
       .send(userData)
       .end((err, res) => {
-        expect(res.body.message).to.eq('Users has been created sucessfully')
         expect(res.status).to.eq(201)
         done()
       })
@@ -24,6 +23,7 @@ describe('POST /register', () => {
       .post('/api/register')
       .send(badData)
       .end((err, res) => {
+        console.log(res.status)
         expect(res.status).to.eq(422)
         done()
       })
