@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "seed": "node db/seeds",
-    "start": "yarn build && node index",
+    "start": "node index",
     "build": "webpack -p",
     "serve": "webpack-dev-server --mode=development",
     "test": "nyc mocha test/**/*_spec.js --require test/spec_helper --recursive --exit"
