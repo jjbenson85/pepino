@@ -42,20 +42,21 @@ $navbar-item-active-color: black;
 $navbar-breakpoint: 600px;
 
 // Import only what you need from Bulma
-@import "../../node_modules/bulma/sass/utilities/_all.sass";
-@import "../../node_modules/bulma/sass/base/_all.sass";
-@import "../../node_modules/bulma/sass/elements/button.sass";
-@import "../../node_modules/bulma/sass/elements/container.sass";
-@import "../../node_modules/bulma/sass/elements/form.sass";
-@import "../../node_modules/bulma/sass/elements/title.sass";
-@import "../../node_modules/bulma/sass/elements/tag.sass";
-@import "../../node_modules/bulma/sass/elements/image.sass";
-@import "../../node_modules/bulma/sass/components/navbar.sass";
-@import "../../node_modules/bulma/sass/components/card.sass";
-@import "../../node_modules/bulma/sass/components/level.sass";
-@import "../../node_modules/bulma/sass/layout/section.sass";
-@import "../../node_modules/bulma/sass/grid/columns.sass";
-// @import "../../node_modules/bulma/bulma.sass";
+// @import "../../node_modules/bulma/sass/utilities/_all.sass";
+// @import "../../node_modules/bulma/sass/base/_all.sass";
+// @import "../../node_modules/bulma/sass/elements/button.sass";
+// @import "../../node_modules/bulma/sass/elements/container.sass";
+// @import "../../node_modules/bulma/sass/elements/form.sass";
+// @import "../../node_modules/bulma/sass/elements/title.sass";
+// @import "../../node_modules/bulma/sass/elements/tag.sass";
+// @import "../../node_modules/bulma/sass/elements/image.sass";
+// @import "../../node_modules/bulma/sass/components/navbar.sass";
+// @import "../../node_modules/bulma/sass/components/card.sass";
+// @import "../../node_modules/bulma/sass/components/level.sass";
+// @import "../../node_modules/bulma/sass/layout/section.sass";
+// @import "../../node_modules/bulma/sass/grid/columns.sass";
+// @import "../../node_modules/bulma/sass/grid/columns.sass";
+@import "../../node_modules/bulma/bulma.sass";
 
 
 
@@ -120,11 +121,31 @@ $navbar-breakpoint: 600px;
   }
 }
 
+
 .hidden-input{
   border: none;
   background-color: white;
   box-shadow: none;
   &:focus{
     border: 1px solid black;
+  }
+}
+
+.columns.scroll{
+  overflow: scroll;
+  scroll-snap-type: x mandatory;
+  .column{
+    scroll-snap-align: end;
+    height:100vh;
+
+    height: 100vh;
+    overflow: scroll;
+    scroll-snap-type: y mandatory;
+    .card{
+      margin-bottom: 10px;
+      scroll-snap-align: center;
+      scroll-padding: 10px;
+
+    }
   }
 }

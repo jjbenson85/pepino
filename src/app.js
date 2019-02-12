@@ -15,6 +15,7 @@ import Home from './components/Home'
 import UsersShow from './components/users/UsersShow'
 import UsersEdit from './components/users/UsersEdit'
 import Auth from './lib/Auth'
+import Flash from './lib/Flash'
 
 // import 'bulma'
 import './scss/style.scss'
@@ -25,7 +26,9 @@ class App extends React.Component {
   constructor(){
     super()
     this.state={
-      user: null
+      user: null,
+      register: true,
+      error: {}
     }
 
     this.handleLogout = this.handleLogout.bind(this)
@@ -51,7 +54,6 @@ class App extends React.Component {
 
   handleLogout(){
     Auth.removeToken()
-    console.log('log out')
     this.setState({
       user: null,
       redirection: '/',
@@ -61,28 +63,26 @@ class App extends React.Component {
 
   handleLogin(e,data){
     e.preventDefault(e)
-    // console.log(data)
     axios
       .post('api/login', data)
       .then(res => {
         Auth.setToken(res.data.token)
+        Flash.setMessage('success', res.data.message)
       })
       .then(() => {
         return axios.get(`/api/users/${Auth.getUserID()}`)
       })
-      // .then(() => this.props.history.push(`/users/${Auth.getUserID()}`))
       .then((res) =>{
-        console.log('data', res.data)
         this.setState({
           user: res.data,
           redirection: `/user/${Auth.getUserID()}`
         })
       })
-      .catch(err => console.log(err.message))
+      .catch(err =>this.setState({...this.state, error: err.response.data, register: false }))
   }
 
   render(){
-    const _Home = props => <Home handleLogin={this.handleLogin} {...props}/>
+    const _Home = props => <Home handleLogin={this.handleLogin} error={this.state.error} register={this.state.register} {...props}/>
 
     return(
       <BrowserRouter>
