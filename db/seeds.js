@@ -35,7 +35,7 @@ mongoose.connect(process.env.MONGODB_URI, (err, db) => {
       return Package.create([{
         name: 'webpack',
         description: 'Packs CommonJs/AMD modules for the browser. Allows to split your codebase into multiple bundles, which can be loaded on demand. Support loaders to preprocess files, i.e. json, jsx, es7, css, less, ... and your custom stuff.',
-        icon: 'https://webpack.js.org/assets/icon-square-big.svg',
+        icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
         version: '3.1.14',
         keywords: ['webpack'],
         downloadsCount: 22629569,
@@ -49,77 +49,77 @@ mongoose.connect(process.env.MONGODB_URI, (err, db) => {
       },{
         name: 'webpack-dev-server',
         description: 'Serves a webpack app. Updates the browser on changes.',
-        icon: 'https://webpack.js.org/assets/icon-square-big.svg',
+        icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
         version: '3.1.14',
         keywords: ['webpack', 'server', 'development'],
         downloadsCount: 13643230
       },{
         name: 'webpack-dev-middleware',
         description: 'A development middleware for webpack',
-        icon: 'https://webpack.js.org/assets/icon-square-big.svg',
+        icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
         version: '3.1.14',
         keywords: ['webpack'],
         downloadsCount: 17615165
       },{
         name: 'file-loader',
         description: 'A file loader module for webpack',
-        icon: 'https://webpack.js.org/assets/icon-square-big.svg',
+        icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
         version: '3.1.14',
         keywords: ['webpack', 'file-loader' ],
         downloadsCount: 16021065
       },{
         name: 'postcss-loader',
         description: 'PostCSS loader for webpack',
-        icon: 'https://webpack.js.org/assets/icon-square-big.svg',
+        icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
         version: '3.1.14',
         keywords: ['css', 'postcss','postcss-runner','webpack','webpack-loader'],
         downloadsCount: 16021065
       },{
         name: 'html-webpack-plugin',
         description: 'Simplifies creation of HTML files to serve your webpack bundles',
-        icon: 'https://webpack.js.org/assets/icon-square-big.svg',
+        icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
         version: '3.1.14',
         keywords: ['webpack','plugin','html','html-webpack-plugin'],
         downloadsCount: 10753297
       },{
         name: 'url-loader',
         description: 'A loader for webpack which transforms files into base64 URIs',
-        icon: 'https://webpack.js.org/assets/icon-square-big.svg',
+        icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
         version: '3.1.14',
         keywords: ['webpack', 'url', 'url-loader'],
         downloadsCount: 11671284
       },{
         name: 'webpack-bundle-analyzer',
         description: 'Webpack plugin and CLI utility that represents bundle content as convenient interactive zoomable treemap',
-        icon: 'https://webpack.js.org/assets/icon-square-big.svg',
+        icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
         version: '3.1.14',
         keywords: ['webpack', 'bundle', 'analyzer', 'modules', 'size', 'interactive', 'chart', 'treemap', 'zoomable', 'zoom'],
         downloadsCount: 3862578
       },{
         name: 'sass-loader',
         description: 'Sass loader for webpack',
-        icon: 'https://webpack.js.org/assets/icon-square-big.svg',
+        icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
         version: '3.1.14',
         keywords: [ 'sass', 'libsass', 'webpack', 'loader'],
         downloadsCount: 9913408
       },{
         name: 'webpack-cli',
         description: 'CLI for webpack & friends',
-        icon: 'https://webpack.js.org/assets/icon-square-big.svg',
+        icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
         version: '3.1.14',
         keywords: [ 'webpack', 'cli', 'scaffolding', 'module', 'bundler'],
         downloadsCount: 4891405
       },{
         name: 'terser-webpack-plugin',
         description: 'Terser plugin for webpack',
-        icon: 'https://webpack.js.org/assets/icon-square-big.svg',
+        icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
         version: '3.1.14',
         keywords: [ 'uglify', 'uglify-js', 'uglify-es', 'terser', 'webpack', 'webpack-plugin', 'minification', 'compress', 'compressor', 'min', 'minification', 'minifier', 'minify', 'optimize', 'optimizer'],
         downloadsCount: 5988334
       },{
         name: 'case-sensitive-paths-webpack-plugin',
         description: 'Enforces module path case sensitivity in Webpack',
-        icon: 'https://webpack.js.org/assets/icon-square-big.svg',
+        icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
         version: '3.1.14',
         keywords: ['webpack', 'plugin', 'case sensitive', 'import', 'require'],
         downloadsCount: 6755529
