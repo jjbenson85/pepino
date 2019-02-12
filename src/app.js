@@ -38,7 +38,6 @@ class App extends React.Component {
   componentDidMount(){
     this.setState({redirection: null})
     if(Auth.getUserID()){
-      console.log('user',Auth.getUserID())
       axios.get(`/api/users/${Auth.getUserID()}`)
         .then( res =>{
           this.setState({ user: res.data})

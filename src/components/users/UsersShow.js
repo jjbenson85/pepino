@@ -23,9 +23,10 @@ class UsersShow extends React.Component{
   }
 
   componentDidMount(){
+    Auth.checkAvailability(this.props.match.params.id)
     axios.get(`/api/users/${this.props.match.params.id}`)
       .then( res =>{
-        this.setState({ data: res.data})
+        this.setState({ data: res.data, status: Auth.checkAvailability(this.props.match.params.id)})
       })
       .catch((err)=>console.log(err.message))
   }
@@ -58,7 +59,6 @@ class UsersShow extends React.Component{
       bio
     } = this.state.data
     if(!this.state.data.email) return null
-    {console.log(this.state.edit)}
     return(
       <section className="section">
         <div className="container">
@@ -70,16 +70,18 @@ class UsersShow extends React.Component{
                 email={email}
                 bio={bio}
                 changeState={this.changeState}
+                status={this.state.status}
               />}
               {this.state.edit && <UsersEditForm
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
                 data={this.state.data}
                 error={this.state.error}
+                status={this.state.status}
               />}
             </div>
             <div className="column ">
-              <ProjectsIndex projects={project}/>
+              <ProjectsIndex projects={project} status={this.state.status} />
             </div>
           </div>
         </div>

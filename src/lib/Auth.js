@@ -30,6 +30,11 @@ class Auth{
     return now < payload.exp
   }
 
+  static checkAvailability(id){
+    if(this.getUserID() === id && this.isAuthenticated()) return true
+    return false
+  }
+
   static removeToken(){
     localStorage.removeItem('token')
   }

@@ -1,9 +1,8 @@
 import React from 'react'
 
 
-const UsersEditForm  = ({ data, handleChange, handleSubmit, error }) =>  {
+const UsersEditForm  = ({ data, handleChange, handleSubmit, error, status }) =>  {
   const{email, username, bio, image} = data
-  console.log(error)
   return(
     <form onSubmit={handleSubmit}>
       <div className="field" >
@@ -37,7 +36,7 @@ const UsersEditForm  = ({ data, handleChange, handleSubmit, error }) =>  {
       </div>
 
       <div className="field">
-        <button className="button is-primary home-button" >Submit</button>
+        {status && <button className="button is-primary home-button" >Submit</button>}
 
       </div>
     </form>
