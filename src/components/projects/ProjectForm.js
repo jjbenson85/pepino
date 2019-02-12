@@ -18,8 +18,8 @@ const ProjectForm = ({ data, handleChange, handleSubmit }) => {
       <div className="field">
         <label className="label">Description</label>
         <div className="control">
-          <input
-            className="input"
+          <textarea
+            className="textarea"
             placeholder="Description"
             name="description"
             onChange={handleChange}
