@@ -9,7 +9,8 @@ class UsersEdit extends React.Component{
   constructor(){
     super()
     this.state = {
-      data: {}
+      data: {},
+      error: {}
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -36,10 +37,12 @@ class UsersEdit extends React.Component{
         headers: { Authorization: `Bearer ${Auth.getToken()}`}
       })
       .then(() => this.props.history.push(`/users/${Auth.getUserID()}`))
-      .catch((err)=>console.log(err.message))
+      .catch((err)=> this.setState({ error: err.response.data }))
   }
 
   render(){
+    console.log(!this.state.data.email)
+    if(!this.state.data.email) return null
     return(
       <section className="section">
         <div className="container">
@@ -49,6 +52,7 @@ class UsersEdit extends React.Component{
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
                 data={this.state.data}
+                error={this.state.error}
               />
             </div>
           </div>

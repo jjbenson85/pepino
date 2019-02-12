@@ -4,13 +4,20 @@ import Auth from '../../lib/Auth'
 import axios from 'axios'
 
 import ProjectsIndex from '../projects/ProjectsIndex'
+import UsersEditForm from './UsersEditForm'
 
 
 class UsersShow extends React.Component{
 
   constructor(){
     super()
-    this.state = {}
+    this.state = {
+      data: {},
+      error: {},
+      edit: false
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount(){
@@ -21,10 +28,22 @@ class UsersShow extends React.Component{
       .catch((err)=>console.log(err.message))
   }
 
+  handleChange({target: {name, value}}){
+    const data = {...this.state.data, [name]: value}
+    this.setState({data})
+  }
+
+  handleSubmit(e){
+    e.preventDefault(e)
+    axios.put(`/api/users/${Auth.getUserID()}`, this.state.data,
+      {
+        headers: { Authorization: `Bearer ${Auth.getToken()}`}
+      })
+      .then(() => this.props.history.push(`/users/${Auth.getUserID()}`))
+      .catch((err)=> this.setState({ error: err.response.data }))
+  }
 
   render(){
-    if(!this.state.data) return null
-
     const {
       username,
       image,
@@ -32,6 +51,7 @@ class UsersShow extends React.Component{
       email,
       bio
     } = this.state.data
+    if(!this.state.data.email) return null
     return(
       <section className="section">
         <div className="container">
@@ -41,6 +61,12 @@ class UsersShow extends React.Component{
               <h1>User name: {username}</h1>
               <p>Email: {email}</p>
               <p>{bio}</p>
+              <UsersEditForm
+                handleSubmit={this.handleSubmit}
+                handleChange={this.handleChange}
+                data={this.state.data}
+                error={this.state.error}
+              />
             </div>
             <div className="column ">
               <ProjectsIndex projects={project}/>
