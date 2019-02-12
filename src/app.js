@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Redirect } from 'react-router'
 
 import Header from './components/common/Header'
 import PackageShow from './components/packages/PackageShow'
@@ -13,17 +14,84 @@ import FlashMessages from './components/common/FlashMessages'
 import Home from './components/Home'
 import UsersShow from './components/users/UsersShow'
 import UsersEdit from './components/users/UsersEdit'
+import Auth from './lib/Auth'
 
-import 'bulma'
+// import 'bulma'
 import './scss/style.scss'
+import axios from 'axios'
 
 class App extends React.Component {
 
+  constructor(){
+    super()
+    this.state={
+      user: null
+    }
+
+    this.handleLogout = this.handleLogout.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
+
+  }
+
+  componentDidMount(){
+    this.setState({redirection: null})
+    if(Auth.getUserID()){
+      console.log('user',Auth.getUserID())
+      axios.get(`/api/users/${Auth.getUserID()}`)
+        .then( res =>{
+          this.setState({ user: res.data})
+        })
+        .catch((err)=>console.log(err.message))
+    }
+  }
+
+  componentDidUpdate(){
+    if(this.state.redirection) this.setState({redirection: null})
+  }
+
+  handleLogout(){
+    Auth.removeToken()
+    console.log('log out')
+    this.setState({
+      user: null,
+      redirection: '/',
+      loggedIn: false
+    })
+  }
+
+  handleLogin(e,data){
+    e.preventDefault(e)
+    // console.log(data)
+    axios
+      .post('api/login', data)
+      .then(res => {
+        Auth.setToken(res.data.token)
+      })
+      .then(() => {
+        return axios.get(`/api/users/${Auth.getUserID()}`)
+      })
+      // .then(() => this.props.history.push(`/users/${Auth.getUserID()}`))
+      .then((res) =>{
+        console.log('data', res.data)
+        this.setState({
+          user: res.data,
+          redirection: `/user/${Auth.getUserID()}`
+        })
+      })
+      .catch(err => console.log(err.message))
+  }
+
   render(){
+    const _Home = props => <Home handleLogin={this.handleLogin} {...props}/>
+
     return(
       <BrowserRouter>
         <main>
-          <Header />
+          {(this.state.redirection) && <Redirect push to={this.state.redirection} />}
+          <Header
+            user={this.state.user}
+            handleLogout={this.handleLogout}
+          />
           <FlashMessages />
 
           <Switch>
@@ -32,7 +100,7 @@ class App extends React.Component {
             <Route path="/packages" component={PackageIndex} />
             <Route path="/users/:id/edit" component={UsersEdit} />
             <Route path="/users/:id" component={UsersShow} />
-            <Route path="/" component={Home} />
+            <Route path="/" handleLogin={this.handleLogin} component={_Home} />
           </Switch>
         </main>
       </BrowserRouter>

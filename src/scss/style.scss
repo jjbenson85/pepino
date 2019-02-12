@@ -1,11 +1,98 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+// Set your brand colors
+$purple: #8A4D76;
+$red: #d02323;
+$pink: #FA7C91;
+$brown: #757763;
+$blue: #209cee;
+$green: #00d1b2;
+$beige-light: #D0D1CD;
+$beige-lighter: #EFF0EB;
+
+// Update Bulma's global variables
+$family-sans-serif: "Nunito", sans-serif;
+// $grey-dark: #446;
+// $grey-light: #ddf;
+// $primary: darken($blue, 20%);
+$primary: $green;
+$link: $blue;
+// $widescreen-enabled: false;
+// $fullhd-enabled: false;
+
+// Update some of Bulma's component variables
+// $body-background-color: lighten($primary, 50%);
+// $control-border-width: 2px;
+// $input-border-color: transparent;
+// $input-shadow: none;
+$navbar-background-color: $primary;
+$navbar-item-color: black;
+$navbar-item-hover-color: black;
+$navbar-item-active-color: black;
+// $navbar-item-background-color: darken($navbar-background-color, 20%);
+// $footer-background-color: $primary;
+// $navbar-item-active-background-color: $primary;
+
+// $navbar-dropdown-item-active-background-color: $primary;
+//
+// $navbar-item-img-max-height: 2em;
+$navbar-breakpoint: 600px;
+
+// Import only what you need from Bulma
+@import "../../node_modules/bulma/sass/utilities/_all.sass";
+@import "../../node_modules/bulma/sass/base/_all.sass";
+@import "../../node_modules/bulma/sass/elements/button.sass";
+@import "../../node_modules/bulma/sass/elements/container.sass";
+@import "../../node_modules/bulma/sass/elements/form.sass";
+@import "../../node_modules/bulma/sass/elements/title.sass";
+@import "../../node_modules/bulma/sass/elements/tag.sass";
+@import "../../node_modules/bulma/sass/elements/image.sass";
+@import "../../node_modules/bulma/sass/components/navbar.sass";
+@import "../../node_modules/bulma/sass/components/card.sass";
+@import "../../node_modules/bulma/sass/components/level.sass";
+@import "../../node_modules/bulma/sass/layout/section.sass";
+@import "../../node_modules/bulma/sass/grid/columns.sass";
+// @import "../../node_modules/bulma/bulma.sass";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .home-button{
   margin-right: 20px;
 }
 
 
-.profile{
-  height: 400px;
-  width: 300px;
+.pepino-logo{
+  height:30px;
+  width:10px;
+  border-radius: 5px;
+  border: 1px solid green;
+  transform: rotate(30deg);
+
+}
+
+.header{
+  transition: all 1s;
+  nav.link-list{
+    min-height: 0;
+  }
 }
 
 .package-index{

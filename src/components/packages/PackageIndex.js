@@ -6,8 +6,9 @@ import axios from 'axios'
 class PackageIndex extends React.Component{
   constructor(){
     super()
-    this.state = {}
-
+    this.state = {
+      usedPackagesId: []
+    }
   }
 
   getPackagesData(){
@@ -22,12 +23,18 @@ class PackageIndex extends React.Component{
     this.getPackagesData()
   }
 
+  getUsedPackagesIds() {
+    this.props.packages.forEach(_package => this.state.usedPackagesId.push(_package._id))
+  }
+
+
+
   render(){
     if(!this.state.packages) return null
+    this.getUsedPackagesIds()
     return(
-      <section className='section package-index'>
-        <div className='container'>
-          <h1>packages</h1>
+      <section className='package-index'>
+        <div>
           {this.state.packages.map( (_package,i)=>
             <div key={i} className='card'>
               <div className='card-header'>
@@ -62,13 +69,11 @@ class PackageIndex extends React.Component{
               </div>
               <div className='card-content'>
                 <div className="buttons has-addons is-fullwidth">
-                  <span className="button is-success is-outlined ">+Add to project</span>
+                  {!this.state.usedPackagesId.includes(_package._id) && <button className="button is-success is-outlined " name="package" value={_package._id} onClick={() => this.props.handleClick(_package)}>+Add to project</button> }
                   <span className="button is-info is-outlined">View Details</span>
                 </div>
                 <div className='content'><blockquote className='is-medium'>{_package.description}</blockquote></div>
-                <div className='level'>
-                  <div className="tags level-item " >{_package.keywords.map( (keyword,j)=> <div key={j} className="tag is-primary">{keyword}</div>)}</div>
-                </div>
+                <div className="tags level-item " >{_package.keywords.map( (keyword,j)=> <div key={j} className="tag is-primary">{keyword}</div>)}</div>
               </div>
             </div>
           )}
