@@ -40,6 +40,7 @@ class ProjectShow extends React.Component {
       this.getProject()
     }
   }
+
   putProject() {
     axios.put(`/api/projects/${this.props.match.params.id}`,
       {...this.state.project},
@@ -54,7 +55,6 @@ class ProjectShow extends React.Component {
   }
 
   handleViewClick(_package){
-    console.log(_package)
     document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'})
     this.setState({ selectedPackage: _package })
   }

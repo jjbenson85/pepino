@@ -18,6 +18,7 @@ class ProjectsIndex extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   handleChange({ target: { name, value } }) {
@@ -43,6 +44,15 @@ class ProjectsIndex extends React.Component {
       .catch(() => this.setState({ error: 'An error occured' }))
   }
 
+  handleDelete(id) {
+    axios
+      .delete(`/api/projects/${id}`, {
+        headers: {Authorization: `Bearer ${Auth.getToken()}`}
+      })
+      .then(() => this.props.history.push('/users'))
+      .catch(err => console.log(err))
+  }
+
   render() {
     if(!this.props) return (
       <section className="section">
@@ -65,7 +75,7 @@ class ProjectsIndex extends React.Component {
           <div className="columns is-multiline">
             {this.props.projects.map(project =>
               <div key={project._id} className="column is-one-third">
-                {this.props.projects.length > 0 && <ProjectCard project ={project}/> }
+                {this.props.projects.length > 0 && <ProjectCard project ={project} handleDelete={this.handleDelete}/> }
                 {!this.props.projects.length > 0 && <div>No projects have been added </div> }
               </div>
             )}
