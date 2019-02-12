@@ -13,6 +13,7 @@ import FlashMessages from './components/common/FlashMessages'
 
 import Home from './components/Home'
 import UsersShow from './components/users/UsersShow'
+import UsersIndex from './components/users/UsersIndex'
 import Auth from './lib/Auth'
 import Flash from './lib/Flash'
 
@@ -97,6 +98,7 @@ class App extends React.Component {
             <Route path="/packages/:name" component={PackageShow} />
             <Route path="/packages" component={PackageIndex} />
             <Route path="/users/:id" component={UsersShow} />
+            <Route path="/users" component={UsersIndex} />
             <Route path="/" handleLogin={this.handleLogin} component={_Home} />
           </Switch>
         </main>
