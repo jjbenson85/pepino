@@ -119,3 +119,12 @@ $navbar-breakpoint: 600px;
     }
   }
 }
+
+.hidden-input{
+  border: none;
+  background-color: white;
+  box-shadow: none;
+  &:focus{
+    border: 1px solid black;
+  }
+}
