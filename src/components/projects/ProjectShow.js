@@ -53,6 +53,7 @@ class ProjectShow extends React.Component {
 
   handleViewClick(_package){
     console.log(_package)
+    document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'})
     this.setState({ selectedPackage: _package })
   }
 
@@ -101,8 +102,8 @@ class ProjectShow extends React.Component {
     return(
       <section className="section">
         <div className="container">
-          <div className="columns">
-            <div className="column is-one-quarter project">
+          <div className="columns scroll">
+            <div className="column is-half project">
               <h1 className="title is-1">{name}</h1>
               <div>{description}</div>
               <section className="section">
@@ -132,8 +133,9 @@ class ProjectShow extends React.Component {
             <div className="column is-half">
               <PackageIndex handleAddClick={this.handleAddClick} packages={this.state.project.packages} handleViewClick={this.handleViewClick}/>
             </div>
-            <div className="column">
-              <PackageShow packageName={this.state.selctedPackage} />
+            <div id="package-show" className="column is-half">
+              <PackageShow
+                selectedPackage={this.state.selectedPackage} />
             </div>
           </div>
         </div>
