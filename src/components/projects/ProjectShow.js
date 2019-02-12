@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 import PackageIndex from '../packages/PackageIndex'
+import PackageShow from '../packages/PackageShow'
 
 import Auth from '../../lib/Auth'
 
@@ -11,21 +12,33 @@ class ProjectShow extends React.Component {
     super()
 
     this.state = {
-      editing: false
+      editing: false,
+      selectedPackage: null
     }
 
-    this.handleClick = this.handleClick.bind(this)
+    this.handleAddClick = this.handleAddClick.bind(this)
+    this.handleViewClick = this.handleViewClick.bind(this)
     this.handleSaveClick = this.handleSaveClick.bind(this)
     this.handlePackageDelete = this.handlePackageDelete.bind(this)
   }
 
-  componentDidMount() {
+
+  getProject() {
     axios.get(`/api/projects/${this.props.match.params.id}`)
       .then(res => this.setState({ project: res.data }))
   }
 
-  handleSaveClick(){
+  componentDidMount() {
+    this.getProject()
+  }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.location.pathname !== prevProps.location.pathname) {
+      this.getProject()
+    }
+  }
+
+  handleSaveClick(){
     axios.put(`/api/projects/${this.props.match.params.id}`,
       {...this.state.project},
       {
@@ -38,7 +51,12 @@ class ProjectShow extends React.Component {
       .catch( err => console.log(err.errors))
   }
 
-  handleClick(_package) {
+  handleViewClick(_package){
+    console.log(_package)
+    this.setState({ selectedPackage: _package })
+  }
+
+  handleAddClick(_package) {
     const index = this.state.project.packages.indexOf(_package)
     console.log(index)
 
@@ -80,8 +98,6 @@ class ProjectShow extends React.Component {
       </section>
     )
     const { name, description, createdAt, updatedAt, packages } = this.state.project
-    const createdDate =new Date(createdAt).toLocaleString()
-    const updatedDate =new Date(updatedAt).toLocaleString()
     return(
       <section className="section">
         <div className="container">
@@ -114,9 +130,10 @@ class ProjectShow extends React.Component {
               <div>Updated at: {updatedAt.split('T')[0]}</div>
             </div>
             <div className="column is-half">
-              <PackageIndex handleClick={this.handleClick} packages={this.state.project.packages}/>
+              <PackageIndex handleAddClick={this.handleAddClick} packages={this.state.project.packages} handleViewClick={this.handleViewClick}/>
             </div>
             <div className="column">
+              <PackageShow packageName={this.state.selctedPackage} />
             </div>
           </div>
         </div>
