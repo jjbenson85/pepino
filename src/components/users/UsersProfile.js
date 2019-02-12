@@ -1,34 +1,20 @@
 import React from 'react'
 
 
-const UsersProfile  = ({ data, handleChange, handleSubmit, changeState, errors }) =>  {
+const UsersProfile  = ({ username, email, bio, image}) =>  {
 
-  const{email, password} = data
   return(
-    <form onSubmit={handleSubmit} name="login">
-
-      <div className="field" >
-        <label className="label">Email</label>
-        <div className="control">
-          <input className="input" type="text" placeholder="Email" name="email" onChange={handleChange} value={email || ''}/>
-        </div>
-        {errors.email && <small className="help is-danger">{errors.email}</small>}
-      </div>
+    <div className="field" >
+      <img className="image profile" src={image || 'http://interreligio.unistra.fr/wp-content/uploads/2017/07/profil-vide.png'} alt={`image of user ${username}`} />
+      <h1>User name: {username}</h1>
+      <p>Email: {email}</p>
+      <p>{bio}</p>
       <div className="field">
-        <label className="label">Password</label>
-        <div className="control">
-          <input className="input" type="password" placeholder="Password" name="password" onChange={handleChange} value={password || ''}/>
-        </div>
-        {errors.password && <small className="help is-danger">{errors.password}</small>}
+        <button className="button is-primary home-button" >Edit Profile</button>
       </div>
-      <div className="field">
-        <button className="button is-primary home-button" >Submit</button>
-        <button className="button is-primary home-button" onClick={changeState}>Register</button>
+    </div>
 
-      </div>
-    </form>
   )
-
 }
 
 export default UsersProfile

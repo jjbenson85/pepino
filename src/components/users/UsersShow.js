@@ -6,6 +6,7 @@ import axios from 'axios'
 import ProjectsIndex from '../projects/ProjectsIndex'
 import UsersEditForm from './UsersEditForm'
 
+import UsersProfile from './UsersProfile'
 
 class UsersShow extends React.Component{
 
@@ -57,10 +58,12 @@ class UsersShow extends React.Component{
         <div className="container">
           <div className="columns">
             <div className="column is-one-quarter">
-              <img className="image profile" src={image || 'http://interreligio.unistra.fr/wp-content/uploads/2017/07/profil-vide.png'} alt={`image of user ${username}`} />
-              <h1>User name: {username}</h1>
-              <p>Email: {email}</p>
-              <p>{bio}</p>
+              <UsersProfile
+                username={username}
+                image={image}
+                email={email}
+                bio={bio}
+              />
               <UsersEditForm
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
