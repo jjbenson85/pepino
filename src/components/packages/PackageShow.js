@@ -26,6 +26,12 @@ class PackageShow extends React.Component{
     }
   }
 
+  componentDidUpdate(prevProps){
+    // if(this.props.location.pathname !== prevProps.location.pathname){
+    //   this.getPackageData()
+    // }
+  }
+
   render(){
     if(!this.state.package) return null
     console.log('package', this.state.package)
