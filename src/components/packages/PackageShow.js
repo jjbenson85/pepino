@@ -7,12 +7,13 @@ class PackageShow extends React.Component{
 
   constructor(){
     super()
-    this.state = {}
+    this.state = {
+    }
 
   }
 
   getPackageData(){
-    axios.get(`/api/packages/${this.props.match.params.name}`)
+    axios.get(`/api/packages/${this.props.packageName}`)
       .then( res =>{
         this.setState({ package: res.data})
       })
@@ -20,7 +21,9 @@ class PackageShow extends React.Component{
   }
 
   componentDidMount(){
-    this.getPackageData()
+    if(this.props.packageName){
+      this.getPackageData()
+    }
   }
 
   render(){
@@ -33,8 +36,8 @@ class PackageShow extends React.Component{
       publisher,
       links,
       license
-    } = this.state.package.collected.metadata
-    const {comments} = this.state.package
+    } = this.state.package.npms.collected.metadata
+    //const {comments} = this.state.package.pepino
     function arrFromObj(obj){
       const arr = []
       for (const key in obj) arr.push([key, obj[key]])
@@ -42,9 +45,10 @@ class PackageShow extends React.Component{
     }
 
     return(
+
       <section>
-        <h1>Packages</h1>
-        <h2>{name}</h2>
+        <h1>Package</h1>
+        {/*<h2>{name}</h2>
         <p>{description}</p>
         <p>{`author:${author.name}`}</p>
         <p>{`license:${license}`}</p>
@@ -63,7 +67,7 @@ class PackageShow extends React.Component{
               <p>{`Posted by ${comment.user.username}`}</p>
             </li>
           )}
-        </ul>
+        </ul>*/}
       </section>
     )
   }

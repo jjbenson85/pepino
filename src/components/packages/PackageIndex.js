@@ -69,8 +69,23 @@ class PackageIndex extends React.Component{
               </div>
               <div className='card-content'>
                 <div className="buttons has-addons is-fullwidth">
-                  {!this.state.usedPackagesId.includes(_package._id) && <button className="button is-success is-outlined " name="package" value={_package._id} onClick={() => this.props.handleClick(_package)}>+Add to project</button> }
-                  <span className="button is-info is-outlined">View Details</span>
+                  {!this.state.usedPackagesId.includes(_package._id) &&
+                    <button
+                      className="button is-success is-outlined "
+                      name="package"
+                      value={_package._id}
+                      onClick={() => this.props.handleAddClick(_package)}
+                    >
+                      +Add to project
+                    </button> }
+                  <button
+                    className="button is-info is-outlined"
+                    name='viewPackage'
+                    value={_package._id}
+                    onClick={() => this.props.handleViewClick(_package)}
+                  >
+                  View Details
+                  </button>
                 </div>
                 <div className='content'><blockquote className='is-medium'>{_package.description}</blockquote></div>
                 <div className="tags level-item " >{_package.keywords.map( (keyword,j)=> <div key={j} className="tag is-primary">{keyword}</div>)}</div>
