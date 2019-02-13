@@ -63,7 +63,7 @@ mongoose.connect(process.env.MONGODB_URI, (err, db) => {
         description: 'The second most beautiful',
         user: users.begona,
         visible: true
-        
+
       })
       Project.create({
         name: 'Beautiful Project three',
@@ -113,29 +113,29 @@ mongoose.connect(process.env.MONGODB_URI, (err, db) => {
 
       return (users)
     })
-    .then( (users)=>{
-      var options = {
-        uri: `https://api.npms.io/v2/package/`,
-        json: true // Automatically parses the JSON string in the response
-      }
-
-      //Wait for both promises to be completed before continuing
-      Promise.props({
-        localData: Package
-          .findOne({name})
-          .populate({
-            path: 'comments.user',
-            select: 'username image'
-          })
-        ,
-        remoteData: rp(options)
-      })
-        .then( (data) =>{
-          //Add remoteData data as the value for npms in localData
-          data.localData.npms = data.remoteData
-          res.json(data.localData)
-        })
-    }
+    // .then( (users)=>{
+    //   var options = {
+    //     uri: `https://api.npms.io/v2/package/`,
+    //     json: true // Automatically parses the JSON string in the response
+    //   }
+    //
+    //   //Wait for both promises to be completed before continuing
+    //   Promise.props({
+    //     localData: Package
+    //       .findOne({name})
+    //       .populate({
+    //         path: 'comments.user',
+    //         select: 'username image'
+    //       })
+    //     ,
+    //     remoteData: rp(options)
+    //   })
+    //     .then( (data) =>{
+    //       //Add remoteData data as the value for npms in localData
+    //       data.localData.npms = data.remoteData
+    //       res.json(data.localData)
+    //     })
+    // })
     .then( (users)=> Package.create([{
       name: 'webpack',
       description: 'Packs CommonJs/AMD modules for the browser. Allows to split your codebase into multiple bundles, which can be loaded on demand. Support loaders to preprocess files, i.e. json, jsx, es7, css, less, ... and your custom stuff.',
