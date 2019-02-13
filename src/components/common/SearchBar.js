@@ -22,7 +22,7 @@ class SearchBar extends React.Component{
     axios
       .get(this.props.url+'/'+this.state.text)
       .then((data) => {
-        // console.log(data)
+        console.log('search',data)
         this.props.returnData(data)
       })
       .catch((err) => console.log('error',err.errors))

@@ -19,7 +19,36 @@ function searchRoute(req, res, next){
   }
   rp(options)
     .then( (data) =>{
-      res.json(data)
+      // console.log('data',data.results)
+      // const newData = data.results.map(data => {
+      return Promise.map(data.results, data => {
+        const {name, description} = data.package
+        return Package
+          .findOne({name})
+          .then( foundPackage => {
+            if(!foundPackage){
+              // console.log('package not found', foundPackage, name, description)
+              const packageDetails = {
+                name: name,
+                description: description,
+                comments: []
+              }
+              return Package
+                //Add a new project to database
+                .create(packageDetails)
+                //Return the new project
+            }else{
+              // console.log('package found', foundPackage)
+              return foundPackage
+            }
+          })
+      })
+      // console.log('newData',newData)
+      // res.json(newdata)
+    })
+    .then( (output) => {
+      console.log('output',output)
+      res.json(output)
     })
     .catch(next)
 }

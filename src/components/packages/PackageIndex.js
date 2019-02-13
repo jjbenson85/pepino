@@ -32,7 +32,7 @@ class PackageIndex extends React.Component{
   }
 
   returnData(searchData){
-    const packages = searchData.data.results
+    const packages = searchData.data
     console.log('search bar returning data',packages)
     this.setState({ packages})
   }
@@ -46,7 +46,7 @@ class PackageIndex extends React.Component{
         <SearchBar url='/api/packages/search' returnData={this.returnData}/>
         <div>
           {/*this.state.packages && this.state.packages.map( (_package)=>console.log(_package))*/}
-          {this.state.packages && this.state.packages.map( ({package: _package},i)=>
+          {this.state.packages && this.state.packages.map( (_package,i)=>
             <div key={i} className='card'>
               <div className='card-header'>
                 <div className="media">
