@@ -239,7 +239,6 @@ justify-content: space-between;
   border-radius: 2px;
   border: 1px solid rgba(10, 10, 10, 0.1);
   margin-bottom: 8px;
-  // box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
   .textarea-control{
     width: 100%;
   }
@@ -259,14 +258,7 @@ justify-content: space-between;
 
   }
 }
-//
-// .image{
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-a {
-  color: black;
+
 .project {
   textarea::placeholder {
     text-align: center;
