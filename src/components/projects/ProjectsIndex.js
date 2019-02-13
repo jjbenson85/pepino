@@ -73,14 +73,19 @@ class ProjectsIndex extends React.Component {
             />}
           {!this.state.addingProject && this.props.logged && <hr /> }
           <div className="columns is-multiline">
-            {this.props.projects.map(project =>
-              <div key={project._id} className="column is-one-third">
-                {this.props.projects.length > 0 &&
-                  <ProjectCard project = {project}
-                    handleDelete={this.handleDelete}
-                    logged={this.props.logged}/> }
-                {!this.props.projects.length > 0 && <div>No projects have been added </div> }
-              </div>
+            {this.props.projects.map(project => {
+              if (project.visible || this.props.logged) {
+                return (
+                  <div key={project._id} className="column is-one-third">
+                    {this.props.projects.length > 0 &&
+                      <ProjectCard project = {project}
+                        handleDelete={this.handleDelete}
+                        logged={this.props.logged}/> }
+                    {!this.props.projects.length > 0 && <div>No projects have been added </div> }
+                  </div>
+                )
+              }
+            }
             )}
           </div>
         </div>
