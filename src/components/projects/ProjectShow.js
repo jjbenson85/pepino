@@ -48,8 +48,7 @@ class ProjectShow extends React.Component {
           Authorization: `Bearer ${Auth.getToken()}`
         }
       })
-      .then(res => console.log(res))
-      .then(() => this.setState({editing: false}))
+      .then(res => console.log(res.data))
       .catch( err => console.log(err.errors))
   }
 
@@ -107,7 +106,7 @@ class ProjectShow extends React.Component {
         </div>
       </section>
     )
-    const { name, description, createdAt, updatedAt, packages, user } = this.state.project
+    const { name, description, createdAt, updatedAt, packages, user, visible } = this.state.project
     return(
       <section className="section">
         <div className="container">
@@ -115,7 +114,7 @@ class ProjectShow extends React.Component {
             <div className="column is-half project">
               <input
                 className="title is-1 input hidden-input"
-                placeholder="Name"
+                placeholder="Name is required"
                 name="name"
                 onChange={this.handleChange}
                 value={name}
@@ -124,6 +123,7 @@ class ProjectShow extends React.Component {
               <textarea
                 className="textarea hidden-input"
                 name="description"
+                placeholder="description"
                 onChange={this.handleChange}
                 value={description}
                 disabled={!Auth.checkAvailability(user._id)}
@@ -145,12 +145,28 @@ class ProjectShow extends React.Component {
                   </div>
                 )}
               </section>
+              <section className="section visible">
+                <div className="control">
+                  <label className="radio">
+                    <input type="radio" name="visible" value={true} onChange={this.handleChange} checked={JSON.parse(visible)=== true}/>
+                    <span>Visible</span>
+                  </label>
+                  <label className="radio">
+                    <input type="radio" name="visible" value={false} onChange={this.handleChange} checked={JSON.parse(visible)=== false}/>
+                    <span>Not visible</span>
+                  </label>
+                </div>
+              </section>
               <hr />
               <div>Created at: {createdAt.split('T')[0]}</div>
               <div>Updated at: {updatedAt.split('T')[0]}</div>
             </div>
             <div className="column is-half">
-              <PackageIndex handleAddClick={this.handleAddClick} packages={this.state.project.packages} handleViewClick={this.handleViewClick} userId = {this.state.project.user._id}/>
+              <PackageIndex
+                handleAddClick={this.handleAddClick}
+                packages={this.state.project.packages}
+                handleViewClick={this.handleViewClick}
+                userId = {this.state.project.user._id}/>
             </div>
             <div id="package-show" className="column is-half">
               <PackageShow

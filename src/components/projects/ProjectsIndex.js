@@ -13,7 +13,8 @@ class ProjectsIndex extends React.Component {
     this.state = {
       addingProject: false,
       data: {},
-      newProjectId: null
+      newProjectId: null,
+      error: null
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -41,7 +42,7 @@ class ProjectsIndex extends React.Component {
         console.log(`/projects/${res.data._id}`)
         this.props.history.push(`/projects/${res.data._id}`)
       })
-      .catch(() => this.setState({ error: 'An error occured' }))
+      .catch(err =>this.setState({...this.state, error: err.response.data }))
   }
 
   handleDelete(id) {
@@ -70,14 +71,23 @@ class ProjectsIndex extends React.Component {
               data={this.state.data}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
+              errors={this.state.error}
             />}
           {!this.state.addingProject && this.props.logged && <hr /> }
           <div className="columns is-multiline">
-            {this.props.projects.map(project =>
-              <div key={project._id} className="column is-one-third">
-                {this.props.projects.length > 0 && <ProjectCard project = {project} handleDelete={this.handleDelete} logged={this.props.logged}/> }
-                {!this.props.projects.length > 0 && <div>No projects have been added </div> }
-              </div>
+            {this.props.projects.map(project => {
+              if (project.visible || this.props.logged) {
+                return (
+                  <div key={project._id} className="column is-one-third">
+                    {this.props.projects.length > 0 &&
+                      <ProjectCard project = {project}
+                        handleDelete={this.handleDelete}
+                        logged={this.props.logged}/> }
+                    {!this.props.projects.length > 0 && <div>No projects have been added </div> }
+                  </div>
+                )
+              }
+            }
             )}
           </div>
         </div>

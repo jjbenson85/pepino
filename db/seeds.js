@@ -55,19 +55,21 @@ mongoose.connect(process.env.MONGODB_URI, (err, db) => {
         name: 'Beautiful Project',
         description: 'The most beautiful',
         user: users.begona,
-        public: true
+        visible: true
+
       })
       Project.create({
         name: 'Beautiful Project two',
         description: 'The second most beautiful',
         user: users.begona,
-        public: true
+        visible: true
+        
       })
       Project.create({
         name: 'Beautiful Project three',
         description: 'The third most beautiful',
         user: users.begona,
-        public: true
+        visible: true
       })
 
       Project.create({
