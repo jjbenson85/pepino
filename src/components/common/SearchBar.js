@@ -19,12 +19,21 @@ class SearchBar extends React.Component{
 
   handleSubmit(e){
     e.preventDefault()
+    const that = this
     axios
       .get(this.props.url+'/'+this.state.text)
       .then((data) => {
         this.props.returnData(data)
       })
-      .catch((err) => console.log('error',err.errors))
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data)
+          console.log(error.response.status)
+          console.log(error.response.headers)
+          console.log(that)
+          that.props.returnData(error.response.status)
+        }
+      })
   }
 
 

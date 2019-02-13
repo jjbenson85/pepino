@@ -25,7 +25,7 @@ class ProjectIndex extends React.Component {
             {this.state.projects.map(project => {
               if (project.visible) {
                 return (
-                  <div key={project._id} className="column is-one-fourth">
+                  <div key={project._id} className="column is-one-quarter">
                     {this.state.projects.length > 0 &&
                       <ProjectCard
                         project = {project}

@@ -33,6 +33,9 @@ router.route('/projects')
   .get(projectsController.index)
   .post(secureRoute, projectsController.create)
 
+router.route('/projects/:id/comments')
+  .post(projectsController.comment)
+
 router.route('/projects/:id')
   .get(projectsController.show)
   .put(secureRoute, projectsController.update)

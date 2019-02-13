@@ -110,6 +110,7 @@ function showRoute(req, res, next) {
       data.localData.npms = data.remoteData
       res.json(data.localData)
     })
+    // .catch(err => console.log('rp error',err.statusCode))
     .catch(next)
 }
 

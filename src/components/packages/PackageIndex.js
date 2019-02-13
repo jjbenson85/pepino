@@ -9,7 +9,7 @@ class PackageIndex extends React.Component{
   constructor(){
     super()
     this.state = {
-
+      error: false
     }
     this.returnData = this.returnData.bind(this)
   }
@@ -32,8 +32,12 @@ class PackageIndex extends React.Component{
   }
 
   returnData(searchData){
+    if(searchData===500) {
+      this.setState({error: true})
+      return
+    }
     const packages = searchData.data
-    this.setState({ packages})
+    this.setState({ packages, error: false})
   }
 
   render(){
@@ -42,6 +46,12 @@ class PackageIndex extends React.Component{
       <section className='package-index'>
         <SearchBar url='/api/packages/search' returnData={this.returnData}/>
         <div>
+          {this.state.error &&
+          <div className="card">
+            <div className='card-header'>
+              <div className="card-header-title">Server Error</div>
+            </div>
+          </div>}
           {this.state.packages && this.state.packages.map( (_package,i)=>
             <div key={i} className='card'>
               <div className='card-header'>
