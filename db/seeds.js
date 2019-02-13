@@ -149,6 +149,9 @@ mongoose.connect(process.env.MONGODB_URI, (err, db) => {
       },{
         text: 'Best package ever!',
         user: users.siddant
+      },{
+        text: 'Most beautiful package ever!',
+        user: users.begona
       }]
     },{
       name: 'webpack-dev-server',
@@ -156,77 +159,154 @@ mongoose.connect(process.env.MONGODB_URI, (err, db) => {
       icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
       version: '3.1.14',
       keywords: ['webpack', 'server', 'development'],
-      downloadsCount: 13643230
+      downloadsCount: 13643230,
+      comments: [{
+        text: 'This is great!',
+        user: users.james
+      },{
+        text: 'Best package ever!',
+        user: users.siddant
+      }]
     },{
       name: 'webpack-dev-middleware',
       description: 'A development middleware for webpack',
       icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
       version: '3.1.14',
       keywords: ['webpack'],
-      downloadsCount: 17615165
+      downloadsCount: 17615165,
+      comments: [{
+        text: 'This is great!',
+        user: users.james
+      },{
+        text: 'Best package ever!',
+        user: users.siddant
+      }]
     },{
       name: 'file-loader',
       description: 'A file loader module for webpack',
       icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
       version: '3.1.14',
       keywords: ['webpack', 'file-loader' ],
-      downloadsCount: 16021065
+      downloadsCount: 16021065,
+      comments: [{
+        text: 'This is great!',
+        user: users.james
+      },{
+        text: 'Best package ever!',
+        user: users.siddant
+      }]
     },{
       name: 'postcss-loader',
       description: 'PostCSS loader for webpack',
       icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
       version: '3.1.14',
       keywords: ['css', 'postcss','postcss-runner','webpack','webpack-loader'],
-      downloadsCount: 16021065
+      downloadsCount: 16021065,
+      comments: [{
+        text: 'This is great!',
+        user: users.james
+      },{
+        text: 'Best package ever!',
+        user: users.siddant
+      }]
     },{
       name: 'html-webpack-plugin',
       description: 'Simplifies creation of HTML files to serve your webpack bundles',
       icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
       version: '3.1.14',
       keywords: ['webpack','plugin','html','html-webpack-plugin'],
-      downloadsCount: 10753297
+      downloadsCount: 10753297,
+      comments: [{
+        text: 'This is great!',
+        user: users.james
+      },{
+        text: 'Best package ever!',
+        user: users.siddant
+      }]
     },{
       name: 'url-loader',
       description: 'A loader for webpack which transforms files into base64 URIs',
       icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
       version: '3.1.14',
       keywords: ['webpack', 'url', 'url-loader'],
-      downloadsCount: 11671284
+      downloadsCount: 11671284,
+      comments: [{
+        text: 'This is great!',
+        user: users.james
+      },{
+        text: 'Best package ever!',
+        user: users.siddant
+      }]
     },{
       name: 'webpack-bundle-analyzer',
       description: 'Webpack plugin and CLI utility that represents bundle content as convenient interactive zoomable treemap',
       icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
       version: '3.1.14',
       keywords: ['webpack', 'bundle', 'analyzer', 'modules', 'size', 'interactive', 'chart', 'treemap', 'zoomable', 'zoom'],
-      downloadsCount: 3862578
+      downloadsCount: 3862578,
+      comments: [{
+        text: 'This is great!',
+        user: users.james
+      },{
+        text: 'Best package ever!',
+        user: users.siddant
+      }]
     },{
       name: 'sass-loader',
       description: 'Sass loader for webpack',
       icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
       version: '3.1.14',
       keywords: [ 'sass', 'libsass', 'webpack', 'loader'],
-      downloadsCount: 9913408
+      downloadsCount: 9913408,
+      comments: [{
+        text: 'This is great!',
+        user: users.james
+      },{
+        text: 'Best package ever!',
+        user: users.siddant
+      }]
     },{
       name: 'webpack-cli',
       description: 'CLI for webpack & friends',
       icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
       version: '3.1.14',
       keywords: [ 'webpack', 'cli', 'scaffolding', 'module', 'bundler'],
-      downloadsCount: 4891405
+      downloadsCount: 4891405,
+      comments: [{
+        text: 'This is great!',
+        user: users.james
+      },{
+        text: 'Best package ever!',
+        user: users.siddant
+      }]
     },{
       name: 'terser-webpack-plugin',
       description: 'Terser plugin for webpack',
       icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
       version: '3.1.14',
       keywords: [ 'uglify', 'uglify-js', 'uglify-es', 'terser', 'webpack', 'webpack-plugin', 'minification', 'compress', 'compressor', 'min', 'minification', 'minifier', 'minify', 'optimize', 'optimizer'],
-      downloadsCount: 5988334
+      downloadsCount: 5988334,
+      comments: [{
+        text: 'This is great!',
+        user: users.james
+      },{
+        text: 'Best package ever!',
+        user: users.siddant
+      }]
     },{
       name: 'case-sensitive-paths-webpack-plugin',
       description: 'Enforces module path case sensitivity in Webpack',
       icon: 'https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png',
       version: '3.1.14',
       keywords: ['webpack', 'plugin', 'case sensitive', 'import', 'require'],
-      downloadsCount: 6755529
+      downloadsCount: 6755529,
+      comments: [{
+        text: 'This is great!',
+        user: users.james
+      },{
+        text: 'Best package ever!',
+        user: users.siddant
+      }]
     }])
     )
 
