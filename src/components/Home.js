@@ -31,7 +31,6 @@ class Home extends React.Component{
     axios
       .post('api/register', this.state.data)
       .then(res => {
-        console.log(res)
         Flash.setMessage('success', res.data.message)
         this.setState({...this.state,  data: {}})
         this.props.history.push('/')
@@ -57,7 +56,6 @@ class Home extends React.Component{
   }
 
   render(){
-    console.log(this.props.error)
     return(
       <section className="section">
         <div className="container">

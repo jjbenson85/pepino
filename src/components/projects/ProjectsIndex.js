@@ -75,7 +75,10 @@ class ProjectsIndex extends React.Component {
           <div className="columns is-multiline">
             {this.props.projects.map(project =>
               <div key={project._id} className="column is-one-third">
-                {this.props.projects.length > 0 && <ProjectCard project = {project} handleDelete={this.handleDelete} logged={this.props.logged}/> }
+                {this.props.projects.length > 0 &&
+                  <ProjectCard project = {project}
+                    handleDelete={this.handleDelete}
+                    logged={this.props.logged}/> }
                 {!this.props.projects.length > 0 && <div>No projects have been added </div> }
               </div>
             )}

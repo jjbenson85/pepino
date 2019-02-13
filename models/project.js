@@ -12,7 +12,7 @@ const projectSchema = new mongoose.Schema({
   description: { type: String },
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
   packages: [{ type: mongoose.Schema.ObjectId, ref: 'Package'}],
-  public: { type: Boolean, required: true, default: true},
+  visible: { type: Boolean, required: true, default: true},
   comments: [ commentSchema ]
 }, {
   timestamps: true
