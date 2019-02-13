@@ -7,12 +7,14 @@ import { Redirect } from 'react-router'
 import Header from './components/common/Header'
 import PackageShow from './components/packages/PackageShow'
 import ProjectShow from './components/projects/ProjectShow'
+import ProjectsIndex from './components/projects/ProjectsIndex'
 import PackageIndex from './components/packages/PackageIndex'
 
 import FlashMessages from './components/common/FlashMessages'
 
 import Home from './components/Home'
 import UsersShow from './components/users/UsersShow'
+import UsersIndex from './components/users/UsersIndex'
 import Auth from './lib/Auth'
 import Flash from './lib/Flash'
 
@@ -94,9 +96,11 @@ class App extends React.Component {
 
           <Switch>
             <Route path="/projects/:id" component={ProjectShow} />
+            <Route path="/projects" component={ProjectsIndex} />
             <Route path="/packages/:name" component={PackageShow} />
             <Route path="/packages" component={PackageIndex} />
             <Route path="/users/:id" component={UsersShow} />
+            <Route path="/users" component={UsersIndex} />
             <Route path="/" handleLogin={this.handleLogin} component={_Home} />
           </Switch>
         </main>

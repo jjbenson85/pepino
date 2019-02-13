@@ -160,6 +160,13 @@ $navbar-breakpoint: 600px;
     }
   }
 }
+.search-bar{
+  padding-bottom: 20px;
+}
+
+a {
+  color: black;
+}
 
 .card{
   border-radius: 2px 2px 0 0;
@@ -262,6 +269,9 @@ justify-content: space-between;
 .project {
   textarea::placeholder {
     text-align: center;
+  }
+  .title {
+    padding-left: 5px;
   }
 }
 .projectForm {

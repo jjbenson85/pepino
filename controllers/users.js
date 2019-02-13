@@ -1,18 +1,27 @@
 const User = require('../models/user')
 
-//Index Route returns a response containing all users
-function indexRoute(req, res) {
+function indexRoute(req, res, next) {
   User
     .find()
-    .then(users => res.status(200).json(users))
+    .then(users => res.json(users))
+    .catch(next)
 }
 
-//Show Route returns a response containing one user and populates the project but does not return the project comments
+
+function searchRoute(req, res, next ) {
+  User
+    .find()
+    .find({'username': new RegExp(req.params.search, 'i')})
+    .then(user => res.json(user))
+    .catch(next)
+}
+
+
 function showRoute(req, res, next) {
   User
     .findById(req.params.id)
     .populate({path: ' project', select: '-comments'})
-    .then(projects => res.status(200).json(projects))
+    .then(user => res.json(user))
     .catch(next)
 }
 
@@ -39,5 +48,6 @@ module.exports = {
   index: indexRoute,
   show: showRoute,
   update: updateRoute,
-  delete: deleteRoute
+  delete: deleteRoute,
+  search: searchRoute
 }
