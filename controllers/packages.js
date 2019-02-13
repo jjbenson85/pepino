@@ -39,8 +39,13 @@ function searchRoute(req, res, next){
                 //Return the new project
             }else{
               // console.log('package found', foundPackage)
+
               return foundPackage
             }
+          })
+          .then((_package) => {
+            _package.npms = data.package
+            return _package
           })
       })
       // console.log('newData',newData)

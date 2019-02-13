@@ -17,7 +17,6 @@ class PackageIndex extends React.Component{
   getPackagesData(){
     axios.get('/api/packages')
       .then( res =>{
-        console.log(res.data)
         this.setState({ packages: res.data})
       })
       .catch((err)=>console.log(err.message))
@@ -29,23 +28,20 @@ class PackageIndex extends React.Component{
 
   getUsedPackagesIds() {
     return this.props.packages.map((_package)=> _package._id)
+
   }
 
   returnData(searchData){
     const packages = searchData.data
-    console.log('search bar returning data',packages)
     this.setState({ packages})
   }
 
   render(){
-    // if(!this.state.packages) return null
-    console.log('packageIndex render state',this.state.packages)
     this.getUsedPackagesIds()
     return(
       <section className='package-index'>
         <SearchBar url='/api/packages/search' returnData={this.returnData}/>
         <div>
-          {/*this.state.packages && this.state.packages.map( (_package)=>console.log(_package))*/}
           {this.state.packages && this.state.packages.map( (_package,i)=>
             <div key={i} className='card'>
               <div className='card-header'>
