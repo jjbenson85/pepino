@@ -1,6 +1,7 @@
 import React from 'react'
 import UsersResult from './UsersResult'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 
 class UsersIndex extends React.Component{
@@ -23,11 +24,24 @@ class UsersIndex extends React.Component{
     return(
       <section className="section">
         <div className="container">
+          <form >
+            <div className="field" >
+              <label className="label">Disover Other Users</label>
+              <div className="control search-bar">
+                <input className="input" type="text" placeholder="search" name="search" />
+                <button className="button is-primary home-button" >Submit</button>
+
+              </div>
+            </div>
+          </form>
+
           <div className="columns is-multiline">
             {this.state.data.map(user =>
-              <div key={user._id} className="column is-one-third">
-                <UsersResult data={user}/>
-              </div>
+              <Link key={user._id} to={`/users/${user._id}` } className="column is-one-third">
+                <div key={user._id}>
+                  <UsersResult data={user}/>
+                </div>
+              </Link>
             )}
           </div>
         </div>

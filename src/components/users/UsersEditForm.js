@@ -24,8 +24,7 @@ const UsersEditForm  = ({ data, handleChange, handleSubmit, error, status }) => 
 
       <div className="field">
         <label className="label">Image</label>
-        <label className="label">{image}</label>
-
+        <img className="image profile" src={image || 'http://interreligio.unistra.fr/wp-content/uploads/2017/07/profil-vide.png'} alt={`image of user ${username}`} />
 
 
         <div className="control">
