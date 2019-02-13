@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 const ProjectCard = ({project, handleDelete, logged}) => {
   const {_id, name, description, updatedAt} = project
   return(
-    <div className="card">
+    <div className="card projectCard">
       <Link to={`/projects/${_id}`}>
         <div className="card-header">
-          <h4 className="card-header-title">{name}</h4>
+          <h4 className="card-header-title">{name.length > 23 ? name.substr(0, 23) + '...' : name}</h4>
         </div>
         <div className="card-content">
           <div className="content">
-            {description.length > 150 ? description.substr(0, 150) + '...' : description}
+            <p className="description">{description && description.length > 150 ? description.substr(0, 150) + '...' : description}</p>
             <hr />
             <p className="is-small">Last updated: {updatedAt.split('T')[0]}</p>
           </div>

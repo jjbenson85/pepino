@@ -138,6 +138,10 @@ $navbar-breakpoint: 600px;
   color: black;
 }
 
+.visible span {
+  padding: 5px;
+}
+
 .columns.scroll{
   overflow: scroll;
   scroll-snap-type: x mandatory;
@@ -263,17 +267,33 @@ justify-content: space-between;
 // }
 a {
   color: black;
+.project {
+  textarea::placeholder {
+    text-align: center;
+  }
+}
+.projectForm {
+  padding-bottom: 20px;
 }
 
-p.is-small {
-  font-size: small;
-}
-
-.card {
+.projectCard {
   .card-content {
     padding-bottom: 10px;
   }
+
   hr {
     margin-bottom: 10px;
+  }
+
+  .description {
+    height: 169px;
+  }
+
+  .is-small {
+    font-size: small;
+  }
+
+  a {
+    color: black;
   }
 }

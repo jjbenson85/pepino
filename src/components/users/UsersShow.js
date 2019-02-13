@@ -81,7 +81,7 @@ class UsersShow extends React.Component{
               />}
             </div>
             <div className="column ">
-              <ProjectsIndex projects={project} logged={this.state.status} />
+              <ProjectsIndex projects={project} logged={this.state.status}/>
             </div>
           </div>
         </div>

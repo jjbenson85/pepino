@@ -29,7 +29,7 @@ mongoose.connect(process.env.MONGODB_URI, (err, db) => {
         name: 'Beautiful Project',
         description: 'The most beautiful',
         user: user,
-        public: true
+        visible: true
       })
 
       return Package.create([{
