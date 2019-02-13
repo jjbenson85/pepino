@@ -72,6 +72,9 @@ class Header extends React.Component{
                 <Link to={`/users/${user._id}`} className="navbar-item">
                 Profile
                 </Link>}
+              <Link to="/projects" className="navbar-item">
+                  Discover more projects
+              </Link>
               {(user)&&
               <nav className="navbar link-list" role="navigation" aria-label="dropdown navigation">
                 <div
@@ -80,7 +83,7 @@ class Header extends React.Component{
                   onClick={this.handleDropDown}
                 >
                   <a className="navbar-link">
-                    Projects
+                    Your Projects
                   </a>
                   <div
                     className="navbar-dropdown is-hidden-touch"

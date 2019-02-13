@@ -25,6 +25,7 @@ function showRoute(req, res, next) {
     .catch(next)
 }
 
+//Update Route finds a user by id and updates it, returning the updated user
 function updateRoute(req, res, next) {
   User
     .findById(req.params.id)
@@ -34,9 +35,19 @@ function updateRoute(req, res, next) {
     .catch(next)
 }
 
+//Delete Route finds a user by id and removes it from the database. Returns a success status and empty body.
+function deleteRoute(req, res, next) {
+  User
+    .findById(req.params.id)
+    .then(user => user.remove())
+    .then(() => res.sendStatus(204))
+    .catch(next)
+}
+
 module.exports = {
   index: indexRoute,
   show: showRoute,
   update: updateRoute,
+  delete: deleteRoute,
   search: searchRoute
 }
