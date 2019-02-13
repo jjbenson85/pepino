@@ -3,32 +3,49 @@ import UsersResult from './UsersResult'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-
 class UsersIndex extends React.Component{
   constructor(){
     super()
-    this.state = {}
+    this.state = {
+      search: ''
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount(){
     axios.get('/api/users')
-      .then( res =>{
+      .then(res =>{
         this.setState({ data: res.data})
       })
-      .catch((err)=>console.log(err.message))
+      .catch((err)=>console.log(err.response.data))
   }
 
+  handleChange({target: {name, value}}){
+    this.setState({...this.state, [name]: value})
+  }
+  handleSubmit(e){
+    e.preventDefault(e)
+    console.log(this.state.search)
+    // axios.put(`/api/users/${Auth.getUserID()}`, this.state.data,
+    //   {
+    //     headers: { Authorization: `Bearer ${Auth.getToken()}`}
+    //   })
+    //   .then(() => this.changeState())
+    //   .catch((err)=> this.setState({ error: err.response.data }))
+  }
+
+
   render(){
-    console.log(this.state.data)
     if(!this.state.data) return null
     return(
       <section className="section">
         <div className="container">
-          <form >
+          <form onSubmit={this.handleSubmit}>
             <div className="field" >
               <label className="label">Disover Other Users</label>
               <div className="control search-bar">
-                <input className="input" type="text" placeholder="search" name="search" />
+                <input className="input" type="text" placeholder="search" name="search" onChange={this.handleChange}  value={this.state.search || ''}/>
                 <button className="button is-primary home-button" >Submit</button>
 
               </div>

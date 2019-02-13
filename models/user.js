@@ -20,6 +20,7 @@ userSchema.virtual('project', {
 
 userSchema.plugin(uniqueValidator)
 
+
 userSchema.virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation){
     this._passwordConfirmation = passwordConfirmation

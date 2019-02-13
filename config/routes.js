@@ -11,6 +11,11 @@ router.post('/login', authController.login)
 
 router.route('/users')
   .get(usersController.index)
+
+router.route('/users/search')
+  .get(usersController.search)
+
+
 //   .post(secureRoute, usersController.create)
 
 router.route('/users/:id')

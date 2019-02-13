@@ -2,7 +2,6 @@ import React from 'react'
 
 const UserResult = ({ data }) => {
   const {username, image} = data
-  console.log(username)
   return(
     <div className="card">
       <div className="card-header">
