@@ -4,27 +4,53 @@ import Auth from '../../lib/Auth'
 import axios from 'axios'
 
 import ProjectsIndex from '../projects/ProjectsIndex'
+import UsersEditForm from './UsersEditForm'
 
+import UsersProfile from './UsersProfile'
 
 class UsersShow extends React.Component{
 
   constructor(){
     super()
-    this.state = {}
+    this.state = {
+      data: {},
+      error: {},
+      edit: false
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.changeState = this.changeState.bind(this)
   }
 
   componentDidMount(){
-    axios.get(`/api/users/${Auth.getUserID()}`)
+    Auth.checkAvailability(this.props.match.params.id)
+    axios.get(`/api/users/${this.props.match.params.id}`)
       .then( res =>{
-        this.setState({ data: res.data})
+        this.setState({ data: res.data, status: Auth.checkAvailability(this.props.match.params.id)})
       })
       .catch((err)=>console.log(err.message))
   }
 
+  handleChange({target: {name, value}}){
+    const data = {...this.state.data, [name]: value}
+    this.setState({data})
+  }
+
+  handleSubmit(e){
+    e.preventDefault(e)
+    axios.put(`/api/users/${Auth.getUserID()}`, this.state.data,
+      {
+        headers: { Authorization: `Bearer ${Auth.getToken()}`}
+      })
+      .then(() => this.changeState())
+      .catch((err)=> this.setState({ error: err.response.data }))
+  }
+
+  changeState(){
+    this.setState({...this.state, edit: !this.state.edit })
+  }
 
   render(){
-    if(!this.state.data) return null
-
     const {
       username,
       image,
@@ -32,18 +58,30 @@ class UsersShow extends React.Component{
       email,
       bio
     } = this.state.data
+    if(!this.state.data.email) return null
     return(
       <section className="section">
         <div className="container">
           <div className="columns">
             <div className="column is-one-quarter">
-              <img className="image profile" src={image || 'http://interreligio.unistra.fr/wp-content/uploads/2017/07/profil-vide.png'} alt={`image of user ${username}`} />
-              <h1>User name: {username}</h1>
-              <p>Email: {email}</p>
-              <p>{bio}</p>
+              {!this.state.edit &&  <UsersProfile
+                username={username}
+                image={image}
+                email={email}
+                bio={bio}
+                changeState={this.changeState}
+                status={this.state.status}
+              />}
+              {this.state.edit && <UsersEditForm
+                handleSubmit={this.handleSubmit}
+                handleChange={this.handleChange}
+                data={this.state.data}
+                error={this.state.error}
+                status={this.state.status}
+              />}
             </div>
             <div className="column ">
-              <ProjectsIndex projects={project}/>
+              <ProjectsIndex projects={project} logged={this.state.status} />
             </div>
           </div>
         </div>

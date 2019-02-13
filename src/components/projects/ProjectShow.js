@@ -13,7 +13,6 @@ class ProjectShow extends React.Component {
     super()
 
     this.state = {
-      editing: false,
       selectedPackage: null,
       error: null
     }
@@ -40,6 +39,7 @@ class ProjectShow extends React.Component {
       this.getProject()
     }
   }
+
   putProject() {
     axios.put(`/api/projects/${this.props.match.params.id}`,
       {...this.state.project},
@@ -54,7 +54,6 @@ class ProjectShow extends React.Component {
   }
 
   handleViewClick(_package){
-    console.log(_package)
     document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'})
     this.setState({ selectedPackage: _package })
   }
@@ -108,7 +107,7 @@ class ProjectShow extends React.Component {
         </div>
       </section>
     )
-    const { name, description, createdAt, updatedAt, packages } = this.state.project
+    const { name, description, createdAt, updatedAt, packages, user } = this.state.project
     return(
       <section className="section">
         <div className="container">
@@ -120,12 +119,14 @@ class ProjectShow extends React.Component {
                 name="name"
                 onChange={this.handleChange}
                 value={name}
+                disabled={!Auth.checkAvailability(user._id)}
               />
               <textarea
                 className="textarea hidden-input"
                 name="description"
                 onChange={this.handleChange}
                 value={description}
+                disabled={!Auth.checkAvailability(user._id)}
               >
               </textarea>
               <section className="section">
@@ -137,10 +138,10 @@ class ProjectShow extends React.Component {
                     key={packageUnit._id}
                     id={packageUnit._id}>
                     {packageUnit.name}
-                    <button
+                    {Auth.checkAvailability(user._id) && <button
                       className="delete is-small"
                       onClick={() => this.handlePackageDelete(packageUnit)}>
-                    </button>
+                    </button>}
                   </div>
                 )}
               </section>
@@ -149,7 +150,7 @@ class ProjectShow extends React.Component {
               <div>Updated at: {updatedAt.split('T')[0]}</div>
             </div>
             <div className="column is-half">
-              <PackageIndex handleAddClick={this.handleAddClick} packages={this.state.project.packages} handleViewClick={this.handleViewClick}/>
+              <PackageIndex handleAddClick={this.handleAddClick} packages={this.state.project.packages} handleViewClick={this.handleViewClick} userId = {this.state.project.user._id}/>
             </div>
             <div id="package-show" className="column is-half">
               <PackageShow
