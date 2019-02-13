@@ -3,6 +3,8 @@ import UsersResult from './UsersResult'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+import Auth from '../../lib/Auth'
+
 class UsersIndex extends React.Component{
   constructor(){
     super()
@@ -26,13 +28,11 @@ class UsersIndex extends React.Component{
   }
   handleSubmit(e){
     e.preventDefault(e)
-    console.log(this.state.search)
-    // axios.put(`/api/users/${Auth.getUserID()}`, this.state.data,
-    //   {
-    //     headers: { Authorization: `Bearer ${Auth.getToken()}`}
-    //   })
-    //   .then(() => this.changeState())
-    //   .catch((err)=> this.setState({ error: err.response.data }))
+    axios.get(`/api/users/search/${this.state.search}`)
+      .then(res => {
+        this.setState({ ...this.state, data: res.data})
+      })
+      .catch((err)=> this.setState({ error: err.response.data }))
   }
 
 

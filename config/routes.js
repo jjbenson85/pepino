@@ -12,7 +12,7 @@ router.post('/login', authController.login)
 router.route('/users')
   .get(usersController.index)
 
-router.route('/users/search')
+router.route('/users/search/:search')
   .get(usersController.search)
 
 

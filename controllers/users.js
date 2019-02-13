@@ -8,10 +8,10 @@ function indexRoute(req, res, next) {
 }
 
 
-function searchRoute(req, res, next) {
-  console.log(req.body)
+function searchRoute(req, res, next ) {
   User
-    .find({'username': new RegExp('', 'i')})
+    .find()
+    .find({'username': new RegExp(req.params.search, 'i')})
     .then(user => res.json(user))
     .catch(next)
 }
