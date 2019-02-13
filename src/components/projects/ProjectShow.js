@@ -58,18 +58,18 @@ class ProjectShow extends React.Component {
   }
 
   handleAddClick(_package) {
-    const index = this.state.project.packages.indexOf(_package)
-    console.log(index)
-
-    const packages = (index === -1) ? (
-      this.setState({editing: true}),
-      this.state.project.packages.concat(_package)
-    ) : (
-      this.state.project.packages
-    )
-
-    const project = {...this.state.project, packages }
-    this.setState({ project })
+    // const index = this.state.project.packages.indexOf(_package)
+    // console.log(index)
+    console.log('handleAddClick',_package)
+    // const packages = (index === -1) ? (
+    //   this.setState({editing: true}),
+    //   this.state.project.packages.concat(_package)
+    // ) : (
+    //   this.state.project.packages
+    // )
+    //
+    // const project = {...this.state.project, packages }
+    // this.setState({ project })
     this.delayedCallback()
   }
 

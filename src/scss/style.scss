@@ -289,3 +289,13 @@ justify-content: space-between;
     color: black;
   }
 }
+
+.search-bar{
+  width:100%;
+  .field.has-addons{
+
+    .control.field{
+      width:100%;
+    }
+  }
+}
