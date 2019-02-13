@@ -36,8 +36,8 @@ class UsersIndex extends React.Component{
 
   searchUser(){
     console.log(this.state.search.replace(/\s/g, ''))
-    if(this.state.search.replace(/\s/g, '') !== ''){
-      axios.get(`/api/users/search/${this.state.search.replace(/\s/g, '')}`)
+    if(this.state.search.trim() !== ''){
+      axios.get(`/api/users/search/${this.state.search.trim()}`)
         .then(res => {
           this.setState({ ...this.state, data: res.data})
         })
