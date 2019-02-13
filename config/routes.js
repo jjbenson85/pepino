@@ -18,9 +18,6 @@ router.route('/users')
 router.route('/users/search/:search')
   .get(usersController.search)
 
-
-//   .post(secureRoute, usersController.create)
-
 router.route('/users/:id')
   .get(usersController.show)
   .put(secureRoute, usersController.update)

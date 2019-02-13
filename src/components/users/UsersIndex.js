@@ -3,7 +3,8 @@ import UsersResult from './UsersResult'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-import Auth from '../../lib/Auth'
+import debounce from 'lodash/debounce'
+
 
 class UsersIndex extends React.Component{
   constructor(){
@@ -13,6 +14,7 @@ class UsersIndex extends React.Component{
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.delayedCallback = debounce(this.searchUser, 1000)
   }
 
   componentDidMount(){
@@ -25,15 +27,20 @@ class UsersIndex extends React.Component{
 
   handleChange({target: {name, value}}){
     this.setState({...this.state, [name]: value})
+    this.delayedCallback()
   }
-  handleSubmit(e){
-    e.preventDefault(e)
+
+  searchUser(){
     axios.get(`/api/users/search/${this.state.search}`)
       .then(res => {
         this.setState({ ...this.state, data: res.data})
       })
       .catch((err)=> this.setState({ error: err.response.data }))
   }
+  handleSubmit(e){
+    e.preventDefault(e)
+  }
+
 
 
   render(){
@@ -46,8 +53,6 @@ class UsersIndex extends React.Component{
               <label className="label">Disover Other Users</label>
               <div className="control search-bar">
                 <input className="input" type="text" placeholder="search" name="search" onChange={this.handleChange}  value={this.state.search || ''}/>
-                <button className="button is-primary home-button" >Submit</button>
-
               </div>
             </div>
           </form>
