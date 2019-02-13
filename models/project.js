@@ -8,7 +8,7 @@ const commentSchema = new mongoose.Schema({
 })
 
 const projectSchema = new mongoose.Schema({
-  name: { type: String, required: 'You must provide a project name' },
+  name: { type: String, required: 'Project name is required' },
   description: { type: String },
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
   packages: [{ type: mongoose.Schema.ObjectId, ref: 'Package'}],

@@ -11,7 +11,7 @@ const ProjectCard = ({project, handleDelete, logged}) => {
         </div>
         <div className="card-content">
           <div className="content">
-            <p className="description">{description.length > 150 ? description.substr(0, 150) + '...' : description}</p>
+            <p className="description">{description && description.length > 150 ? description.substr(0, 150) + '...' : description}</p>
             <hr />
             <p className="is-small">Last updated: {updatedAt.split('T')[0]}</p>
           </div>

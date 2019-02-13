@@ -114,7 +114,7 @@ class ProjectShow extends React.Component {
             <div className="column is-half project">
               <input
                 className="title is-1 input hidden-input"
-                placeholder="Name"
+                placeholder="Name is required"
                 name="name"
                 onChange={this.handleChange}
                 value={name}
@@ -123,6 +123,7 @@ class ProjectShow extends React.Component {
               <textarea
                 className="textarea hidden-input"
                 name="description"
+                placeholder="description"
                 onChange={this.handleChange}
                 value={description}
                 disabled={!Auth.checkAvailability(user._id)}
