@@ -217,6 +217,38 @@ justify-content: space-between;
     }
   }
 
+
+#package-show{
+  .card{
+    .tabs.is-boxed{
+      margin-bottom: 0;
+    }
+  }
+}
+.comment-input{
+  border-radius: 2px;
+  border: 1px solid rgba(10, 10, 10, 0.1);
+  margin-bottom: 8px;
+  // box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+  .textarea-control{
+    width: 100%;
+  }
+  .button{
+    height:100%;
+  }
+  textarea{
+    height: 4em;
+    min-height: 36px;
+    resize: none;
+    border-radius: 2px 0 0 2px;
+    border: 0;
+    box-shadow: none;
+  }
+  button{
+    border-radius: 0 2px 2px 0;
+
+  }
+}
 //
 // .image{
 //   display: flex;

@@ -1,7 +1,6 @@
 import React from 'react'
 
 const CommentCard = ({comment: {text, user}})=> {
-  console.log('comment', text, user)
   return(
     <div className="card">
       <div className="card-content">

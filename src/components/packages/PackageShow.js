@@ -3,6 +3,7 @@ import React from 'react'
 import axios from 'axios'
 
 import CommentCard from '../common/CommentCard'
+import CommentInput from '../common/CommentInput'
 
 
 class PackageShow extends React.Component{
@@ -10,10 +11,12 @@ class PackageShow extends React.Component{
   constructor(){
     super()
     this.state = {
-      tab: 'about'
+      tab: 'about',
+      package: null
     }
 
     this.handleClick = this.handleClick.bind(this)
+    this.getPackageData = this.getPackageData.bind(this)
 
   }
 
@@ -49,6 +52,20 @@ class PackageShow extends React.Component{
     e.currentTarget.classList.add('is-active')
     {this.setState({tab: val})}
   }
+
+  // updateThread(){
+  //   this.getPackageData()
+  //   // const state = {...this.state}
+  //   // const comments = [newComment, ...this.state.package.pepino.comments]
+  //   // const pepino = {...this.state.package.pepino, comments}
+  //   // const _package = {...this.state.package, pepino}
+  //   //
+  //   // // console.log('newComment',newComment)
+  //   // // console.log('1',this.state.package.pepino.comments)
+  //   // this.setState({...state, package: _package } )
+  //   // // console.log('2',this.state.package.pepino.comments)
+  //   // this.forceUpdate()
+  // }
 
   render(){
     if(!this.state.package) return null
@@ -122,8 +139,9 @@ class PackageShow extends React.Component{
           STATS
         </div>}
         {(this.state.tab==='comments')&&<div className="card-content">
-          comments
+          <CommentInput postCommentUrl={`/api/packages/${name}`} updateThread={this.getPackageData}/>
           {comments.map((comment, i)=><CommentCard key={i} comment={comment} />)}
+          {/* <CommentInput postCommentUrl={`/api/packages/${this.props.match.params.id}`}/>*/}
         </div>}
         <footer className="card-footer-item">
           {arrFromObj(links).map( (link,i) => {

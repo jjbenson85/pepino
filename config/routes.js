@@ -33,8 +33,11 @@ router.route('/packages')
   .get(packagesController.index)
   // .post(secureRoute, packagesController.create)
 
+
 router.route('/packages/:name')
   .get(packagesController.show)
+  .post(packagesController.comment)
+
 // .put(secureRoute, packagesController.update)
 // .delete(secureRoute, packagesController.delete)
 

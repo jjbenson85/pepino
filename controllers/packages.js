@@ -2,10 +2,27 @@ const Package = require('../models/package')
 
 const rp = require('request-promise')
 
-function indexRoute(req, res) {
+function indexRoute(req, res, next) {
   Package
     .find()
     .then(packages => res.json(packages))
+    .catch(next)
+}
+function postCommentRoute(req, res,  next) {
+  console.log('postCommentRoute', req.params.name)
+  Package
+    // .findOneAndUpdate({name: req.params.name}, {comment: {text: req.body.text}} )
+    .findOne({name: req.params.name})
+    .then(_package => {
+      console.log('_package', _package)
+      _package.comments.unshift(req.body)
+      // _package.set(req.body)
+      return _package.save()
+    })
+    // .then(_package => _package.save())
+    .then( data => res.status(201).json(data) )
+    .catch(next)
+
 }
 function showRoute(req, res) {
   const name = req.params.name
@@ -30,5 +47,6 @@ function showRoute(req, res) {
 
 module.exports = {
   index: indexRoute,
-  show: showRoute
+  show: showRoute,
+  comment: postCommentRoute
 }
