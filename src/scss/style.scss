@@ -130,6 +130,12 @@ $navbar-breakpoint: 600px;
     border: 1px solid black;
   }
 }
+.hidden-input[disabled] {
+  border: none;
+  background-color: white;
+  box-shadow: none;
+  color: black;
+}
 
 .columns.scroll{
   overflow: scroll;
@@ -154,4 +160,20 @@ $navbar-breakpoint: 600px;
 
 .search-bar{
   padding-bottom: 20px;
+}
+a {
+  color: black;
+}
+
+p.is-small {
+  font-size: small;
+}
+
+.card {
+  .card-content {
+    padding-bottom: 10px;
+  }
+  hr {
+    margin-bottom: 10px;
+  }
 }

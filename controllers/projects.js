@@ -1,6 +1,4 @@
 const Project = require('../models/project')
-const User = require('../models/user')
-const Package = require('../models/package')
 
 function indexRoute(req, res) {
   Project
@@ -34,9 +32,19 @@ function updateRoute(req, res, next) {
     .catch(next)
 }
 
+function deleteRoute(req, res, next) {
+  console.log(req.params.id)
+  Project
+    .findById(req.params.id)
+    .then(project => project.remove())
+    .then(() => res.sendStatus(204))
+    .catch(next)
+}
+
 module.exports = {
   index: indexRoute,
   create: createRoute,
   show: showRoute,
-  update: updateRoute
+  update: updateRoute,
+  delete: deleteRoute
 }

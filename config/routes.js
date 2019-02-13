@@ -27,7 +27,7 @@ router.route('/projects')
 router.route('/projects/:id')
   .get(projectsController.show)
   .put(secureRoute, projectsController.update)
-//   .delete(secureRoute, projectsController.delete)
+  .delete(secureRoute, projectsController.delete)
 
 router.route('/packages')
   .get(packagesController.index)
