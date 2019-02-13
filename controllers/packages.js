@@ -11,6 +11,30 @@ function indexRoute(req, res, next) {
     .catch(next)
 }
 
+function searchRoute(req, res, next){
+
+  var options = {
+    uri: `https://api.npms.io/v2/search?q=${req.params.search}`,
+    json: true // Automatically parses the JSON string in the response
+  }
+  rp(options)
+    .then( (data) =>{
+      res.json(data)
+    })
+    .catch(next)
+}
+
+//Create Route adds a new package to the database and returns it
+function createRoute(req, res, next) {
+  //Add current user to the body
+  Package
+    //Add a new project to database
+    .create(req.body)
+    //Return the new project
+    .then(project => res.status(201).json(project))
+    .catch(next)
+}
+
 //PostCommentRoute finds the package and puts the new comment into the beginning of the array
 //returns a response containing the package with the new comment
 function postCommentRoute(req, res,  next) {
@@ -57,6 +81,8 @@ function showRoute(req, res, next) {
 
 module.exports = {
   index: indexRoute,
+  create: createRoute,
+  search: searchRoute,
   show: showRoute,
   comment: postCommentRoute
 }
