@@ -172,7 +172,8 @@ class ProjectShow extends React.Component {
             </div>
             <div id="package-show" className="column is-half">
               <PackageShow
-                selectedPackage={this.state.selectedPackage} />
+                selectedPackage={this.state.selectedPackage}
+              />
             </div>
           </div>
         </div>
