@@ -110,7 +110,7 @@ class ProjectShow extends React.Component {
     return(
       <section className="section">
         <div className="container">
-          <div className="columns scroll">
+          <div className="columns is-9 scroll">
             <div className="column is-half project">
               <input
                 className="title is-1 input hidden-input"
@@ -132,18 +132,20 @@ class ProjectShow extends React.Component {
               <section className="section">
                 <h2 className='title is-5'>Installed packages</h2>
                 {packages.length === 0 && <div>no packages yet</div>}
-                {packages.map(packageUnit =>
-                  <div
-                    className="tag"
-                    key={packageUnit._id}
-                    id={packageUnit._id}>
-                    {packageUnit.name}
-                    {Auth.checkAvailability(user._id) && <button
-                      className="delete is-small"
-                      onClick={() => this.handlePackageDelete(packageUnit)}>
-                    </button>}
-                  </div>
-                )}
+                <div className="tags">
+                  {packages.map(packageUnit =>
+                    <div
+                      className="tag"
+                      key={packageUnit._id}
+                      id={packageUnit._id}>
+                      {packageUnit.name}
+                      {Auth.checkAvailability(user._id) && <button
+                        className="delete is-small"
+                        onClick={() => this.handlePackageDelete(packageUnit)}>
+                      </button>}
+                    </div>
+                  )}
+                </div>
               </section>
               <section className="section visible">
                 <div className="control">
