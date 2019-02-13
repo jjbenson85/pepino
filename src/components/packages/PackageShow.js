@@ -53,31 +53,16 @@ class PackageShow extends React.Component{
     {this.setState({tab: val})}
   }
 
-  // updateThread(){
-  //   this.getPackageData()
-  //   // const state = {...this.state}
-  //   // const comments = [newComment, ...this.state.package.pepino.comments]
-  //   // const pepino = {...this.state.package.pepino, comments}
-  //   // const _package = {...this.state.package, pepino}
-  //   //
-  //   // // console.log('newComment',newComment)
-  //   // // console.log('1',this.state.package.pepino.comments)
-  //   // this.setState({...state, package: _package } )
-  //   // // console.log('2',this.state.package.pepino.comments)
-  //   // this.forceUpdate()
-  // }
-
   render(){
     if(!this.state.package) return null
     const {
       name,
       description,
       author,
-      publisher,
       links,
       license
     } = this.state.package.npms.collected.metadata
-    const {comments, icon} = this.state.package.pepino
+    const {comments, icon} = this.state.package
     function arrFromObj(obj){
       const arr = []
       for (const key in obj) arr.push([key, obj[key]])

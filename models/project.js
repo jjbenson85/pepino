@@ -18,7 +18,7 @@ const projectSchema = new mongoose.Schema({
   timestamps: true
 })
 
-
+//Remove __v tag when returning JSON
 projectSchema.set('toJSON', {
   transform(doc, json) {
     delete json.__v
