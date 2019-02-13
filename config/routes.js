@@ -38,6 +38,10 @@ router.route('/projects/:id')
 router.route('/packages')
   .get(packagesController.index)
 
+router.route('/packages/search/:search')
+  .get(packagesController.search)
+  // .post(packagesController.create)
+
 router.route('/packages/:name')
   .get(packagesController.show)
   .post(packagesController.comment)
