@@ -17,12 +17,16 @@ class UsersIndex extends React.Component{
     this.delayedCallback = debounce(this.searchUser, 1000)
   }
 
-  componentDidMount(){
+  getAllUsers(){
     axios.get('/api/users')
       .then(res =>{
         this.setState({ data: res.data})
       })
       .catch((err)=>console.log(err.response.data))
+  }
+
+  componentDidMount(){
+    this.getAllUsers()
   }
 
   handleChange({target: {name, value}}){
@@ -31,11 +35,16 @@ class UsersIndex extends React.Component{
   }
 
   searchUser(){
-    axios.get(`/api/users/search/${this.state.search}`)
-      .then(res => {
-        this.setState({ ...this.state, data: res.data})
-      })
-      .catch((err)=> this.setState({ error: err.response.data }))
+    console.log(this.state.search.replace(/\s/g, ''))
+    if(this.state.search.replace(/\s/g, '') !== ''){
+      axios.get(`/api/users/search/${this.state.search.replace(/\s/g, '')}`)
+        .then(res => {
+          this.setState({ ...this.state, data: res.data})
+        })
+        .catch((err)=>console.log(err.response.data))
+    }else{
+      this.getAllUsers()
+    }
   }
   handleSubmit(e){
     e.preventDefault(e)
