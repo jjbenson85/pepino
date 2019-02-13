@@ -2,7 +2,7 @@ import React from 'react'
 
 const ProjectForm = ({ data, handleChange, handleSubmit }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="projectForm" onSubmit={handleSubmit}>
       <div className="field">
         <label className="label">Name</label>
         <div className="control">

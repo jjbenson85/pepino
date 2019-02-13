@@ -6,20 +6,23 @@ const usersController = require('../controllers/users')
 const projectsController = require('../controllers/projects')
 const packagesController = require('../controllers/packages')
 
+//*** AUTH ROUTES **//
 router.post('/register', authController.register)
 router.post('/login', authController.login)
 
+
+//*** USER ROUTES **//
 router.route('/users')
   .get(usersController.index)
-//   .post(secureRoute, usersController.create)
 
 router.route('/users/:id')
   .get(usersController.show)
   .put(secureRoute, usersController.update)
-//  .put(secureRoute, usersController.update)
-//  .put(secureRoute, usersController.update)
-//   .delete(secureRoute, usersController.delete)
+  .delete(secureRoute, usersController.delete)
 
+
+
+//*** PROJECT ROUTES **//
 router.route('/projects')
   .get(projectsController.index)
   .post(secureRoute, projectsController.create)
@@ -29,17 +32,17 @@ router.route('/projects/:id')
   .put(secureRoute, projectsController.update)
   .delete(secureRoute, projectsController.delete)
 
+
+
+//*** PACKAGE ROUTES **//
 router.route('/packages')
   .get(packagesController.index)
-  // .post(secureRoute, packagesController.create)
 
 router.route('/packages/:name')
   .get(packagesController.show)
-// .put(secureRoute, packagesController.update)
-// .delete(secureRoute, packagesController.delete)
+  .post(packagesController.comment)
 
-// router.post('/packages/:id/comments', secureRoute, packagesController.commentCreate)
-// router.delete('/packages/:id/comments/:commentId', secureRoute, packagesController.commentDelete)
+
 
 router.all('/*', (req, res) => res.sendStatus(404))
 

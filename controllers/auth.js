@@ -9,19 +9,20 @@ function registerRoute(req, res, next){
 
 function loginRoute(req, res,next) {
   User.findOne({ email: req.body.email })
-    .then(email => {
-      if(!email || !email.validatePassword(req.body.password)) {
+    .then(user => {
+      if(!user || !user.validatePassword(req.body.password)) {
         const error = {
-          email: 'Please proved a vailid email address',
+          user: 'Please proved a vailid user address',
           password: 'Incorrect Password'
         }
         return res.status(401).json(error)
       }
-      const payload = { sub: email._id }
+      const payload = { sub: user._id }
       const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '6h' })
       res.json({
+        _id: user._id,
         token,
-        message: `Welcome back ${email.username}!`
+        message: `Welcome back ${user.username}!`
       })
     })
     .catch(next)

@@ -3,7 +3,7 @@ import Auth from '../../lib/Auth'
 
 import axios from 'axios'
 
-import ProjectsIndex from '../projects/ProjectsIndex'
+import UserProjectsIndex from '../projects/UserProjectsIndex'
 import UsersEditForm from './UsersEditForm'
 
 import UsersProfile from './UsersProfile'
@@ -81,7 +81,7 @@ class UsersShow extends React.Component{
               />}
             </div>
             <div className="column ">
-              <ProjectsIndex projects={project} logged={this.state.status} />
+              <UserProjectsIndex projects={project} logged={this.state.status}/>
             </div>
           </div>
         </div>
