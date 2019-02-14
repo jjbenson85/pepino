@@ -29,17 +29,14 @@ describe('GET /packages/:name', () => {
       .get(`/api/packages/${_package.name}`)
       .end((err, res) => {
         expect(res.body).to.include.keys([
-          'pepino',
-          'npms'
-        ])
-        expect(res.body.pepino).to.include.keys([
           '_id',
           'name',
           'icon',
           'version',
           'keywords',
           'downloadsCount',
-          'comments'
+          'comments',
+          'npms'
         ]),
         expect(res.body.npms).to.include.keys([
           'analyzedAt',
@@ -55,12 +52,12 @@ describe('GET /packages/:name', () => {
     api
       .get(`/api/packages/${_package.name}`)
       .end((err, res) => {
-        expect(res.body.pepino.name).to.eq(_package.name)
-        expect(res.body.pepino.icon).to.eq(_package.icon)
-        expect(res.body.pepino.version).to.eq(_package.version)
-        expect(res.body.pepino.keywords).to.deep.eq(_package.keywords)
-        expect(res.body.pepino.downloadsCount).to.eq(_package.downloadsCount)
-        expect(res.body.pepino.comments).to.deep.eq(_package.comments)
+        expect(res.body.name).to.eq(_package.name)
+        expect(res.body.icon).to.eq(_package.icon)
+        expect(res.body.version).to.eq(_package.version)
+        expect(res.body.keywords).to.deep.eq(_package.keywords)
+        expect(res.body.downloadsCount).to.eq(_package.downloadsCount)
+        expect(res.body.comments).to.deep.eq(_package.comments)
 
         expect(res.body.npms.collected.metadata.name).to.eq(_package.name)
         done()
