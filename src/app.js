@@ -75,7 +75,7 @@ class App extends React.Component {
       .then((res) =>{
         this.setState({
           user: res.data,
-          redirection: `/user/${Auth.getUserID()}`
+          redirection: `/users/${Auth.getUserID()}`
         })
       })
       .catch(err =>this.setState({...this.state, error: err.response.data, register: false }))
