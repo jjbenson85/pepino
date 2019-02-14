@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import debounce from 'lodash/debounce'
+import Textarea from 'react-textarea-autosize'
 
 import PackageIndex from '../packages/PackageIndex'
 import InstalledPackageIndex from '../packages/InstalledPackageIndex'
@@ -142,10 +143,12 @@ class ProjectShow extends React.Component {
       </section>
     )
     const { name, description, createdAt, updatedAt, packages, user, visible, comments, _id } = this.state.project
+    const loggedIn = Auth.checkAvailability(user._id)
+    // console.log("bego", user)
     return(
       <section className="section">
-        <div className="container">
-          <div className="columns is-9 scroll">
+        <div className="container is-fluid">
+          <div className="columns scroll">
             <div className="column is-half project">
               <div className="card is-fullheight">
 

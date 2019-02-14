@@ -51,13 +51,7 @@ class UsersShow extends React.Component{
   }
 
   render(){
-    const {
-      username,
-      image,
-      project,
-      email,
-      bio
-    } = this.state.data
+    const { username, image, project, email, bio } = this.state.data
     if(!this.state.data.email) return null
     return(
       <section className="section">

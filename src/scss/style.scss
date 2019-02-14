@@ -122,6 +122,31 @@ $navbar-breakpoint: 600px;
   }
 }
 
+.title.hidden-input{
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+hr.project {
+  margin-top: 0px;
+}
+
+.project .no-package{
+  text-align: center;
+}
+
+.project {
+  textarea::placeholder {
+    text-align: center;
+  }
+  textarea {
+    resize: none;
+    text-align: center;
+  }
+  .title {
+    padding-left: 5px;
+  }
+}
 
 .hidden-input{
   border: none;
@@ -138,8 +163,12 @@ $navbar-breakpoint: 600px;
   color: black;
 }
 
-.visible span {
-  padding: 5px;
+section.visible {
+  padding-left: 175px;
+  padding-top: 53px;
+  span {
+    padding: 5px;
+  }
 }
 
 .columns.scroll{
@@ -273,14 +302,6 @@ a {
   }
 }
 
-.project {
-  textarea::placeholder {
-    text-align: center;
-  }
-  .title {
-    padding-left: 5px;
-  }
-}
 .projectForm {
   padding-bottom: 20px;
 }

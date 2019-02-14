@@ -7,6 +7,13 @@ function indexRoute(req, res) {
     .then(projects => res.status(200).json(projects))
 }
 
+function searchRoute(req, res, next) {
+  Project
+    .find({'name': new RegExp(req.params.search, 'i')})
+    .then(projects => res.status(200).json(projects))
+    .catch(next)
+}
+
 //Show Route returns a response containing one project and populates the user and pacakges it contains
 function showRoute(req, res, next) {
   Project
@@ -73,5 +80,6 @@ module.exports = {
   show: showRoute,
   update: updateRoute,
   delete: deleteRoute,
+  search: searchRoute,
   comment: postCommentRoute
 }
