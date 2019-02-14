@@ -61,8 +61,11 @@ class ProjectShow extends React.Component {
   }
 
   handleViewClick(_package){
-    document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'})
+
     this.setState({ selectedPackage: _package })
+    setTimeout(function () {
+      document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
+    }, 100)
   }
 
   handleAddClick(_package) {
