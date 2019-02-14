@@ -13,9 +13,7 @@ class Header extends React.Component{
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
       this.navbarDropdown.classList.remove('is-active')
-      // this.navbarDropdown.classList.add('is-hidden-touch')
       this.navbarLinks.classList.add('is-hidden-touch')
-      // this.navbarLinks.classList.add('is-active')
     }
   }
 
