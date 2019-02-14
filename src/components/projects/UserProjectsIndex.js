@@ -50,22 +50,28 @@ class ProjectsIndex extends React.Component {
       .delete(`/api/projects/${id}`, {
         headers: {Authorization: `Bearer ${Auth.getToken()}`}
       })
-      .then(() => this.props.history.push('/users'))
+      .then(() => window.location.reload())
       .catch(err => console.log(err))
   }
 
   render() {
     if(!this.props) return (
       <section className="section">
-        <div className="container">
+        <div className="container is-fluid">
           <h4 className="title is-4">Loading...</h4>
         </div>
       </section>
     )
     return(
-      <section className="">
-        <div className="">
-          {!this.state.addingProject && this.props.logged && <button onClick={this.handleClick} className="button is-primary">Add project</button>}
+      <section className="section">
+        <div className="container">
+          {!this.state.addingProject &&
+            this.props.logged &&
+            <button
+              onClick={this.handleClick}
+              className="button is-primary">
+              Add project
+            </button>}
           {this.state.addingProject &&
             <ProjectForm
               data={this.state.data}
@@ -85,12 +91,12 @@ class ProjectsIndex extends React.Component {
                         handleDelete={this.handleDelete}
                         logged={this.props.logged}
                       /> }
-                    {!this.props.projects.length > 0 && <div>No projects have been added </div> }
                   </div>
                 )
               }
             }
             )}
+            {this.props.projects.length === 0 && <div>You have not added any projects</div> }
           </div>
         </div>
       </section>

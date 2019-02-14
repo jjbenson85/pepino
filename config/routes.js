@@ -38,6 +38,8 @@ router.route('/projects/:id')
   .put(secureRoute, projectsController.update)
   .delete(secureRoute, projectsController.delete)
 
+router.route('/projects/search/:search')
+  .get(projectsController.search)
 
 
 //*** PACKAGE ROUTES **//

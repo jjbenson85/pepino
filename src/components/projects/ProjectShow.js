@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import debounce from 'lodash/debounce'
+import Textarea from 'react-textarea-autosize'
 
 import PackageIndex from '../packages/PackageIndex'
 import PackageShow from '../packages/PackageShow'
@@ -107,10 +108,11 @@ class ProjectShow extends React.Component {
       </section>
     )
     const { name, description, createdAt, updatedAt, packages, user, visible } = this.state.project
+    const loggedIn = Auth.checkAvailability(user._id)
     return(
       <section className="section">
-        <div className="container">
-          <div className="columns is-9 scroll">
+        <div className="container is-fluid">
+          <div className="columns scroll">
             <div className="column is-half project">
               <input
                 className="title is-1 input hidden-input"
@@ -118,20 +120,21 @@ class ProjectShow extends React.Component {
                 name="name"
                 onChange={this.handleChange}
                 value={name}
-                disabled={!Auth.checkAvailability(user._id)}
+                disabled={!loggedIn}
               />
-              <textarea
+              <hr className="project"/>
+              <Textarea
                 className="textarea hidden-input"
                 name="description"
                 placeholder="description"
                 onChange={this.handleChange}
                 value={description}
-                disabled={!Auth.checkAvailability(user._id)}
-              >
-              </textarea>
+                disabled={!loggedIn}
+              />
+              <hr className="project"/>
               <section className="section">
                 <h2 className='title is-5'>Installed packages</h2>
-                {packages.length === 0 && <div>no packages yet</div>}
+                {packages.length === 0 && <div className="no-package">no packages yet</div>}
                 <div className="tags">
                   {packages.map(packageUnit =>
                     <div
@@ -139,7 +142,7 @@ class ProjectShow extends React.Component {
                       key={packageUnit._id}
                       id={packageUnit._id}>
                       {packageUnit.name}
-                      {Auth.checkAvailability(user._id) && <button
+                      {loggedIn && <button
                         className="delete is-small"
                         onClick={() => this.handlePackageDelete(packageUnit)}>
                       </button>}
@@ -150,18 +153,34 @@ class ProjectShow extends React.Component {
               <section className="section visible">
                 <div className="control">
                   <label className="radio">
-                    <input type="radio" name="visible" value={true} onChange={this.handleChange} checked={JSON.parse(visible)=== true}/>
+                    <input
+                      type="radio"
+                      name="visible"
+                      value={true}
+                      onChange={this.handleChange}
+                      checked={JSON.parse(visible)=== true}
+                      disabled={!loggedIn}
+                    />
                     <span>Visible</span>
                   </label>
                   <label className="radio">
-                    <input type="radio" name="visible" value={false} onChange={this.handleChange} checked={JSON.parse(visible)=== false}/>
+                    <input
+                      type="radio"
+                      name="visible"
+                      value={false}
+                      onChange={this.handleChange}
+                      checked={JSON.parse(visible)=== false}
+                      disabled={!loggedIn}
+                    />
                     <span>Not visible</span>
                   </label>
                 </div>
               </section>
               <hr />
-              <div>Created at: {createdAt.split('T')[0]}</div>
-              <div>Updated at: {updatedAt.split('T')[0]}</div>
+              <div className="columns scroll">
+                <div className="column">Created at: {createdAt.split('T')[0]} </div>
+                <div className="column">Updated at: {updatedAt.split('T')[0]}</div>
+              </div>
             </div>
             <div className="column is-half">
               <PackageIndex
