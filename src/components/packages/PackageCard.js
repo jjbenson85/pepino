@@ -10,7 +10,7 @@ class PackageCard extends React.Component{
   render(){
     const { name, icon, version, comments, downloadsCount, description, keywords, _id } = this.props.package
     return(
-      <div className='card'>
+      <div id={name} className='card'>
         <div className='card-header'>
           <div className="media">
             <div className="media-left">

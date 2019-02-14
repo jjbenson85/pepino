@@ -65,12 +65,22 @@ class ProjectShow extends React.Component {
       document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'})
     }, 10)
   }
+
   handleTagClick(_package){
-    // console.log(name)
-    this.setState({ selectedPackage: _package })
+    // let el
+    console.log('SCROLL',_package.name)
+    this.setState({ selectedPackage: _package, tab: 'installed' })
     setTimeout(function () {
+      document.getElementById(_package.name).classList.add('glow')
       document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'})
-    }, 10)
+    }, 100)
+    setTimeout(function () {
+      const el = document.getElementById(_package.name)
+      el.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'})
+      setTimeout(function () {
+        el.classList.remove('glow')
+      }, 1000)
+    }, 500)
   }
   handleAddClick(_package) {
     const index = this.state.project.packages.indexOf(_package)
@@ -201,13 +211,13 @@ class ProjectShow extends React.Component {
               <div className="card is-fullheight">
                 <div className="tabs is-boxed">
                   <ul>
-                    <li
+                    {Auth.checkAvailability(user._id)&&<li
                       className={this.state.tab==='search'? 'is-active': ''}
                       ref={el => this.searchTab = el}
                       onClick={(e)=>this.handleTabClick(e,'search')}
                     >
                       <a>Search</a>
-                    </li>
+                    </li>}
                     <li
                       className={this.state.tab==='installed'? 'is-active': ''}
                       ref={el => this.installedTab = el}

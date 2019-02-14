@@ -167,8 +167,11 @@ $navbar-breakpoint: 600px;
 a {
   color: black;
 }
-
+.glow{
+  background-color: yellow;
+}
 .card{
+  transition: all 1s;
   border-radius: 2px 2px 0 0;
   &.is-fullheight{
     height:100%;

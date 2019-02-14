@@ -117,9 +117,9 @@ class PackageShow extends React.Component{
             {description}
           </p>
           <hr/>
-          <p className="is-small">
+          {author&&<p className="is-small">
             {`author: ${author.name}`}
-          </p>
+          </p>}
           <p className="is-small">
             {`licence: ${license}`}
           </p>
