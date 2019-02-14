@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const ProjectCard = ({project, handleDelete, logged}) => {
-  const {_id, name, description, updatedAt} = project
+  const {_id, name, description, updatedAt, user} = project
   return(
     <div className="card projectCard">
       <Link to={`/projects/${_id}`}>
@@ -13,6 +13,7 @@ const ProjectCard = ({project, handleDelete, logged}) => {
           <div className="content">
             <p className="description">{description && description.length > 150 ? description.substr(0, 150) + '...' : description}</p>
             <hr />
+            <p>{user.username}</p>
             <p className="is-small">Last updated: {updatedAt.split('T')[0]}</p>
           </div>
         </div>

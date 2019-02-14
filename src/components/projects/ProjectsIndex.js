@@ -12,7 +12,7 @@ class ProjectIndex extends React.Component {
       searched: null
     }
     this.handleChange = this.handleChange.bind(this)
-    this.searchUser = this.searchUser.bind(this)
+    this.searchProject = this.searchProject.bind(this)
   }
 
   getAllProjects() {
@@ -29,7 +29,7 @@ class ProjectIndex extends React.Component {
     this.setState({...this.state, [name]: value})
   }
 
-  searchUser(e){
+  searchProject(e){
     e.preventDefault(e)
     if(this.state.search.trim() !== ''){
       axios.get(`/api/projects/search/${this.state.search.trim()}`)
@@ -47,7 +47,7 @@ class ProjectIndex extends React.Component {
     return(
       <section className="section">
         <div className="container">
-          <form onSubmit={this.searchUser}>
+          <form onSubmit={this.searchProject}>
             <div className="field" >
               <label className="label">Search for projects</label>
               <div className="control search-bar">
