@@ -1,6 +1,6 @@
 import React from 'react'
 
-// import axios from 'axios'
+import axios from 'axios'
 // import Auth from '../../lib/Auth'
 
 import SearchBar from '../common/SearchBar'
@@ -10,42 +10,60 @@ class PackageIndex extends React.Component{
   constructor(){
     super()
     this.state = {
-      error: false
+      error: false,
+      searchValue: ''
     }
-    this.returnData = this.returnData.bind(this)
+    // this.returnData = this.returnData.bind(this)
+    this.handleSearchChange = this.handleSearchChange.bind(this)
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
   }
-
-  // getPackagesData(){
-  //   axios.get('/api/packages')
-  //     .then( res =>{
-  //       this.setState({ packages: res.data})
-  //     })
-  //     .catch((err)=>console.log(err.message))
-  // }
-
-  // componentDidMount(){
-  // this.getPackagesData()
-  // }
 
   getUsedPackagesIds() {
     return this.props.packages.map((_package)=> _package._id)
 
   }
+  //
+  // returnData(searchData){
+  //   if(searchData===500) {
+  //     this.setState({error: true})
+  //     return
+  //   }
+  //   const packages = searchData.data
+  //   this.setState({ packages, error: false})
+  // }
 
-  returnData(searchData){
-    if(searchData===500) {
-      this.setState({error: true})
-      return
-    }
-    const packages = searchData.data
-    this.setState({ packages, error: false})
+  handleSearchChange(e){
+    this.setState({searchValue: e.currentTarget.value})
+  }
+
+  handleSearchSubmit(e){
+    e.preventDefault()
+    if(!this.state.searchValue) return
+    const that = this
+    const url = '/api/packages/search/'+this.state.searchValue
+    console.log('handleSearchSubmit', url)
+    axios
+      .get(url)
+      .then((searchData) => {
+        const packages = searchData.data
+        that.setState({ packages, error: false})
+      })
+      .catch(function (error) {
+        if (error.response) {
+          this.setState({error: true})
+        }
+      })
   }
 
   render(){
     this.getUsedPackagesIds()
     return(
       <section className='package-index'>
-        <SearchBar url='/api/packages/search' returnData={this.returnData}/>
+        <SearchBar
+          handleChange={this.handleSearchChange}
+          handleSubmit={this.handleSearchSubmit}
+          value={this.state.searchValue}
+        />
         <div>
           {this.state.error &&
           <div className="card">

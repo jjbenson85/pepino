@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 
 import ProjectCard from './ProjectCard'
+import SearchBar from '../common/SearchBar'
+
 
 class ProjectIndex extends React.Component {
   constructor() {
@@ -47,22 +49,11 @@ class ProjectIndex extends React.Component {
     return(
       <section className="section">
         <div className="container">
-          <form onSubmit={this.searchProject}>
-            <div className="field" >
-              <label className="label">Search for projects</label>
-              <div className="control search-bar">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="search"
-                  name="search"
-                  onChange={this.handleChange}
-                  value={this.state.search || ''}
-                />
-              </div>
-              <button className="button is-primary home-button" >Submit</button>
-            </div>
-          </form>
+          <SearchBar
+            handleChange={this.handleChange}
+            handleSubmit={this.searchProject}
+            value={this.state.searchValue}
+          />
           <hr />
           <div className="columns is-multiline">
             {!this.state.searched && this.state.projects.map(project => {
