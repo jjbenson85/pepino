@@ -156,6 +156,19 @@ hr.project {
       text-align: center;
     }
   }
+
+  .user {
+    display: flex;
+    margin: 0 auto;
+    img {
+      margin-left: 20px;
+    }
+  }
+
+  .projectUsername {
+    font-size: 20px;
+    margin-bottom: 50px;
+  }
 }
 
 .projectForm {

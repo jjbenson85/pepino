@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import debounce from 'lodash/debounce'
 import Textarea from 'react-textarea-autosize'
 
@@ -197,6 +198,16 @@ class ProjectShow extends React.Component {
                 </div>
               </section>
               <hr />
+              {!loggedIn &&
+                <Link to={`/users/${user._id}`}>
+                  <div className="user">
+                    <div className="projectUsername">Created by: {user.username}</div>
+                    <figure className="image is-48x48">
+                      <img src={user.image} />
+                    </figure>
+                  </div>
+                </Link>
+              }
               <div className="columns scroll">
                 <div className="column">Created at: {createdAt.split('T')[0]} </div>
                 <div className="column">Updated at: {updatedAt.split('T')[0]}</div>
@@ -206,7 +217,7 @@ class ProjectShow extends React.Component {
               <div className="card is-fullheight">
                 <div className="tabs is-boxed">
                   <ul>
-                    {loggedIn&&<li className={this.state.tab==='search'? 'is-active': ''} ref={el => this.searchTab = el} onClick={(e)=>this.handleTabClick(e,'search')} >
+                    {loggedIn &&<li className={this.state.tab==='search'? 'is-active': ''} ref={el => this.searchTab = el} onClick={(e)=>this.handleTabClick(e,'search')} >
                       <a>Search</a>
                     </li>}
                     <li className={this.state.tab==='installed'? 'is-active': ''} ref={el => this.installedTab = el} onClick={(e)=>this.handleTabClick(e,'installed')} >
