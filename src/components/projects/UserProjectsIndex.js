@@ -2,7 +2,8 @@ import React from 'react'
 import axios from 'axios'
 
 import ProjectForm from './ProjectForm'
-import ProjectCard from './ProjectCard'
+// import ProjectCard from './ProjectCard'
+import PopulatedProjectColumn from './PopulatedProjectColumn'
 import LoadingScreen from '../common/LoadingScreen'
 import Auth from '../../lib/Auth'
 import {withRouter} from 'react-router-dom'
@@ -80,25 +81,14 @@ class ProjectsIndex extends React.Component {
               error={this.state.error}
             />
           }
-          <div className="columns is-multiline">
-            {this.props.projects.map(project => {
-              if (project.visible || this.props.logged) {
-                return (
-                  <div key={project._id} className="column is-one-third">
-                    {this.props.projects.length > 0 &&
-                      <ProjectCard
-                        project = {project}
-                        handleDelete={this.handleDelete}
-                        logged={this.props.logged}
-                      /> }
-                  </div>
-                )
-              }
-            }
-            )}
-            {this.props.projects.length === 0 && Auth.isAuthenticated() && <div>You have not added any projects</div> }
-            {this.props.projects.length === 0 && !Auth.isAuthenticated() && <div>The user have not added any projects</div> }
-          </div>
+          <PopulatedProjectColumn
+            projects ={this.props.projects}
+            handleDelete={this.handleDelete}
+            logged={this.props.logged}
+          />
+
+          {this.props.projects.length === 0 && Auth.isAuthenticated() && <div>You have not added any projects</div> }
+          {this.props.projects.length === 0 && !Auth.isAuthenticated() && <div>The user have not added any projects</div> }
         </div>
       </section>
     )
