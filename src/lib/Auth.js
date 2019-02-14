@@ -27,7 +27,13 @@ class Auth{
     const payload = this.getPayload()
     if(!payload) return false
     const now = Math.round(Date.now() / 1000)
-    return now < payload.exp
+    if(now < payload.exp){
+      return now < payload.exp
+    }else{
+      this.removeToken()
+      return false
+    }
+
   }
 
   static checkAvailability(id){

@@ -4,6 +4,7 @@ const Project = require('../models/project')
 function indexRoute(req, res) {
   Project
     .find()
+    .populate({path: 'user', select: 'username'})
     .then(projects => res.status(200).json(projects))
 }
 
