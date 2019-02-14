@@ -1,9 +1,9 @@
 import React from 'react'
 
 import axios from 'axios'
-import Auth from '../../lib/Auth'
-
-import SearchBar from '../common/SearchBar'
+// import Auth from '../../lib/Auth'
+//
+// import SearchBar from '../common/SearchBar'
 import PackageCard from './PackageCard'
 
 class PackageIndex extends React.Component{

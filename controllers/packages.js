@@ -55,22 +55,21 @@ function multiRoute(req, res, next){
       'name': { $in: req.body.names}
     })
     .then( (output) => {
-      console.log('output',output)
       res.json(output)
     })
     .catch(next)
 }
 
-//Create Route adds a new package to the database and returns it
-function createRoute(req, res, next) {
-  //Add current user to the body
-  Package
-    //Add a new project to database
-    .create(req.body)
-    //Return the new project
-    .then(project => res.status(201).json(project))
-    .catch(next)
-}
+// //Create Route adds a new package to the database and returns it
+// function createRoute(req, res, next) {
+//   //Add current user to the body
+//   Package
+//     //Add a new project to database
+//     .create(req.body)
+//     //Return the new project
+//     .then(project => res.status(201).json(project))
+//     .catch(next)
+// }
 
 //PostCommentRoute finds the package and puts the new comment into the beginning of the array
 //returns a response containing the package with the new comment
@@ -119,7 +118,7 @@ function showRoute(req, res, next) {
 
 module.exports = {
   index: indexRoute,
-  create: createRoute,
+  // create: createRoute,
   search: searchRoute,
   multi: multiRoute,
   show: showRoute,
