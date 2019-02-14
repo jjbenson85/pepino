@@ -150,15 +150,14 @@ class ProjectShow extends React.Component {
                 value={name}
                 disabled={!loggedIn}
               />
-              <textarea
+              <Textarea
                 className="textarea hidden-input"
                 name="description"
                 placeholder="description"
                 onChange={this.handleChange}
                 value={description}
                 disabled={!loggedIn}
-              >
-              </textarea>
+              />
               <section className="section">
                 <h2 className='title is-5'>Installed packages</h2>
                 {packages.length === 0 && <div>no packages yet</div>}
@@ -225,7 +224,7 @@ class ProjectShow extends React.Component {
                 <div className="column">Updated at: {updatedAt.split('T')[0]}</div>
               </div>
             </div>
-            <div className="column is-half">
+            <div className="column is-half package-column">
               <div className="card is-fullheight">
                 <div className="tabs is-boxed">
                   <ul>
@@ -251,7 +250,7 @@ class ProjectShow extends React.Component {
                   </ul>
                 </div>
                 <div className="card-content">
-                  {(this.state.tab==='comments')&&<div className="card-content">
+                  {(this.state.tab==='comments')&&<div className="">
                     <CommentInput postCommentUrl={`/api/projects/${_id}/comments`} updateThread={this.getProject}/>
                     {comments.map((comment, i)=><CommentCard key={i} comment={comment} />)}
                     {/* <CommentInput postCommentUrl={`/api/packages/${this.props.match.params.id}`}/>*/}
