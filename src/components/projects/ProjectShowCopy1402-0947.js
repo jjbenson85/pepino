@@ -158,10 +158,9 @@ class ProjectShow extends React.Component {
                     <div
                       className="tag"
                       key={_package._id}
-                      id={_package._id}
-                      onClick={()=> this.handleTagClick(_package)}
-                    >
+                      id={_package._id}>
                       {_package.name}
+                      onClick={()=> this.handleTagClick(_package)}
                       {loggedIn && <button
                         className="delete is-small"
                         onClick={() => this.handlePackageDelete(_package)}>
