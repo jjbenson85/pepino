@@ -99,6 +99,9 @@ $navbar-breakpoint: 600px;
 
 .package-index{
   .card{
+    .field.is-grouped{
+      justify-content: space-between;
+    }
     .control{
       display: flex;
     }
@@ -166,6 +169,7 @@ hr.project {
   height:100%;
   .card-content {
     padding-bottom: 10px;
+
   }
 
   hr {

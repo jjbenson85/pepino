@@ -15,6 +15,7 @@ const packageSchema = new mongoose.Schema({
   version: {type: String},
   keywords: [{ type: String}],
   downloadsCount: { type: Number},
+  score: { type: Number},
   //Package comments embedded model
   comments: [commentSchema],
   //NPMS is data returned from NPMS API used for package show
