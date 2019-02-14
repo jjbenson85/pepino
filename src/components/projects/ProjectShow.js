@@ -67,8 +67,25 @@ class ProjectShow extends React.Component {
     }, 10)
   }
 
+  handleAddClick(_package) {
+    const index = this.state.project.packages.indexOf(_package)
+    const packages = (index === -1) ? (
+      this.setState({editing: true}),
+      this.state.project.packages.concat(_package)
+    ) : (
+      this.state.project.packages
+    )
+
+    const project = {...this.state.project, packages }
+    this.setState({ project })
+    this.delayedCallback()
+  }
+
+  handleTabClick(e, val){
+    {this.setState({tab: val})}
+  }
+
   handleTagClick(_package){
-    // let el
     console.log('SCROLL',_package.name)
     this.setState({ selectedPackage: _package, tab: 'installed' })
     setTimeout(function () {
@@ -82,19 +99,6 @@ class ProjectShow extends React.Component {
         el.classList.remove('glow')
       }, 1000)
     }, 500)
-  }
-  handleAddClick(_package) {
-    const index = this.state.project.packages.indexOf(_package)
-    const packages = (index === -1) ? (
-      this.setState({editing: true}),
-      this.state.project.packages.concat(_package)
-    ) : (
-      this.state.project.packages
-    )
-
-    const project = {...this.state.project, packages }
-    this.setState({ project })
-    this.delayedCallback()
   }
 
   handlePackageDelete(_package) {
@@ -122,17 +126,6 @@ class ProjectShow extends React.Component {
     this.delayedCallback()
   }
 
-  handleTabClick(e, val){
-
-    // const stats = document.querySelector('#stats')
-    // const about = document.querySelector('#about')
-    // const comment = document.querySelector('#comment')
-    // this.statsTab.classList.remove('is-active')
-    // this.searchTab.classList.remove('is-active')
-    // this.commentTab.classList.remove('is-active')
-    // e.currentTarget.classList.add('is-active')
-    {this.setState({tab: val})}
-  }
 
   render() {
     if(!this.state.project) return (
@@ -158,7 +151,7 @@ class ProjectShow extends React.Component {
                     name="name"
                     onChange={this.handleChange}
                     value={name}
-                    disabled={!Auth.checkAvailability(user._id)}
+                    disabled={!loggedIn}
                   />
                   <textarea
                     className="textarea hidden-input"
@@ -166,7 +159,7 @@ class ProjectShow extends React.Component {
                     placeholder="description"
                     onChange={this.handleChange}
                     value={description}
-                    disabled={!Auth.checkAvailability(user._id)}
+                    disabled={!loggedIn}
                   >
                   </textarea>
                   <section className="section">
@@ -182,7 +175,7 @@ class ProjectShow extends React.Component {
                         >
                           {_package.name}
 
-                          {Auth.checkAvailability(user._id) && <button
+                          {loggedIn && <button
                             className="delete is-small"
                             onClick={() => this.handlePackageDelete(_package)}>
                           </button>}
@@ -212,18 +205,10 @@ class ProjectShow extends React.Component {
               <div className="card is-fullheight">
                 <div className="tabs is-boxed">
                   <ul>
-                    {Auth.checkAvailability(user._id)&&<li
-                      className={this.state.tab==='search'? 'is-active': ''}
-                      ref={el => this.searchTab = el}
-                      onClick={(e)=>this.handleTabClick(e,'search')}
-                    >
+                    {loggedIn&&<li className={this.state.tab==='search'? 'is-active': ''} ref={el => this.searchTab = el} onClick={(e)=>this.handleTabClick(e,'search')} >
                       <a>Search</a>
                     </li>}
-                    <li
-                      className={this.state.tab==='installed'? 'is-active': ''}
-                      ref={el => this.installedTab = el}
-                      onClick={(e)=>this.handleTabClick(e,'installed')}
-                    >
+                    <li className={this.state.tab==='installed'? 'is-active': ''} ref={el => this.installedTab = el} onClick={(e)=>this.handleTabClick(e,'installed')} >
                       <a className='level'>
                         <div className='level-item'>Installed</div>
                         <div className='level-right'>
@@ -231,11 +216,7 @@ class ProjectShow extends React.Component {
                         </div>
                       </a>
                     </li>
-                    <li
-                      className={this.state.tab==='comments'? 'is-active': ''}
-                      ref={el => this.commentTab = el}
-                      onClick={(e)=>this.handleTabClick(e,'comments')}
-                    >
+                    <li className={this.state.tab==='comments'? 'is-active': ''} ref={el => this.commentTab = el} onClick={(e)=>this.handleTabClick(e,'comments')} >
                       <a className='level'>
                         <div className='level-item'>Comments</div>
                         <div className='level-right'>
