@@ -64,7 +64,7 @@ class ProjectsIndex extends React.Component {
     )
     return(
       <section className="section">
-        <div className="container">
+        <div className="">
           {!this.state.addingProject &&
             this.props.logged &&
             <button

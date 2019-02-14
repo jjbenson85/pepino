@@ -150,9 +150,7 @@ class ProjectShow extends React.Component {
         <div className="container is-fluid">
           <div className="columns scroll">
             <div className="column is-half project">
-              <div className="card is-fullheight">
-
-
+              <div className="">
                 <div>
                   <input
                     className="title is-1 input hidden-input"
