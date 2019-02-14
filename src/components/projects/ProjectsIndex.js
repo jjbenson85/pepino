@@ -66,14 +66,13 @@ class ProjectIndex extends React.Component {
             value={this.state.searchValue}
           />
           <div className="columns is-multiline">
-            {!this.state.searched && this.state.projects.map(project => {
+            {!this.state.searched &&  this.state.projects.length > 0 && this.state.projects.map(project => {
               if (project.visible) {
                 return (
                   <div key={project._id} className="column is-one-quarter">
-                    {this.state.projects.length > 0 &&
-                      <ProjectCard
-                        project = {project}
-                      /> }
+                    <ProjectCard
+                      project = {project}
+                    />
                   </div>
                 )
               }
@@ -84,10 +83,9 @@ class ProjectIndex extends React.Component {
               if (project.visible) {
                 return (
                   <div key={project._id} className="column is-one-quarter">
-                    {this.state.searched.length > 0 &&
-                      <ProjectCard
-                        project = {project}
-                      /> }
+                    <ProjectCard
+                      project = {project}
+                    />
                   </div>
                 )
               }

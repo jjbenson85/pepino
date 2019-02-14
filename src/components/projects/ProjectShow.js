@@ -123,7 +123,6 @@ class ProjectShow extends React.Component {
 
   handleChange({ target: { name, value } }) {
     console.log(this.state.project)
-    // const value = target.type === 'checkbox' ? target.checked : target.value;
     const _value = name === 'visible' ? !this.state.project.visible : value
     const project = {...this.state.project, [name]: _value }
     const errors = {...this.state.errors, [name]: null }

@@ -1,7 +1,7 @@
 import React from 'react'
 import ProjectCard from './ProjectCard'
 
-const PopulatedProjectColumn = ({projects, handleDelete, logged}) => {
+const PopulatedUserProjectColumn = ({projects, handleDelete, logged}) => {
   return (
     <div>
       {projects.length > 0 && <div className="columns is-multiline">
@@ -24,4 +24,4 @@ const PopulatedProjectColumn = ({projects, handleDelete, logged}) => {
   )
 }
 
-export default PopulatedProjectColumn
+export default PopulatedUserProjectColumn

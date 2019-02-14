@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import ProjectForm from './ProjectForm'
 // import ProjectCard from './ProjectCard'
-import PopulatedProjectColumn from './PopulatedProjectColumn'
+import PopulatedUserProjectColumn from './PopulatedUserProjectColumn'
 import LoadingScreen from '../common/LoadingScreen'
 import Auth from '../../lib/Auth'
 import {withRouter} from 'react-router-dom'
@@ -81,7 +81,7 @@ class ProjectsIndex extends React.Component {
               error={this.state.error}
             />
           }
-          <PopulatedProjectColumn
+          <PopulatedUserProjectColumn
             projects ={this.props.projects}
             handleDelete={this.handleDelete}
             logged={this.props.logged}
