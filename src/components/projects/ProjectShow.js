@@ -118,7 +118,10 @@ class ProjectShow extends React.Component {
   }
 
   handleChange({ target: { name, value } }) {
-    const project = {...this.state.project, [name]: value }
+    console.log(this.state.project)
+    // const value = target.type === 'checkbox' ? target.checked : target.value;
+    const _value = name === 'visible' ? !this.state.project.visible : value
+    const project = {...this.state.project, [name]: _value }
     const errors = {...this.state.errors, [name]: null }
     this.setState({ project, errors, editing: true })
     this.delayedCallback()
@@ -141,7 +144,6 @@ class ProjectShow extends React.Component {
         <div className="container is-fluid">
           <div className="columns scroll">
             <div className="column is-half project">
-
               <input
                 className="title is-1 input hidden-input"
                 placeholder="Name is required"
@@ -158,7 +160,7 @@ class ProjectShow extends React.Component {
                 value={description}
                 disabled={!loggedIn}
               />
-              <section className="section">
+              <section className="box">
                 <h2 className='title is-5'>Installed packages</h2>
                 {packages.length === 0 && <div>no packages yet</div>}
                 <div className="tags">
@@ -170,7 +172,6 @@ class ProjectShow extends React.Component {
                       onClick={()=> this.handleTagClick(_package)}
                     >
                       {_package.name}
-
                       {loggedIn && <button
                         className="delete is-small"
                         onClick={() => this.handlePackageDelete(_package)}>
@@ -181,40 +182,15 @@ class ProjectShow extends React.Component {
               </section>
               <section className="section visible">
                 <div className="control">
-                  <label className="radio">
-                    <input type="radio" name="visible" value={true} onChange={this.handleChange} checked={JSON.parse(visible)=== true}/>
-                    <span>Visible</span>
-                  </label>
-                  <label className="radio">
-                    <input type="radio" name="visible" value={false} onChange={this.handleChange} checked={JSON.parse(visible)=== false}/>
-                    <span>Not visible</span>
-                  </label>
-                </div>
-              </section>
-
-              <section className="section visible">
-                <div className="control">
-                  <label className="radio">
+                  <strong>Visible?</strong>
+                  <label className="switch">
                     <input
-                      type="radio"
+                      type="checkbox"
                       name="visible"
-                      value={true}
-                      onChange={this.handleChange}
                       checked={JSON.parse(visible)=== true}
-                      disabled={!loggedIn}
-                    />
-                    <span>Visible</span>
-                  </label>
-                  <label className="radio">
-                    <input
-                      type="radio"
-                      name="visible"
-                      value={false}
                       onChange={this.handleChange}
-                      checked={JSON.parse(visible)=== false}
-                      disabled={!loggedIn}
                     />
-                    <span>Not visible</span>
+                    <span className="slider round"></span>
                   </label>
                 </div>
               </section>
@@ -253,7 +229,6 @@ class ProjectShow extends React.Component {
                   {(this.state.tab==='comments')&&<div className="">
                     <CommentInput postCommentUrl={`/api/projects/${_id}/comments`} updateThread={this.getProject}/>
                     {comments.map((comment, i)=><CommentCard key={i} comment={comment} />)}
-                    {/* <CommentInput postCommentUrl={`/api/packages/${this.props.match.params.id}`}/>*/}
                   </div>}
                   {(this.state.tab==='installed')&&
                   <InstalledPackageIndex
