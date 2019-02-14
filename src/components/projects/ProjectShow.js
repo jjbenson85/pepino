@@ -122,8 +122,9 @@ class ProjectShow extends React.Component {
         </div>
       </section>
     )
-    const loggedIn = Auth.checkAvailability(user._id)
     const { name, description, createdAt, updatedAt, packages, user, visible, comments, _id } = this.state.project
+    const loggedIn = Auth.checkAvailability(user._id)
+    // console.log("bego", user)
     return(
       <section className="section">
         <div className="container is-fluid">
