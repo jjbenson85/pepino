@@ -426,3 +426,26 @@ input:checked + .slider:before {
       height: 200px;
     }
 }
+.field{
+  .profileImage{
+    height: 300px;
+    img{
+      height: 280px;
+      width: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  .profileBio{
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+
+.authorisation{
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+}

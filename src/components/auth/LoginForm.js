@@ -5,7 +5,7 @@ const Login  = ({ data, handleChange, handleSubmit, changeState, errors }) =>  {
 
   const{email, password} = data
   return(
-    <form onSubmit={handleSubmit} name="login">
+    <form onSubmit={handleSubmit} name="login" >
 
       <div className="field" >
         <label className="label">Email</label>

@@ -62,7 +62,9 @@ const Register  = ({ data, handleChange, handleSubmit, changeState, errors }) =>
 
       <div className="field">
         <button className="button is-primary home-button" >Register</button>
-        <button className="button is-primary home-button" onClick={changeState}>Already a User</button>
+      </div>
+      <div>
+        <p>Already have an account? <a  onClick={changeState}>Sign in</a>.</p>
       </div>
     </form>
   )
