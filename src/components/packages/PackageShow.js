@@ -35,22 +35,14 @@ class PackageShow extends React.Component{
   }
 
   componentDidUpdate(prevProps){
-
     if(!this.props.selectedPackage) return
     if(!prevProps.selectedPackage)  return this.getPackageData()
     if(this.props.selectedPackage.name === prevProps.selectedPackage.name) return
     this.setState({tab: 'about'})
     this.getPackageData()
   }
-  handleClick(e, val){
 
-    // const stats = document.querySelector('#stats')
-    // const about = document.querySelector('#about')
-    // const comment = document.querySelector('#comment')
-    // this.statsTab.classList.remove('is-active')
-    // this.aboutTab.classList.remove('is-active')
-    // this.commentTab.classList.remove('is-active')
-    // e.currentTarget.classList.add('is-active')
+  handleClick(e, val){
     {this.setState({tab: val})}
   }
 

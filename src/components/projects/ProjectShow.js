@@ -161,7 +161,7 @@ class ProjectShow extends React.Component {
               />
               <section className="box">
                 <h2 className='title is-5'>Installed packages</h2>
-                {packages.length === 0 && <div>no packages yet</div>}
+                {packages.length === 0 && <div className="none">no packages yet</div>}
                 <div className="tags">
                   {packages.map(_package =>
                     <div
