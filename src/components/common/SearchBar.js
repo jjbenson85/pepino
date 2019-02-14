@@ -44,6 +44,7 @@ class SearchBar extends React.Component{
         <div className="field has-addons">
           <div className="control field">
             <input
+              autoComplete="off"
               className="input"
               name="search"
               type="text"

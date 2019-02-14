@@ -4,6 +4,9 @@ import axios from 'axios'
 import ProjectCard from './ProjectCard'
 import SearchBar from '../common/SearchBar'
 
+import debounce from 'lodash/debounce'
+
+
 
 class ProjectIndex extends React.Component {
   constructor() {
@@ -14,7 +17,9 @@ class ProjectIndex extends React.Component {
       searched: null
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.searchProject = this.searchProject.bind(this)
+    this.delayedCallback = debounce(this.searchProject, 250)
   }
 
   getAllProjects() {
@@ -29,10 +34,15 @@ class ProjectIndex extends React.Component {
 
   handleChange({target: {name, value}}){
     this.setState({...this.state, [name]: value})
+    this.delayedCallback()
   }
 
-  searchProject(e){
+  handleSubmit(e){
     e.preventDefault(e)
+    this.searchProject()
+  }
+
+  searchProject(){
     if(this.state.search.trim() !== ''){
       axios.get(`/api/projects/search/${this.state.search.trim()}`)
         .then(res => {
@@ -52,7 +62,7 @@ class ProjectIndex extends React.Component {
           <label className="label">Discover More Projects</label>
           <SearchBar
             handleChange={this.handleChange}
-            handleSubmit={this.searchProject}
+            handleSubmit={this.handleSubmit}
             value={this.state.searchValue}
           />
           <div className="columns is-multiline">
