@@ -2,21 +2,27 @@ import React from 'react'
 
 import axios from 'axios'
 
+import CommentCard from '../common/CommentCard'
+import CommentInput from '../common/CommentInput'
+
 
 class PackageShow extends React.Component{
 
   constructor(){
     super()
     this.state = {
+      tab: 'about',
+      package: null
     }
+
+    this.handleClick = this.handleClick.bind(this)
+    this.getPackageData = this.getPackageData.bind(this)
 
   }
 
   getPackageData(){
-    console.log('get package data', this.props.selectedPackage.name)
     axios.get(`/api/packages/${this.props.selectedPackage.name}`)
       .then( res =>{
-        console.log(res.data)
         this.setState({ package: res.data})
       })
       .catch((err)=>console.log(err.message))
@@ -24,72 +30,77 @@ class PackageShow extends React.Component{
 
   componentDidMount(){
     // if(this.props.selectedPackage){
-    //   this.getPackageData()
+    this.getPackageData()
     // }
   }
 
   componentDidUpdate(prevProps){
-    console.log(this.props)
-    console.log(prevProps)
     if(!this.props.selectedPackage) return
     if(!prevProps.selectedPackage)  return this.getPackageData()
     if(this.props.selectedPackage.name === prevProps.selectedPackage.name) return
+    this.setState({tab: 'about'})
     this.getPackageData()
+  }
+
+  handleClick(e, val){
+    {this.setState({tab: val})}
   }
 
   render(){
     if(!this.state.package) return null
-    console.log('package', this.state.package)
     const {
       name,
       description,
       author,
-      publisher,
       links,
       license
     } = this.state.package.npms.collected.metadata
-    const {comments, icon} = this.state.package.pepino
+    const {comments, icon} = this.state.package
     function arrFromObj(obj){
       const arr = []
       for (const key in obj) arr.push([key, obj[key]])
       return arr
     }
-
     return(
       <div className="card">
-        <div className="card-content">
-          <div className="tabs is-boxed">
-            <ul>
-              <li className="is-active">
-                <a>
-                  <span className="icon is-small"><i className="fas fa-image" aria-hidden="true"></i></span>
-                  <span>Pictures</span>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <span className="icon is-small"><i className="fas fa-music" aria-hidden="true"></i></span>
-                  <span>Music</span>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <span className="icon is-small"><i className="fas fa-film" aria-hidden="true"></i></span>
-                  <span>Videos</span>
-                </a>
-              </li>
-              <li>
-                <a>
-                  <span className="icon is-small"><i className="far fa-file-alt" aria-hidden="true"></i></span>
-                  <span>Documents</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="card-image">
-            <figure className="image is-4by3">
-              <img src={icon} alt="Placeholder image"/>
-            </figure>
+        <div className="tabs is-boxed">
+          <ul>
+            <li
+              className={this.state.tab==='about'? 'is-active': ''}
+              ref={el => this.aboutTab = el}
+              onClick={(e)=>this.handleClick(e,'about')}
+            >
+              <a>
+                About
+              </a>
+            </li>
+            <li
+              className={this.state.tab==='stats'? 'is-active': ''}
+              ref={el => this.statsTab = el}
+              onClick={(e)=>this.handleClick(e,'stats')}
+            >
+              <a>
+                Stats
+              </a>
+            </li>
+            <li
+              className={this.state.tab==='comments'? 'is-active': ''}
+              ref={el => this.commentTab = el}
+              onClick={(e)=>this.handleClick(e,'comments')}
+            >
+              <a className='level'>
+                <div className='level-item'>Comments</div>
+                <div className='level-right'>
+                  <div className="level-item tag is-primary">{comments.length}</div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        {(this.state.tab==='about')&&<div className="card-content">
+
+          <div className="package-show-image">
+            <figure className="image" style={{ backgroundImage: `url(${icon})` }} />
           </div>
           <p className="subtitle">
             {name}
@@ -97,7 +108,23 @@ class PackageShow extends React.Component{
           <p className="title">
             {description}
           </p>
-        </div>
+          <hr/>
+          {author&&<p className="is-small">
+            {`author: ${author.name}`}
+          </p>}
+          <p className="is-small">
+            {`licence: ${license}`}
+          </p>
+          <hr/>
+        </div>}
+        {(this.state.tab==='stats')&&<div className="card-content">
+          STATS
+        </div>}
+        {(this.state.tab==='comments')&&<div className="card-content">
+          <CommentInput postCommentUrl={`/api/packages/${name}`} updateThread={this.getPackageData}/>
+          {comments.map((comment, i)=><CommentCard key={i} comment={comment} />)}
+          {/* <CommentInput postCommentUrl={`/api/packages/${this.props.match.params.id}`}/>*/}
+        </div>}
         <footer className="card-footer-item">
           {arrFromObj(links).map( (link,i) => {
             return <p key={i} className="card-footer-item">

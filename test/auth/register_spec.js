@@ -18,12 +18,11 @@ describe('POST /register', () => {
   })
 
   it('should return a stauts 422 and message password doesnot match', done => {
-    const badData = Object.assign({}, userData, { password: 'bad' })
+    const badData = Object.assign({}, userData, { password: 'bad', username: 'siddant' })
     api
       .post('/api/register')
       .send(badData)
       .end((err, res) => {
-        console.log(res.status)
         expect(res.status).to.eq(422)
         done()
       })

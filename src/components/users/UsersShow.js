@@ -3,7 +3,7 @@ import Auth from '../../lib/Auth'
 
 import axios from 'axios'
 
-import ProjectsIndex from '../projects/ProjectsIndex'
+import UserProjectsIndex from '../projects/UserProjectsIndex'
 import UsersEditForm from './UsersEditForm'
 
 import UsersProfile from './UsersProfile'
@@ -51,13 +51,7 @@ class UsersShow extends React.Component{
   }
 
   render(){
-    const {
-      username,
-      image,
-      project,
-      email,
-      bio
-    } = this.state.data
+    const { username, image, project, email, bio } = this.state.data
     if(!this.state.data.email) return null
     return(
       <section className="section">
@@ -81,7 +75,7 @@ class UsersShow extends React.Component{
               />}
             </div>
             <div className="column ">
-              <ProjectsIndex projects={project} status={this.state.status} />
+              <UserProjectsIndex projects={project} logged={this.state.status}/>
             </div>
           </div>
         </div>

@@ -12,6 +12,7 @@ $blue: #209cee;
 $green: #00d1b2;
 $beige-light: #D0D1CD;
 $beige-lighter: #EFF0EB;
+$light-grey: #dbdbdb;
 
 // Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif;
@@ -121,6 +122,69 @@ $navbar-breakpoint: 600px;
   }
 }
 
+.title.hidden-input{
+  margin-bottom: 0;
+  padding-bottom: 0;
+  text-align: center;
+}
+
+hr.project {
+  margin-top: 0px;
+}
+
+.project .no-package{
+  text-align: center;
+}
+
+.project {
+  textarea::placeholder {
+    text-align: center;
+  }
+  textarea {
+    resize: none;
+    text-align: center;
+  }
+  .title {
+    padding-left: 5px;
+  }
+  .box {
+    margin-top: 5px;
+    .title {
+      text-align: center;
+    }
+    .none {
+      text-align: center;
+    }
+  }
+}
+
+.projectForm {
+  padding-bottom: 20px;
+}
+
+.projectCard {
+  height:100%;
+  .card-content {
+    padding-bottom: 10px;
+  }
+
+  hr {
+    margin-bottom: 10px;
+  }
+
+  .description {
+    height: 169px;
+  }
+
+  .is-small {
+    font-size: small;
+  }
+
+  a {
+    color: black;
+  }
+}
+
 
 .hidden-input{
   border: none;
@@ -129,6 +193,24 @@ $navbar-breakpoint: 600px;
   &:focus{
     border: 1px solid black;
   }
+
+}
+.hidden-input[readOnly] {
+  border: none;
+  background-color: white;
+  box-shadow: none;
+  color: black;
+}
+
+section.visible {
+  padding-left: 175px;
+  padding-top: 12px;
+  span {
+    padding: 5px;
+  }
+  strong {
+    margin-right: 10px;
+  }
 }
 
 .columns.scroll{
@@ -136,33 +218,215 @@ $navbar-breakpoint: 600px;
   scroll-snap-type: x mandatory;
   .column{
     scroll-snap-align: end;
-    height:100vh;
+    height:91vh;
 
-    height: 100vh;
+    // height: 100vh;
     overflow: scroll;
     scroll-snap-type: y mandatory;
     .card{
       margin-bottom: 10px;
-      scroll-snap-align: center;
+      // scroll-snap-align: center;
       scroll-padding: 10px;
 
     }
   }
 }
+.search-bar{
+  padding-bottom: 20px;
+}
 
 a {
   color: black;
 }
+.glow{
+  background-color: yellow;
+}
+.card{
+  transition: all 1s;
+  border-radius: 2px 2px 0 0;
+  &.is-fullheight{
+    min-height: 100%;
+  }
+}
+.tabs.is-boxed{
+  ul{
+    display: flex;
+    justify-content: space-between;
+  }
+  li{
+    border-radius: 0;
+    border: none;
+    flex-grow: 1;
+    background-color: $light-grey;
+    a{
+      border-radius: 0;
+      border: none;
+    }
+    &.is-active{
+      border-left: 1px solid #dbdbdb;
+      border-right: 1px solid #dbdbdb;
+      background-color: white;
 
-p.is-small {
-  font-size: small;
+    }
+    &:first-child{
+      border-radius: 2px 0 0 0;
+      border-left: 0;
+    }
+    &:last-child{
+      border-right: 0;
+      border-radius: 0 2px 0 0;
+    }
+
+  }
 }
 
-.card {
-  .card-content {
-    padding-bottom: 10px;
+.section{
+  padding: 1em ;
+}
+
+.comment-image{
+  overflow: hidden;
+  height: 50px;
+  width:50px;
+  border-radius: 25px;
+    .image {
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+        height: 100%;
+        width: 100%;
+    }
   }
-  hr {
-    margin-bottom: 10px;
+.package-show-image{
+  margin: 0 auto;
+  overflow: hidden;
+  height: 200px;
+  width:200px;
+  border-radius: 25px;
+    .image {
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+        height: 100%;
+        width: 100%;
+    }
   }
+
+
+#package-show{
+  .card{
+    .tabs.is-boxed{
+      margin-bottom: 0;
+    }
+  }
+}
+.comment-input{
+  border-radius: 2px;
+  border: 1px solid rgba(10, 10, 10, 0.1);
+  margin-bottom: 8px;
+  .textarea-control{
+    width: 100%;
+  }
+  .button{
+    height:100%;
+  }
+  textarea{
+    height: 4em;
+    min-height: 36px;
+    resize: none;
+    border-radius: 2px 0 0 2px;
+    border: 0;
+    box-shadow: none;
+  }
+  button{
+    border-radius: 0 2px 2px 0;
+
+  }
+}
+
+.search-bar{
+  width:100%;
+  .field.has-addons{
+
+    .control.field{
+      width:100%;
+    }
+  }
+}
+
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+.usersearch-result {
+    .image.profile{
+      height: 200px;
+      width: auto;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: red;
+    }
+    .card-content{
+      height: 200px;
+    }
 }

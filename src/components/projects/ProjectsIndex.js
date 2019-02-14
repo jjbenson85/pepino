@@ -1,84 +1,91 @@
 import React from 'react'
 import axios from 'axios'
 
-import ProjectForm from './ProjectForm'
 import ProjectCard from './ProjectCard'
-import Auth from '../../lib/Auth'
-import {withRouter} from 'react-router-dom'
+import SearchBar from '../common/SearchBar'
 
-class ProjectsIndex extends React.Component {
 
+class ProjectIndex extends React.Component {
   constructor() {
     super()
+
     this.state = {
-      addProject: false,
-      data: {},
-      newProjectId: null
+      search: '',
+      searched: null
     }
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleClick = this.handleClick.bind(this)
-    this.handleDelete = this.handleDelete.bind(this)
+    this.searchProject = this.searchProject.bind(this)
   }
 
-  handleChange({ target: { name, value } }) {
-    const data = {...this.state.data, [name]: value }
-    const error = null
-    this.setState({ data, error })
+  getAllProjects() {
+    axios.get('/api/projects/')
+      .then(res => this.setState({ projects: res.data }))
+      .then(() => this.setState({searched: null}))
   }
 
-  handleClick() {
-    this.setState({ addProject: true })
+  componentDidMount() {
+    this.getAllProjects()
   }
 
-  handleSubmit(e) {
-    e.preventDefault()
-    axios
-      .post('/api/projects', this.state.data, {
-        headers: { Authorization: `Bearer ${Auth.getToken()}` }
-      })
-      .then((res) => {
-        console.log(`/projects/${res.data._id}`)
-        this.props.history.push(`/projects/${res.data._id}`)
-      })
-      .catch(() => this.setState({ error: 'An error occured' }))
+  handleChange({target: {name, value}}){
+    this.setState({...this.state, [name]: value})
   }
 
-  handleDelete(id) {
-    axios
-      .delete(`/api/projects/${id}`, {
-        headers: {Authorization: `Bearer ${Auth.getToken()}`}
-      })
-      .then(() => this.props.history.push('/users'))
-      .catch(err => console.log(err))
+  searchProject(e){
+    e.preventDefault(e)
+    if(this.state.search.trim() !== ''){
+      axios.get(`/api/projects/search/${this.state.search.trim()}`)
+        .then(res => {
+          this.setState({ ...this.state, searched: res.data})
+        })
+        .catch((err)=>console.log(err.response.data))
+    }else{
+      this.getAllProjects()
+    }
   }
 
   render() {
-    if(!this.props) return (
+    if (!this.state.projects) return null
+    return(
       <section className="section">
         <div className="container">
-          <h4 className="title is-4">Loading...</h4>
-        </div>
-      </section>
-    )
-    return(
-      <section className="">
-        <div className="">
-          {!this.state.addProject && this.props.status && <button onClick={this.handleClick} className="button is-primary">Add project</button>}
-          {this.state.addProject &&
-            <ProjectForm
-              data={this.state.data}
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-            />}
+          <SearchBar
+            handleChange={this.handleChange}
+            handleSubmit={this.searchProject}
+            value={this.state.searchValue}
+          />
           <hr />
           <div className="columns is-multiline">
-            {this.props.projects.map(project =>
-              <div key={project._id} className="column is-one-third">
-                {this.props.projects.length > 0 && <ProjectCard project ={project} handleDelete={this.handleDelete}/> }
-                {!this.props.projects.length > 0 && <div>No projects have been added </div> }
-              </div>
+            {!this.state.searched && this.state.projects.map(project => {
+              if (project.visible) {
+                return (
+                  <div key={project._id} className="column is-one-quarter">
+                    {this.state.projects.length > 0 &&
+                      <ProjectCard
+                        project = {project}
+                      /> }
+                  </div>
+                )
+              }
+            }
             )}
+
+            {this.state.searched && this.state.searched.length > 0 && this.state.searched.map(project => {
+              if (project.visible) {
+                return (
+                  <div key={project._id} className="column is-one-quarter">
+                    {this.state.searched.length > 0 &&
+                      <ProjectCard
+                        project = {project}
+                      /> }
+                  </div>
+                )
+              }
+            }
+            )}
+
+            {this.state.searched && this.state.searched.length === 0 && <div className="column">No projects have been found with this name </div> }
+
           </div>
         </div>
       </section>
@@ -86,4 +93,4 @@ class ProjectsIndex extends React.Component {
   }
 }
 
-export default withRouter(ProjectsIndex)
+export default ProjectIndex

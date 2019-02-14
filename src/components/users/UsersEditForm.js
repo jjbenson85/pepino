@@ -1,5 +1,6 @@
 import React from 'react'
 
+import ReactFilestack from 'filestack-react'
 
 const UsersEditForm  = ({ data, handleChange, handleSubmit, error, status }) =>  {
   const{email, username, bio, image} = data
@@ -23,8 +24,24 @@ const UsersEditForm  = ({ data, handleChange, handleSubmit, error, status }) => 
 
       <div className="field">
         <label className="label">Image</label>
+        <img className="image profile" src={image || 'http://interreligio.unistra.fr/wp-content/uploads/2017/07/profil-vide.png'} alt={`image of user ${username}`} />
+
+
         <div className="control">
-          <input className="input" type="text" placeholder="image" name="image" onChange={handleChange} value={image || ''}/>
+          <ReactFilestack
+            apikey={ `${process.env.FILE_STACK_KEY}` }
+            mode={'pick'}
+            onSuccess={(res) => {
+              handleChange({
+                target: {
+                  name: 'image',
+                  value: res.filesUploaded[0].url
+                }})
+            }}
+            onError={(e) => console.log(e)}
+            buttonText={'Add An Image'}
+            buttonClass={'button is-rounded'}
+          />
         </div>
       </div>
       <div className="field">

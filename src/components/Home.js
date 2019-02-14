@@ -31,7 +31,6 @@ class Home extends React.Component{
     axios
       .post('api/register', this.state.data)
       .then(res => {
-        console.log(res)
         Flash.setMessage('success', res.data.message)
         this.setState({...this.state,  data: {}})
         this.props.history.push('/')
@@ -50,42 +49,55 @@ class Home extends React.Component{
     else this.loginFunction()
   }
 
-  componentDidMount(){
-    if(Auth.isAuthenticated()) this.props.history.push(`/users/${Auth.getUserID()}`)
-    this.setState({...this.state, register: this.props.register })
-
-  }
+  // componentDidMount(){
+  //   if(Auth.isAuthenticated()) this.props.history.push(`/users/${Auth.getUserID()}`)
+  //   this.setState({...this.state, register: this.props.register })
+  //
+  // }
 
   render(){
-    console.log(this.props.error)
-    return(
-      <section className="section">
-        <div className="container">
-          <div className="columns">
-            <div className="column is-half">
-              <h2>Built for Developers</h2>
-            </div>
-            <div className="column is-half">
-              {this.state.register &&  <RegisterForm
-                handleSubmit={this.handleSubmit}
-                handleChange={this.handleChange}
-                data={this.state.data}
-                errors={this.state.error}
-                changeState={this.changeState}
-              />}
+    console.log(Auth.isAuthenticated())
+    const authenticated = Auth.isAuthenticated()
+    if (!authenticated) {
+      return(
+        <section className="section">
+          <div className="container">
+            <div className="columns">
+              <div className="column is-half">
+                <h2>Built for Developers</h2>
+              </div>
+              <div className="column is-half">
+                {this.state.register &&  <RegisterForm
+                  handleSubmit={this.handleSubmit}
+                  handleChange={this.handleChange}
+                  data={this.state.data}
+                  errors={this.state.error}
+                  changeState={this.changeState}
+                />}
 
-              {!this.state.register && <LoginForm
-                handleSubmit={(e)=>this.props.handleLogin(e, this.state.data)}
-                handleChange={this.handleChange}
-                data={this.state.data}
-                changeState={this.changeState}
-                errors={this.props.error}
-              />}
+                {!this.state.register && <LoginForm
+                  handleSubmit={(e)=>this.props.handleLogin(e, this.state.data)}
+                  handleChange={this.handleChange}
+                  data={this.state.data}
+                  changeState={this.changeState}
+                  errors={this.props.error}
+                />}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    )
+        </section>
+      )
+    }
+    if (authenticated) {
+      return (
+        <section className="section">
+          <div className="container">
+            <div className="pepino-logo"></div>
+            <div>If you want to manage your projects, see what packages are out there and find out what other users are doing blah blah blah </div>
+          </div>
+        </section>
+      )
+    }
   }
 }
 

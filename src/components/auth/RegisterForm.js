@@ -7,7 +7,13 @@ const Register  = ({ data, handleChange, handleSubmit, changeState, errors }) =>
       <div className="field">
         <label className="label">User Name</label>
         <div className="control">
-          <input className="input" type="text" placeholder="Username" name="username" onChange={handleChange} value={username || ''}/>
+          <input
+            className="input"
+            type="text"
+            placeholder="Username"
+            name="username"
+            onChange={handleChange}
+            value={username || ''}/>
         </div>
         {errors.username && <small className="help is-danger">{errors.username}</small>}
       </div>
@@ -15,7 +21,13 @@ const Register  = ({ data, handleChange, handleSubmit, changeState, errors }) =>
       <div className="field">
         <label className="label">Email</label>
         <div className="control">
-          <input className="input" type="text" placeholder="Email" name="email" onChange={handleChange} value={email || ''}/>
+          <input
+            className="input"
+            type="text"
+            placeholder="Email"
+            name="email"
+            onChange={handleChange}
+            value={email || ''}/>
         </div>
         {errors.email && <small className="help is-danger">{errors.email}</small>}
       </div>
@@ -23,7 +35,13 @@ const Register  = ({ data, handleChange, handleSubmit, changeState, errors }) =>
       <div className="field">
         <label className="label">Password</label>
         <div className="control">
-          <input className="input" type="password" placeholder="Password" name="password" onChange={handleChange} value={password || ''}/>
+          <input
+            className="input"
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={handleChange}
+            value={password || ''}/>
         </div>
         {errors.password && <small className="help is-danger">{errors.password  || ''}</small>}
       </div>
@@ -31,7 +49,13 @@ const Register  = ({ data, handleChange, handleSubmit, changeState, errors }) =>
       <div className="field">
         <label className="label">Password Confirmation</label>
         <div className="control">
-          <input className="input" type="password" placeholder="Password Confirmation" name="passwordConfirmation" onChange={handleChange} value={passwordConfirmation || ''}/>
+          <input
+            className="input"
+            type="password"
+            placeholder="Password Confirmation"
+            name="passwordConfirmation"
+            onChange={handleChange}
+            value={passwordConfirmation || ''}/>
         </div>
         {errors.passwordConfirmation && <small className="help is-danger">{errors.passwordConfirmation || ''}</small>}
       </div>
