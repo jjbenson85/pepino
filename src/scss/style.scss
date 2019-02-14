@@ -170,38 +170,42 @@ a {
 
 .card{
   border-radius: 2px 2px 0 0;
-  .tabs.is-boxed{
-    ul{
-      display: flex;
-justify-content: space-between;
-    }
-    li{
-      border-radius: 0;
-      border: none;
-      flex-grow: 1;
-      background-color: $light-grey;
-      a{
-        border-radius: 0;
-        border: none;
-      }
-      &.is-active{
-        border-left: 1px solid #dbdbdb;
-        border-right: 1px solid #dbdbdb;
-        background-color: white;
-
-      }
-      &:first-child{
-        border-radius: 2px 0 0 0;
-        border-left: 0;
-      }
-      &:last-child{
-        border-right: 0;
-        border-radius: 0 2px 0 0;
-      }
-
-    }
+  &.is-fullheight{
+    height:100%;
   }
 }
+.tabs.is-boxed{
+  ul{
+    display: flex;
+    justify-content: space-between;
+  }
+  li{
+    border-radius: 0;
+    border: none;
+    flex-grow: 1;
+    background-color: $light-grey;
+    a{
+      border-radius: 0;
+      border: none;
+    }
+    &.is-active{
+      border-left: 1px solid #dbdbdb;
+      border-right: 1px solid #dbdbdb;
+      background-color: white;
+
+    }
+    &:first-child{
+      border-radius: 2px 0 0 0;
+      border-left: 0;
+    }
+    &:last-child{
+      border-right: 0;
+      border-radius: 0 2px 0 0;
+    }
+
+  }
+}
+
 .section{
   padding: 1em ;
 }

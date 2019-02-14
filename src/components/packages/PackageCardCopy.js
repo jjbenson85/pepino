@@ -8,7 +8,20 @@ import Auth from '../../lib/Auth'
 class PackageCard extends React.Component{
 
   render(){
-    const { name, icon, version, comments, downloadsCount, description, keywords, _id } = this.props.package
+    // if(!this.state.package) return null
+    // const { name, icon, version, comments, downloadsCount, description, keywords, _id } = this.props.package
+    const {
+      name,
+      description,
+      version
+      // author,
+      // links,
+      // license
+    } = this.props.package.npms.collected.metadata
+    const keywords = false
+    const _id = false
+    const {downloadsCount} = this.props.package.npms.evaluation.popularity
+    const {comments, icon} = this.props.package
     return(
       <div className='card'>
         <div className='card-header'>
@@ -56,7 +69,7 @@ class PackageCard extends React.Component{
           <div className='content'><blockquote className='is-medium'>{description}</blockquote></div>
           {keywords && <div className="tags level-item " >{keywords.map( (keyword,j)=> <div key={j} className="tag is-primary">{keyword}</div>)}</div>}
         </div>
-        <div className="card-footer">
+        {_id &&<div className="card-footer">
           <div className="card-footer-item buttons has-addons is-fullwidth">
             <button
               className="button is-success is-outlined "
@@ -76,7 +89,7 @@ class PackageCard extends React.Component{
             View Details
             </button>
           </div>
-        </div>
+        </div>}
       </div>
     )
   }

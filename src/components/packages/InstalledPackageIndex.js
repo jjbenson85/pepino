@@ -15,17 +15,21 @@ class PackageIndex extends React.Component{
     this.returnData = this.returnData.bind(this)
   }
 
-  // getPackagesData(){
-  //   axios.get('/api/packages')
-  //     .then( res =>{
-  //       this.setState({ packages: res.data})
-  //     })
-  //     .catch((err)=>console.log(err.message))
-  // }
+  getPackagesData(){
+    const arr = this.props.packages.map( (p)=> p.name )
+    console.log('arr',arr)
+    axios.post('/api/packages/multi',{
+      names: arr
+    })
+      .then( res =>{
+        this.setState({ packages: res.data})
+      })
+      .catch((err)=>console.log(err.message))
+  }
 
-  // componentDidMount(){
-  // this.getPackagesData()
-  // }
+  componentDidMount(){
+    this.getPackagesData()
+  }
 
   getUsedPackagesIds() {
     return this.props.packages.map((_package)=> _package._id)
@@ -43,9 +47,10 @@ class PackageIndex extends React.Component{
 
   render(){
     this.getUsedPackagesIds()
+    console.log('InstalledPackageIndex state',this.state.packages)
     return(
       <section className='package-index'>
-        <SearchBar url='/api/packages/search' returnData={this.returnData}/>
+        {/*<SearchBar url='/api/packages/search' returnData={this.returnData}/>*/}
         <div>
           {this.state.error &&
           <div className="card">

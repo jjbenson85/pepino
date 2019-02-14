@@ -49,6 +49,9 @@ router.route('/packages')
 
 router.route('/packages/search/:search')
   .get(packagesController.search)
+
+router.route('/packages/multi')
+  .post(packagesController.multi)
   // .post(packagesController.create)
 
 router.route('/packages/:name')
