@@ -79,7 +79,7 @@ class Header extends React.Component{
               <Link to="/projects" className="navbar-item">
                   Discover more projects
               </Link>
-              {(user)&&
+              {(user && user.project.length > 0)&&
               <nav className="navbar link-list" role="navigation" aria-label="dropdown navigation">
                 <div
                   ref={el => this.navbarDropdown = el}
