@@ -20,15 +20,17 @@ function searchRoute(req, res, next){
   rp(options)
     .then( (data) =>{
       return Promise.map(data.results, data => {
-        const {name, description} = data.package
+        const {name, description, version, links, keywords, author} = data.package
+        const score = data.score.final
+        // console.log('searchROute', data )
         return Package
           .findOne({name})
           .then( foundPackage => {
             if(!foundPackage){
               const packageDetails = {
-                name: name,
-                description: description,
+                name, description, version, links, keywords, author,score,
                 comments: []
+
               }
               return Package
                 //Add a new project to database

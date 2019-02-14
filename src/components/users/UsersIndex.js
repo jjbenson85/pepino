@@ -4,6 +4,8 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import debounce from 'lodash/debounce'
+import SearchBar from '../common/SearchBar'
+
 
 
 class UsersIndex extends React.Component{
@@ -14,7 +16,7 @@ class UsersIndex extends React.Component{
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.delayedCallback = debounce(this.searchUser, 1000)
+    this.delayedCallback = debounce(this.searchUser, 250)
   }
 
   getAllUsers(){
@@ -35,7 +37,7 @@ class UsersIndex extends React.Component{
   }
 
   searchUser(){
-    console.log(this.state.search.replace(/\s/g, ''))
+    // console.log(this.state.search.replace(/\s/g, ''))
     if(this.state.search.trim() !== ''){
       axios.get(`/api/users/search/${this.state.search.trim()}`)
         .then(res => {
@@ -49,6 +51,7 @@ class UsersIndex extends React.Component{
 
   handleSubmit(e){
     e.preventDefault(e)
+    this.searchUser()
   }
 
   render(){
@@ -56,14 +59,13 @@ class UsersIndex extends React.Component{
     return(
       <section className="section">
         <div className="container">
-          <form onSubmit={this.handleSubmit}>
-            <div className="field" >
-              <label className="label">Disover Other Users</label>
-              <div className="control search-bar">
-                <input className="input" type="text" placeholder="search" name="search" onChange={this.handleChange}  value={this.state.search || ''}/>
-              </div>
-            </div>
-          </form>
+          <label className="label">Disover Other Users</label>
+          <SearchBar
+
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            value={this.state.search || ''}
+          />
 
           <div className="columns is-multiline">
             {this.state.data.map(user =>

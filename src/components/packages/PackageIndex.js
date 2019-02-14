@@ -3,6 +3,8 @@ import React from 'react'
 import axios from 'axios'
 // import Auth from '../../lib/Auth'
 
+import debounce from 'lodash/debounce'
+
 import SearchBar from '../common/SearchBar'
 import PackageCard from './PackageCard'
 
@@ -16,6 +18,7 @@ class PackageIndex extends React.Component{
     // this.returnData = this.returnData.bind(this)
     this.handleSearchChange = this.handleSearchChange.bind(this)
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
+    this.delayedCallback = debounce(this.searchPackages, 250)
   }
 
   getUsedPackagesIds() {
@@ -34,10 +37,10 @@ class PackageIndex extends React.Component{
 
   handleSearchChange(e){
     this.setState({searchValue: e.currentTarget.value})
+    this.delayedCallback()
   }
 
-  handleSearchSubmit(e){
-    e.preventDefault()
+  searchPackages(){
     if(!this.state.searchValue) return
     const that = this
     const url = '/api/packages/search/'+this.state.searchValue
@@ -53,6 +56,12 @@ class PackageIndex extends React.Component{
           this.setState({error: true})
         }
       })
+
+  }
+
+  handleSearchSubmit(e){
+    e.preventDefault()
+    this.searchPackages()
   }
 
   render(){

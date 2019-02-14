@@ -8,7 +8,8 @@ import Auth from '../../lib/Auth'
 class PackageCard extends React.Component{
 
   render(){
-    const { name, icon, version, comments, downloadsCount, description, keywords, _id } = this.props.package
+    console.log(this.props.package)
+    const { name, icon, version, comments, score, description, keywords, _id } = this.props.package
     return(
       <div id={name} className='card'>
         <div className='card-header'>
@@ -48,8 +49,8 @@ class PackageCard extends React.Component{
             </div>}
             <div className="control">
               <div className="tags has-addons">
-                <span className="tag is-dark">downloads</span>
-                <span className="tag is-warning">{Math.round(downloadsCount/1000)}k</span>
+                <span className="tag is-dark">score</span>
+                <span className="tag is-warning">{parseInt(score*100)}</span>
               </div>
             </div>
           </div>
