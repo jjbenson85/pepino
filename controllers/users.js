@@ -3,6 +3,7 @@ const User = require('../models/user')
 function indexRoute(req, res, next) {
   User
     .find()
+    .populate({path: ' project'})
     .then(users => res.json(users))
     .catch(next)
 }
@@ -10,6 +11,7 @@ function indexRoute(req, res, next) {
 function searchRoute(req, res, next ) {
   User
     .find({'username': new RegExp(req.params.search, 'i')})
+    .populate('project')
     .then(users => res.json(users))
     .catch(next)
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import UsersResult from './UsersResult'
+import UserCard from './UserCard'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -12,7 +13,8 @@ class UsersIndex extends React.Component{
   constructor(){
     super()
     this.state = {
-      search: ''
+      search: '',
+      users: null
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -22,7 +24,8 @@ class UsersIndex extends React.Component{
   getAllUsers(){
     axios.get('/api/users')
       .then(res =>{
-        this.setState({ data: res.data})
+        console.log('getAllUsers',res)
+        this.setState({ users: res.data})
       })
       .catch((err)=>console.log(err.response.data))
   }
@@ -41,12 +44,14 @@ class UsersIndex extends React.Component{
     if(this.state.search.trim() !== ''){
       axios.get(`/api/users/search/${this.state.search.trim()}`)
         .then(res => {
-          this.setState({ ...this.state, data: res.data})
+          console.log('searchUser',res)
+          this.setState({ ...this.state, users: res.data})
         })
         .catch((err)=>console.log(err.response.data))
     }else{
       this.getAllUsers()
     }
+
   }
 
   handleSubmit(e){
@@ -55,7 +60,7 @@ class UsersIndex extends React.Component{
   }
 
   render(){
-    if(!this.state.data) return null
+    if(!this.state.users) return null
     return(
       <section className="section">
         <div className="container">
@@ -68,12 +73,17 @@ class UsersIndex extends React.Component{
           />
 
           <div className="columns is-multiline">
-            {this.state.data.map(user =>
-              <Link key={user._id} to={`/users/${user._id}` } className="column is-one-quarter  usersearch-result">
-                <div key={user._id}>
-                  <UsersResult data={user}/>
-                </div>
-              </Link>
+            {this.state.users.map((user,i) =>{
+              return <div key={i} className="column is-12">
+                <UserCard key={i} data={user}/>
+              </div>
+
+            }
+              // {/*<Link key={user._id} to={`/users/${user._id}` } className="column is-one-quarter  usersearch-result">
+              //   <div key={user._id}>
+              //     <UsersResult data={user}/>
+              //   </div>
+              // </Link>*/}
             )}
           </div>
         </div>

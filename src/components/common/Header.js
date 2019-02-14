@@ -74,11 +74,14 @@ class Header extends React.Component{
                 Profile
                 </Link>}
               <Link to="/users" className="navbar-item">
-                  Discover other people
+                  Discover Users
               </Link>
               <Link to="/projects" className="navbar-item">
-                  Discover more projects
+                  Discover Projects
               </Link>
+
+            </div>
+            <div className="navbar-end">
               {(user && user.project.length > 0)&&
               <nav className="navbar link-list" role="navigation" aria-label="dropdown navigation">
                 <div
@@ -90,15 +93,13 @@ class Header extends React.Component{
                     Your Projects
                   </a>
                   <div
-                    className="navbar-dropdown is-hidden-touch"
+                    className="navbar-dropdown is-hidden-touch dropdown-right"
                     ref={el => this.navbarLinks = el}
                   >
                     {this.BuildDropDownLinks()}
                   </div>
                 </div>
               </nav>}
-            </div>
-            <div className="navbar-end">
               {(user)&&
               <a to={`/users/${user._id}`} className="navbar-item" onClick={this.props.handleLogout}>
                 Log Out
