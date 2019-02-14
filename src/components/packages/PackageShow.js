@@ -30,7 +30,7 @@ class PackageShow extends React.Component{
 
   componentDidMount(){
     // if(this.props.selectedPackage){
-    //   this.getPackageData()
+    this.getPackageData()
     // }
   }
 
@@ -39,6 +39,7 @@ class PackageShow extends React.Component{
     if(!this.props.selectedPackage) return
     if(!prevProps.selectedPackage)  return this.getPackageData()
     if(this.props.selectedPackage.name === prevProps.selectedPackage.name) return
+    this.setState({tab: 'about'})
     this.getPackageData()
   }
   handleClick(e, val){
@@ -46,10 +47,10 @@ class PackageShow extends React.Component{
     // const stats = document.querySelector('#stats')
     // const about = document.querySelector('#about')
     // const comment = document.querySelector('#comment')
-    this.statsTab.classList.remove('is-active')
-    this.aboutTab.classList.remove('is-active')
-    this.commentTab.classList.remove('is-active')
-    e.currentTarget.classList.add('is-active')
+    // this.statsTab.classList.remove('is-active')
+    // this.aboutTab.classList.remove('is-active')
+    // this.commentTab.classList.remove('is-active')
+    // e.currentTarget.classList.add('is-active')
     {this.setState({tab: val})}
   }
 
@@ -73,7 +74,7 @@ class PackageShow extends React.Component{
         <div className="tabs is-boxed">
           <ul>
             <li
-              className="is-active"
+              className={this.state.tab==='about'? 'is-active': ''}
               ref={el => this.aboutTab = el}
               onClick={(e)=>this.handleClick(e,'about')}
             >
@@ -82,6 +83,7 @@ class PackageShow extends React.Component{
               </a>
             </li>
             <li
+              className={this.state.tab==='stats'? 'is-active': ''}
               ref={el => this.statsTab = el}
               onClick={(e)=>this.handleClick(e,'stats')}
             >
@@ -90,12 +92,15 @@ class PackageShow extends React.Component{
               </a>
             </li>
             <li
+              className={this.state.tab==='comments'? 'is-active': ''}
               ref={el => this.commentTab = el}
               onClick={(e)=>this.handleClick(e,'comments')}
             >
-              <a>
-                Comments
-
+              <a className='level'>
+                <div className='level-item'>Comments</div>
+                <div className='level-right'>
+                  <div className="level-item tag is-primary">{comments.length}</div>
+                </div>
               </a>
             </li>
           </ul>
@@ -112,9 +117,9 @@ class PackageShow extends React.Component{
             {description}
           </p>
           <hr/>
-          <p className="is-small">
+          {author&&<p className="is-small">
             {`author: ${author.name}`}
-          </p>
+          </p>}
           <p className="is-small">
             {`licence: ${license}`}
           </p>

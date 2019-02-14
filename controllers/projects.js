@@ -4,7 +4,15 @@ const Project = require('../models/project')
 function indexRoute(req, res) {
   Project
     .find()
+    .populate({path: 'user', select: 'username'})
     .then(projects => res.status(200).json(projects))
+}
+
+function searchRoute(req, res, next) {
+  Project
+    .find({'name': new RegExp(req.params.search, 'i')})
+    .then(projects => res.status(200).json(projects))
+    .catch(next)
 }
 
 //Show Route returns a response containing one project and populates the user and pacakges it contains
@@ -14,7 +22,13 @@ function showRoute(req, res, next) {
     //Make user available to front end
     .populate('user')
     //Make packages available to front end
-    .populate('packages')
+    // .populate('packages')
+    .populate([{
+      path: 'comments.user',
+      select: 'username image'
+    },{
+      path: 'packages'
+    }])
     .then(projects => res.status(200).json(projects))
     .catch(next)
 }
@@ -50,10 +64,23 @@ function deleteRoute(req, res, next) {
     .catch(next)
 }
 
+function postCommentRoute(req, res,  next) {
+  Project
+    .findById(req.params.id)
+    .then(project => {
+      project.comments.unshift(req.body)
+      return project.save()
+    })
+    .then( data => res.status(201).json(data) )
+    .catch(next)
+}
+
 module.exports = {
   index: indexRoute,
   create: createRoute,
   show: showRoute,
   update: updateRoute,
-  delete: deleteRoute
+  delete: deleteRoute,
+  search: searchRoute,
+  comment: postCommentRoute
 }

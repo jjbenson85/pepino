@@ -11,6 +11,143 @@ function indexRoute(req, res, next) {
     .catch(next)
 }
 
+function searchRoute(req, res, next){
+
+  var options = {
+    uri: `https://api.npms.io/v2/search?q=${req.params.search}`,
+    json: true // Automatically parses the JSON string in the response
+  }
+  rp(options)
+    .then( (data) =>{
+      // console.log('data',data.results)
+      // const newData = data.results.map(data => {
+      return Promise.map(data.results, data => {
+        const {name, description} = data.package
+        return Package
+          .findOne({name})
+          .then( foundPackage => {
+            if(!foundPackage){
+              // console.log('package not found', foundPackage, name, description)
+              const packageDetails = {
+                name: name,
+                description: description,
+                comments: []
+              }
+              return Package
+                //Add a new project to database
+                .create(packageDetails)
+                //Return the new project
+            }else{
+              // console.log('package found', foundPackage)
+
+              return foundPackage
+            }
+          })
+          .then((_package) => {
+            _package.npms = data.package
+            return _package
+          })
+      })
+      // console.log('newData',newData)
+      // res.json(newdata)
+    })
+    .then( (output) => {
+      console.log('output',output)
+      res.json(output)
+    })
+    .catch(next)
+}
+function multiRoute(req, res, next){
+  console.log('req.body',req.body.names)
+  Package
+    // .findOne({name})
+    .find({
+      'name': { $in: req.body.names}
+    })
+    .then( (output) => {
+      console.log('output',output)
+      res.json(output)
+    })
+  // const {names} = req.body
+  // var options = {
+  //   method: 'POST',
+  //   uri: 'https://api.npms.io/v2/package/mget',
+  //   body: req.body.names,
+  //   json: true // Automatically parses the JSON string in the response
+  // }
+  // rp(options)
+  //   .then( (data) => {
+  //     console.log('data',data)
+      // const arr =[]
+      // for(const _package in data){
+      // arr.push({npms: data[_package]})
+      // arr.push(data.npms.collected.metadata.name)
+      // }
+      // Package
+      //   // .findOne({name})
+      //   .find({
+      //     'name': { $in: data}
+      //   })
+      //   .then( (output) => {
+      //     console.log('output',output)
+      //     res.json(output)
+      //   })
+      // arr = arr.map((_package)=> _package.npms = _package )
+      // res.json(arr)
+      // const newData = arr.map(data => {
+      // return Promise.map(arr, data => {
+      //   const {name} = data.npms.collected.metadata
+      //   // console.log('NAME', name)
+      //   return Package
+      //     // .findOne({name})
+      //     .find({
+      //       'name': { $in: arr}
+      //     })
+      // .then( foundPackage => {
+      //   if(!foundPackage){
+      //     // console.log('package not found', foundPackage, name, description)
+      //     const packageDetails = {
+      //       name: name,
+      //       description: description,
+      //       comments: []
+      //     }
+      //     return Package
+      //     //Add a new project to database
+      //     .create(packageDetails)
+      //     //Return the new project
+      //   }else{
+      //     // console.log('package found', foundPackage)
+      //
+      //     return foundPackage
+      //   }
+      // })
+        // .then((_package) => {
+          // _package.npms = data.package
+          // return _package
+        // })
+    // })
+    // console.log('newData',newData)
+    // res.json(newdata)
+
+    // .then( (output) => {
+    //   console.log('output',output)
+    //   res.json(output)
+    // })
+    .catch(next)
+}
+// )}
+
+//Create Route adds a new package to the database and returns it
+function createRoute(req, res, next) {
+  //Add current user to the body
+  Package
+    //Add a new project to database
+    .create(req.body)
+    //Return the new project
+    .then(project => res.status(201).json(project))
+    .catch(next)
+}
+
 //PostCommentRoute finds the package and puts the new comment into the beginning of the array
 //returns a response containing the package with the new comment
 function postCommentRoute(req, res,  next) {
@@ -52,11 +189,15 @@ function showRoute(req, res, next) {
       data.localData.npms = data.remoteData
       res.json(data.localData)
     })
+    // .catch(err => console.log('rp error',err.statusCode))
     .catch(next)
 }
 
 module.exports = {
   index: indexRoute,
+  create: createRoute,
+  search: searchRoute,
+  multi: multiRoute,
   show: showRoute,
   comment: postCommentRoute
 }
