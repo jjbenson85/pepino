@@ -67,7 +67,7 @@ class UsersIndex extends React.Component{
 
           <div className="columns is-multiline">
             {this.state.data.map(user =>
-              <Link key={user._id} to={`/users/${user._id}` } className="column is-one-third">
+              <Link key={user._id} to={`/users/${user._id}` } className="column is-one-quarter  usersearch-result">
                 <div key={user._id}>
                   <UsersResult data={user}/>
                 </div>
