@@ -12,11 +12,6 @@ const UserResult = ({ data }) => {
           <img className="image profile" src={image || 'http://interreligio.unistra.fr/wp-content/uploads/2017/07/profil-vide.png'} alt={'hello'} />
         </figure>
       </div>
-      <div className="card-content">
-        <div className="content">
-
-        </div>
-      </div>
     </div>
   )
 }

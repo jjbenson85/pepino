@@ -7,16 +7,12 @@ function indexRoute(req, res, next) {
     .catch(next)
 }
 
-
 function searchRoute(req, res, next ) {
-  //req.params.search
   User
     .find({'username': new RegExp(req.params.search, 'i')})
     .then(users => res.json(users))
     .catch(next)
-
 }
-
 
 function showRoute(req, res, next) {
   User

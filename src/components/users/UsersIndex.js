@@ -46,11 +46,10 @@ class UsersIndex extends React.Component{
       this.getAllUsers()
     }
   }
+
   handleSubmit(e){
     e.preventDefault(e)
   }
-
-
 
   render(){
     if(!this.state.data) return null
