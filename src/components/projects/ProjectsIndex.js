@@ -49,12 +49,12 @@ class ProjectIndex extends React.Component {
     return(
       <section className="section">
         <div className="container">
+          <label className="label">Discover More Projects</label>
           <SearchBar
             handleChange={this.handleChange}
             handleSubmit={this.searchProject}
             value={this.state.searchValue}
           />
-          <hr />
           <div className="columns is-multiline">
             {!this.state.searched && this.state.projects.map(project => {
               if (project.visible) {

@@ -4,6 +4,8 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import debounce from 'lodash/debounce'
+import SearchBar from '../common/SearchBar'
+
 
 
 class UsersIndex extends React.Component{
@@ -56,6 +58,11 @@ class UsersIndex extends React.Component{
     return(
       <section className="section">
         <div className="container">
+          <SearchBar
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            value={this.state.search || ''}
+          />
           <form onSubmit={this.handleSubmit}>
             <div className="field" >
               <label className="label">Disover Other Users</label>
