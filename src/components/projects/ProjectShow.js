@@ -4,6 +4,7 @@ import debounce from 'lodash/debounce'
 import Textarea from 'react-textarea-autosize'
 
 import PackageIndex from '../packages/PackageIndex'
+import InstalledPackageIndex from '../packages/InstalledPackageIndex'
 import PackageShow from '../packages/PackageShow'
 
 import CommentCard from '../common/CommentCard'
@@ -78,6 +79,26 @@ class ProjectShow extends React.Component {
     this.delayedCallback()
   }
 
+  handleTabClick(e, val){
+    {this.setState({tab: val})}
+  }
+
+  handleTagClick(_package){
+    console.log('SCROLL',_package.name)
+    this.setState({ selectedPackage: _package, tab: 'installed' })
+    setTimeout(function () {
+      document.getElementById(_package.name).classList.add('glow')
+      document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'})
+    }, 100)
+    setTimeout(function () {
+      const el = document.getElementById(_package.name)
+      el.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'})
+      setTimeout(function () {
+        el.classList.remove('glow')
+      }, 1000)
+    }, 500)
+  }
+
   handlePackageDelete(_package) {
     const index = this.state.project.packages.indexOf(_package)
 
@@ -104,18 +125,6 @@ class ProjectShow extends React.Component {
   }
 
 
-  handleTabClick(e, val){
-
-    // const stats = document.querySelector('#stats')
-    // const about = document.querySelector('#about')
-    // const comment = document.querySelector('#comment')
-    // this.statsTab.classList.remove('is-active')
-    this.aboutTab.classList.remove('is-active')
-    this.commentTab.classList.remove('is-active')
-    e.currentTarget.classList.add('is-active')
-    {this.setState({tab: val})}
-  }
-
   render() {
     if(!this.state.project) return (
       <section className="section">
@@ -132,6 +141,7 @@ class ProjectShow extends React.Component {
         <div className="container is-fluid">
           <div className="columns scroll">
             <div className="column is-half project">
+
               <input
                 className="title is-1 input hidden-input"
                 placeholder="Name is required"
@@ -140,19 +150,18 @@ class ProjectShow extends React.Component {
                 value={name}
                 disabled={!loggedIn}
               />
-              <hr className="project"/>
-              <Textarea
+              <textarea
                 className="textarea hidden-input"
                 name="description"
                 placeholder="description"
                 onChange={this.handleChange}
                 value={description}
                 disabled={!loggedIn}
-              />
-              <hr className="project"/>
+              >
+              </textarea>
               <section className="section">
                 <h2 className='title is-5'>Installed packages</h2>
-                {packages.length === 0 && <div className="no-package">no packages yet</div>}
+                {packages.length === 0 && <div>no packages yet</div>}
                 <div className="tags">
                   {packages.map(_package =>
                     <div
@@ -162,6 +171,7 @@ class ProjectShow extends React.Component {
                       onClick={()=> this.handleTagClick(_package)}
                     >
                       {_package.name}
+
                       {loggedIn && <button
                         className="delete is-small"
                         onClick={() => this.handlePackageDelete(_package)}>
@@ -170,6 +180,19 @@ class ProjectShow extends React.Component {
                   )}
                 </div>
               </section>
+              <section className="section visible">
+                <div className="control">
+                  <label className="radio">
+                    <input type="radio" name="visible" value={true} onChange={this.handleChange} checked={JSON.parse(visible)=== true}/>
+                    <span>Visible</span>
+                  </label>
+                  <label className="radio">
+                    <input type="radio" name="visible" value={false} onChange={this.handleChange} checked={JSON.parse(visible)=== false}/>
+                    <span>Not visible</span>
+                  </label>
+                </div>
+              </section>
+
               <section className="section visible">
                 <div className="control">
                   <label className="radio">
@@ -203,17 +226,50 @@ class ProjectShow extends React.Component {
               </div>
             </div>
             <div className="column is-half">
-              {(this.state.tab==='comments')&&<div className="card-content">
-                <CommentInput postCommentUrl={`/api/projects/${_id}/comments`} updateThread={this.getProject}/>
-                {comments.map((comment, i)=><CommentCard key={i} comment={comment} />)}
-                {/* <CommentInput postCommentUrl={`/api/packages/${this.props.match.params.id}`}/>*/}
-              </div>}
-              {(this.state.tab==='about')&&
-              <PackageIndex
-                handleAddClick={this.handleAddClick}
-                packages={this.state.project.packages}
-                handleViewClick={this.handleViewClick}
-                userId = {this.state.project.user._id}/>}
+              <div className="card is-fullheight">
+                <div className="tabs is-boxed">
+                  <ul>
+                    {loggedIn&&<li className={this.state.tab==='search'? 'is-active': ''} ref={el => this.searchTab = el} onClick={(e)=>this.handleTabClick(e,'search')} >
+                      <a>Search</a>
+                    </li>}
+                    <li className={this.state.tab==='installed'? 'is-active': ''} ref={el => this.installedTab = el} onClick={(e)=>this.handleTabClick(e,'installed')} >
+                      <a className='level'>
+                        <div className='level-item'>Installed</div>
+                        <div className='level-right'>
+                          <div className="level-item tag is-primary">{packages.length}</div>
+                        </div>
+                      </a>
+                    </li>
+                    <li className={this.state.tab==='comments'? 'is-active': ''} ref={el => this.commentTab = el} onClick={(e)=>this.handleTabClick(e,'comments')} >
+                      <a className='level'>
+                        <div className='level-item'>Comments</div>
+                        <div className='level-right'>
+                          <div className="level-item tag is-primary">{comments.length}</div>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div className="card-content">
+                  {(this.state.tab==='comments')&&<div className="card-content">
+                    <CommentInput postCommentUrl={`/api/projects/${_id}/comments`} updateThread={this.getProject}/>
+                    {comments.map((comment, i)=><CommentCard key={i} comment={comment} />)}
+                    {/* <CommentInput postCommentUrl={`/api/packages/${this.props.match.params.id}`}/>*/}
+                  </div>}
+                  {(this.state.tab==='installed')&&
+                  <InstalledPackageIndex
+                    handleAddClick={this.handleAddClick}
+                    packages={packages}
+                    handleViewClick={this.handleViewClick}
+                    userId = {this.state.project.user._id}/>}
+                  {(this.state.tab==='search')&&
+                  <PackageIndex
+                    handleAddClick={this.handleAddClick}
+                    packages={this.state.project.packages}
+                    handleViewClick={this.handleViewClick}
+                    userId = {this.state.project.user._id}/>}
+                </div>
+              </div>
             </div>
             {this.state.selectedPackage && <div id="package-show" className="column is-half">
               <PackageShow
