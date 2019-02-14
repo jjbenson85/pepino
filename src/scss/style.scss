@@ -300,6 +300,7 @@ justify-content: space-between;
 }
 
 .projectCard {
+  height:100%;
   .card-content {
     padding-bottom: 10px;
   }
@@ -318,5 +319,15 @@ justify-content: space-between;
 
   a {
     color: black;
+  }
+}
+
+.search-bar{
+  width:100%;
+  .field.has-addons{
+
+    .control.field{
+      width:100%;
+    }
   }
 }

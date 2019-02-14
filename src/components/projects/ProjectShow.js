@@ -6,6 +6,9 @@ import Textarea from 'react-textarea-autosize'
 import PackageIndex from '../packages/PackageIndex'
 import PackageShow from '../packages/PackageShow'
 
+import CommentCard from '../common/CommentCard'
+import CommentInput from '../common/CommentInput'
+
 import Auth from '../../lib/Auth'
 
 
@@ -15,7 +18,8 @@ class ProjectShow extends React.Component {
 
     this.state = {
       selectedPackage: null,
-      error: null
+      error: null,
+      tab: 'about'
     }
 
     this.delayedCallback = debounce(this.putProject, 1000)
@@ -23,6 +27,7 @@ class ProjectShow extends React.Component {
     this.handleViewClick = this.handleViewClick.bind(this)
     this.handlePackageDelete = this.handlePackageDelete.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.getProject = this.getProject.bind(this)
   }
 
 
@@ -60,8 +65,6 @@ class ProjectShow extends React.Component {
 
   handleAddClick(_package) {
     const index = this.state.project.packages.indexOf(_package)
-    console.log(index)
-
     const packages = (index === -1) ? (
       this.setState({editing: true}),
       this.state.project.packages.concat(_package)
@@ -99,6 +102,18 @@ class ProjectShow extends React.Component {
     this.delayedCallback()
   }
 
+  handleTabClick(e, val){
+
+    // const stats = document.querySelector('#stats')
+    // const about = document.querySelector('#about')
+    // const comment = document.querySelector('#comment')
+    // this.statsTab.classList.remove('is-active')
+    this.aboutTab.classList.remove('is-active')
+    this.commentTab.classList.remove('is-active')
+    e.currentTarget.classList.add('is-active')
+    {this.setState({tab: val})}
+  }
+
   render() {
     if(!this.state.project) return (
       <section className="section">
@@ -107,8 +122,8 @@ class ProjectShow extends React.Component {
         </div>
       </section>
     )
-    const { name, description, createdAt, updatedAt, packages, user, visible } = this.state.project
     const loggedIn = Auth.checkAvailability(user._id)
+    const { name, description, createdAt, updatedAt, packages, user, visible, comments, _id } = this.state.project
     return(
       <section className="section">
         <div className="container is-fluid">
@@ -183,17 +198,23 @@ class ProjectShow extends React.Component {
               </div>
             </div>
             <div className="column is-half">
+              {(this.state.tab==='comments')&&<div className="card-content">
+                <CommentInput postCommentUrl={`/api/projects/${_id}/comments`} updateThread={this.getProject}/>
+                {comments.map((comment, i)=><CommentCard key={i} comment={comment} />)}
+                {/* <CommentInput postCommentUrl={`/api/packages/${this.props.match.params.id}`}/>*/}
+              </div>}
+              {(this.state.tab==='about')&&
               <PackageIndex
                 handleAddClick={this.handleAddClick}
                 packages={this.state.project.packages}
                 handleViewClick={this.handleViewClick}
-                userId = {this.state.project.user._id}/>
+                userId = {this.state.project.user._id}/>}
             </div>
-            <div id="package-show" className="column is-half">
+            {this.state.selectedPackage && <div id="package-show" className="column is-half">
               <PackageShow
                 selectedPackage={this.state.selectedPackage}
               />
-            </div>
+            </div>}
           </div>
         </div>
       </section>

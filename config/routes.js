@@ -33,6 +33,9 @@ router.route('/projects')
   .get(projectsController.index)
   .post(secureRoute, projectsController.create)
 
+router.route('/projects/:id/comments')
+  .post(projectsController.comment)
+
 router.route('/projects/:id')
   .get(projectsController.show)
   .put(secureRoute, projectsController.update)
@@ -45,6 +48,10 @@ router.route('/projects/search/:search')
 //*** PACKAGE ROUTES **//
 router.route('/packages')
   .get(packagesController.index)
+
+router.route('/packages/search/:search')
+  .get(packagesController.search)
+  // .post(packagesController.create)
 
 router.route('/packages/:name')
   .get(packagesController.show)
