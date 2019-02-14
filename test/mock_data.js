@@ -25,12 +25,12 @@ const userData = {
   image: 'https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/13592585_820157962567_7587254174743103700_n.jpg?_nc_cat=107&_nc_ht=scontent-lhr3-1.xx&oh=aeb90d73de4bda5f560059b37658a67f&oe=5CE8FD2F',
   bio: 'I love packages!'
 }
-/*const userData = {
-  username: 'test',
-  email: 'test@test.com',
-  password: 'test',
-  passwordConfirmation: 'test'
-}*/
+// const userData = {
+//   username: 'test',
+//   email: 'test@test.com',
+//   password: 'test',
+//   passwordConfirmation: 'test'
+// }
 module.exports = {
   packageData,
   userData

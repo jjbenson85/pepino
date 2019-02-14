@@ -73,6 +73,9 @@ class Header extends React.Component{
                 <Link to={`/users/${user._id}`} className="navbar-item">
                 Profile
                 </Link>}
+              <Link to="/users" className="navbar-item">
+                  Discover other people
+              </Link>
               <Link to="/projects" className="navbar-item">
                   Discover more projects
               </Link>

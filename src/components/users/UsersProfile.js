@@ -1,4 +1,5 @@
 import React from 'react'
+import Auth from '../../lib/Auth'
 
 
 const UsersProfile  = ({ username, email, bio, image, changeState, status}) =>  {
@@ -12,6 +13,7 @@ const UsersProfile  = ({ username, email, bio, image, changeState, status}) =>  
 
       <div className="field">
         {status &&  <button className="button is-primary home-button" onClick={changeState}>Edit Profile</button>}
+        {!status && Auth.isAuthenticated() &&<button className="button is-primary home-button" >Follow user</button>}
       </div>
     </div>
 
