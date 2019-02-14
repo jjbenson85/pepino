@@ -190,8 +190,9 @@ hr.project {
   &:focus{
     border: 1px solid black;
   }
+
 }
-.hidden-input[disabled] {
+.hidden-input[readOnly] {
   border: none;
   background-color: white;
   box-shadow: none;

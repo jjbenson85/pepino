@@ -138,7 +138,6 @@ class ProjectShow extends React.Component {
     )
     const { name, description, createdAt, updatedAt, packages, user, visible, comments, _id } = this.state.project
     const loggedIn = Auth.checkAvailability(user._id)
-    // console.log("bego", user)
     return(
       <section className="section">
         <div className="container is-fluid">
@@ -150,7 +149,7 @@ class ProjectShow extends React.Component {
                 name="name"
                 onChange={this.handleChange}
                 value={name}
-                disabled={!loggedIn}
+                readOnly={!loggedIn}
               />
               <Textarea
                 className="textarea hidden-input"
@@ -158,7 +157,7 @@ class ProjectShow extends React.Component {
                 placeholder="description"
                 onChange={this.handleChange}
                 value={description}
-                disabled={!loggedIn}
+                readOnly={!loggedIn}
               />
               <section className="box">
                 <h2 className='title is-5'>Installed packages</h2>
