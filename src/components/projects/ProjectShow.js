@@ -61,8 +61,11 @@ class ProjectShow extends React.Component {
   }
 
   handleViewClick(_package){
-    document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'})
+
     this.setState({ selectedPackage: _package })
+    setTimeout(function () {
+      document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
+    }, 100)
   }
 
   handleAddClick(_package) {
@@ -138,7 +141,6 @@ class ProjectShow extends React.Component {
     )
     const { name, description, createdAt, updatedAt, packages, user, visible, comments, _id } = this.state.project
     const loggedIn = Auth.checkAvailability(user._id)
-    // console.log("bego", user)
     return(
       <section className="section">
         <div className="container is-fluid">
@@ -150,7 +152,7 @@ class ProjectShow extends React.Component {
                 name="name"
                 onChange={this.handleChange}
                 value={name}
-                disabled={!loggedIn}
+                readOnly={!loggedIn}
               />
               <Textarea
                 className="textarea hidden-input"
@@ -158,11 +160,11 @@ class ProjectShow extends React.Component {
                 placeholder="description"
                 onChange={this.handleChange}
                 value={description}
-                disabled={!loggedIn}
+                readOnly={!loggedIn}
               />
               <section className="box">
                 <h2 className='title is-5'>Installed packages</h2>
-                {packages.length === 0 && <div>no packages yet</div>}
+                {packages.length === 0 && <div className="none">no packages yet</div>}
                 <div className="tags">
                   {packages.map(_package =>
                     <div

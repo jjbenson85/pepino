@@ -1,9 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import axios from 'axios'
-
-// import Auth from '../../lib/Auth'
-
+import {withRouter} from 'react-router-dom'
 
 class Header extends React.Component{
 
@@ -13,6 +10,12 @@ class Header extends React.Component{
     this.handleNavbarBurger = this.handleNavbarBurger.bind(this)
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location && this.navbarDropdown) {
+      this.navbarDropdown.classList.remove('is-active')
+      this.navbarLinks.classList.add('is-hidden-touch')
+    }
+  }
 
   handleNavbarBurger(){
     this.navbarBurger.classList.toggle('is-active')
@@ -27,8 +30,6 @@ class Header extends React.Component{
   BuildDropDownLinks(){
     return this.props.user.project
       .sort( (A,B)=>{
-        // const Adate = new Date(A.updatedAt).getTime()
-        // const Bdate = new Date(B.updatedAt).getTime()
         const Adate = Date.parse(A.updatedAt)
         const Bdate = Date.parse(B.updatedAt)
         return Bdate-Adate
@@ -78,7 +79,7 @@ class Header extends React.Component{
               <Link to="/projects" className="navbar-item">
                   Discover more projects
               </Link>
-              {(user)&&
+              {(user && user.project.length > 0)&&
               <nav className="navbar link-list" role="navigation" aria-label="dropdown navigation">
                 <div
                   ref={el => this.navbarDropdown = el}
@@ -110,4 +111,4 @@ class Header extends React.Component{
   }
 }
 
-export default Header
+export default withRouter(Header)

@@ -96,7 +96,8 @@ class ProjectsIndex extends React.Component {
               }
             }
             )}
-            {this.props.projects.length === 0 && <div>You have not added any projects</div> }
+            {this.props.projects.length === 0 && Auth.isAuthenticated() && <div>You have not added any projects</div> }
+            {this.props.projects.length === 0 && !Auth.isAuthenticated() && <div>The user have not added any projects</div> }
           </div>
         </div>
       </section>
