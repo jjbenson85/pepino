@@ -66,7 +66,7 @@ class Home extends React.Component{
               <div className="column is-half">
                 <h2>Built for Developers</h2>
               </div>
-              <div className="column is-half">
+              <div className="column is-half  authorisation">
                 {this.state.register &&  <RegisterForm
                   handleSubmit={this.handleSubmit}
                   handleChange={this.handleChange}
