@@ -553,6 +553,10 @@ input:checked + .slider:before {
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
   margin-top: 20px;
   margin-bottom: 20px;
+  margin-right: 10px;
+  background-color: #FFFFFF;
+
+  height: 500px;
 
 }
 .username{
@@ -596,4 +600,8 @@ blockquote.description{
 
 .navbar-menu{
   padding-right: 20px;
+}
+
+.homeText{
+  margin-bottom: 10px;
 }
