@@ -49,11 +49,9 @@ class Home extends React.Component{
     else this.loginFunction()
   }
 
-  // componentDidMount(){
-  //   if(Auth.isAuthenticated()) this.props.history.push(`/users/${Auth.getUserID()}`)
-  //   this.setState({...this.state, register: this.props.register })
-  //
-  // }
+  componentDidMount(){
+    this.setState({...this.state, register: this.props.register })
+  }
 
   render(){
     console.log(Auth.isAuthenticated())
