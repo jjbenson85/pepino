@@ -32,7 +32,7 @@ class Home extends React.Component{
       .post('api/register', this.state.data)
       .then(res => {
         Flash.setMessage('success', res.data.message)
-        this.setState({...this.state,  data: {}})
+        this.setState({...this.state,  data: {}, register: false})
         this.props.history.push('/')
       })
       .catch(err =>this.setState({...this.state, error: err.response.data }))
