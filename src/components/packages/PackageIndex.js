@@ -21,6 +21,16 @@ class PackageIndex extends React.Component{
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
     this.delayedCallback = debounce(this.searchPackages, 250)
   }
+  componentDidMount(){
+    console.log('componentDidMount')
+    axios.post('/api/packages/multi',{
+      names: ['react','redux','webpack','axios','babel','bluebird']
+    })
+      .then( res =>{
+        this.setState({ packages: res.data})
+      })
+      .catch((err)=>console.log(err.message))
+  }
 
   getUsedPackagesIds() {
     return this.props.packages.map((_package)=> _package._id)
