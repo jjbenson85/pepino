@@ -393,6 +393,11 @@ a {
   padding: 1em ;
 }
 
+.content.comment-card{
+  min-height: 40px;
+}
+
+
 .comment-image{
   overflow: hidden;
   height: 50px;
@@ -400,7 +405,7 @@ a {
   border-radius: 25px;
     .image {
       background-position: center;
-      background-size: contain;
+      background-size: cover;
       background-repeat: no-repeat;
         height: 100%;
         width: 100%;
