@@ -40,7 +40,7 @@ const UsersEditForm  = ({ data, handleChange, handleSubmit, error, status }) => 
             }}
             onError={(e) => console.log(e)}
             buttonText={'Add An Image'}
-            buttonClass={'button is-rounded'}
+            buttonClass={'button is-rounded is-skew'}
           />
         </div>
       </div>
@@ -53,7 +53,7 @@ const UsersEditForm  = ({ data, handleChange, handleSubmit, error, status }) => 
       </div>
 
       <div className="field">
-        {status && <button className="button is-primary home-button" >Submit</button>}
+        {status && <button className="button is-primary home-button is-skew" >Submit</button>}
 
       </div>
     </form>

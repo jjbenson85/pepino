@@ -49,7 +49,7 @@ class Header extends React.Component{
       <header className='header'>
         <nav className="navbar" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
-            <div className="navbar-item" href="/books">
+            <div className="navbar-item" href="/">
               <div className="pepino-logo"></div>
             </div>
             <a role="button"
@@ -66,21 +66,24 @@ class Header extends React.Component{
           </div>
           <div ref={el => this.navbar = el} className="navbar-menu">
             <div className="navbar-start">
-              <Link to="/" className="navbar-item">
+              <Link to="/" className="navbar-item is-skew">
                 Home
               </Link>
               {(user)&&
-                <Link to={`/users/${user._id}`} className="navbar-item">
+                <Link to={`/users/${user._id}`} className="navbar-item is-skew">
                 Profile
                 </Link>}
-              <Link to="/users" className="navbar-item">
-                  Discover other people
+              <Link to="/users" className="navbar-item is-skew">
+                  Discover Users
               </Link>
-              <Link to="/projects" className="navbar-item">
-                  Discover more projects
+              <Link to="/projects" className="navbar-item is-skew">
+                  Discover Projects
               </Link>
+
+            </div>
+            <div className="navbar-end">
               {(user && user.project.length > 0)&&
-              <nav className="navbar link-list" role="navigation" aria-label="dropdown navigation">
+              <nav className="navbar link-list is-skew" role="navigation" aria-label="dropdown navigation">
                 <div
                   ref={el => this.navbarDropdown = el}
                   className="navbar-item has-dropdown"
@@ -90,17 +93,15 @@ class Header extends React.Component{
                     Your Projects
                   </a>
                   <div
-                    className="navbar-dropdown is-hidden-touch"
+                    className="navbar-dropdown is-hidden-touch dropdown-right"
                     ref={el => this.navbarLinks = el}
                   >
                     {this.BuildDropDownLinks()}
                   </div>
                 </div>
               </nav>}
-            </div>
-            <div className="navbar-end">
               {(user)&&
-              <a to={`/users/${user._id}`} className="navbar-item" onClick={this.props.handleLogout}>
+              <a to={`/users/${user._id}`} className="navbar-item is-skew" onClick={this.props.handleLogout}>
                 Log Out
               </a>}
             </div>

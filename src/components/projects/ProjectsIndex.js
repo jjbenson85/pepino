@@ -4,6 +4,9 @@ import axios from 'axios'
 import ProjectCard from './ProjectCard'
 import SearchBar from '../common/SearchBar'
 
+import debounce from 'lodash/debounce'
+
+
 
 class ProjectIndex extends React.Component {
   constructor() {
@@ -14,7 +17,9 @@ class ProjectIndex extends React.Component {
       searched: null
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.searchProject = this.searchProject.bind(this)
+    this.delayedCallback = debounce(this.searchProject, 250)
   }
 
   getAllProjects() {
@@ -29,10 +34,15 @@ class ProjectIndex extends React.Component {
 
   handleChange({target: {name, value}}){
     this.setState({...this.state, [name]: value})
+    this.delayedCallback()
   }
 
-  searchProject(e){
+  handleSubmit(e){
     e.preventDefault(e)
+    this.searchProject()
+  }
+
+  searchProject(){
     if(this.state.search.trim() !== ''){
       axios.get(`/api/projects/search/${this.state.search.trim()}`)
         .then(res => {
@@ -49,21 +59,20 @@ class ProjectIndex extends React.Component {
     return(
       <section className="section">
         <div className="container">
+          <label className="label">Discover More Projects</label>
           <SearchBar
             handleChange={this.handleChange}
-            handleSubmit={this.searchProject}
+            handleSubmit={this.handleSubmit}
             value={this.state.searchValue}
           />
-          <hr />
           <div className="columns is-multiline">
-            {!this.state.searched && this.state.projects.map(project => {
+            {!this.state.searched &&  this.state.projects.length > 0 && this.state.projects.map(project => {
               if (project.visible) {
                 return (
                   <div key={project._id} className="column is-one-quarter">
-                    {this.state.projects.length > 0 &&
-                      <ProjectCard
-                        project = {project}
-                      /> }
+                    <ProjectCard
+                      project = {project}
+                    />
                   </div>
                 )
               }
@@ -74,10 +83,9 @@ class ProjectIndex extends React.Component {
               if (project.visible) {
                 return (
                   <div key={project._id} className="column is-one-quarter">
-                    {this.state.searched.length > 0 &&
-                      <ProjectCard
-                        project = {project}
-                      /> }
+                    <ProjectCard
+                      project = {project}
+                    />
                   </div>
                 )
               }

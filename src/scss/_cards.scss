@@ -1,0 +1,36 @@
+.package-index{
+  .card{
+    transition: all 1s;
+    .field.is-grouped{
+      justify-content: space-between;
+    }
+    .control{
+      display: flex;
+    }
+    .buttons.is-fullwidth{
+
+      .button{
+        width:50%;
+      }
+    }
+    .card-header{
+      padding-right:10px;
+      padding-left:10px;
+    }
+    .card-image{
+      height: 40px;
+      width: 30px;
+      .image{
+        height:100%;
+      }
+    }
+  }
+}
+.card.projectCard{
+  transition: all 1s;
+
+}
+.card.projectCard:hover{
+  transition: all 1s;
+  background-color: lighten($grey, 55%);
+}

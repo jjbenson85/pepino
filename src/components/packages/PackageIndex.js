@@ -3,6 +3,8 @@ import React from 'react'
 import axios from 'axios'
 // import Auth from '../../lib/Auth'
 
+import debounce from 'lodash/debounce'
+
 import SearchBar from '../common/SearchBar'
 import PackageCard from './PackageCard'
 
@@ -15,12 +17,33 @@ class PackageIndex extends React.Component{
     }
     // this.returnData = this.returnData.bind(this)
     this.handleSearchChange = this.handleSearchChange.bind(this)
+    this.handleKeywordClick = this.handleKeywordClick.bind(this)
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
+    this.delayedCallback = debounce(this.searchPackages, 250)
+  }
+  componentDidMount(){
+    console.log('componentDidMount')
+    axios.post('/api/packages/multi',{
+      names: ['react','redux','webpack','axios','babel','bluebird']
+    })
+      .then( res =>{
+        this.setState({ packages: res.data})
+      })
+      .catch((err)=>console.log(err.message))
   }
 
   getUsedPackagesIds() {
     return this.props.packages.map((_package)=> _package._id)
 
+  }
+
+  handleKeywordClick(keyword){
+    this.setState({searchValue: `keywords:${keyword}`})
+    this.delayedCallback()
+    // this.props.packageShowScroll()
+    setTimeout(function () {
+      document.getElementById('package-index').scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
+    }, 250)
   }
   //
   // returnData(searchData){
@@ -34,10 +57,10 @@ class PackageIndex extends React.Component{
 
   handleSearchChange(e){
     this.setState({searchValue: e.currentTarget.value})
+    this.delayedCallback()
   }
 
-  handleSearchSubmit(e){
-    e.preventDefault()
+  searchPackages(){
     if(!this.state.searchValue) return
     const that = this
     const url = '/api/packages/search/'+this.state.searchValue
@@ -53,12 +76,18 @@ class PackageIndex extends React.Component{
           this.setState({error: true})
         }
       })
+
+  }
+
+  handleSearchSubmit(e){
+    e.preventDefault()
+    this.searchPackages()
   }
 
   render(){
     this.getUsedPackagesIds()
     return(
-      <section className='package-index'>
+      <section id="scrollID" className='package-index'>
         <SearchBar
           handleChange={this.handleSearchChange}
           handleSubmit={this.handleSearchSubmit}
@@ -74,6 +103,7 @@ class PackageIndex extends React.Component{
           {this.state.packages && this.state.packages.map( (_package,i)=>
             <PackageCard
               key={i}
+              handleKeywordClick={this.handleKeywordClick}
               package={_package}
               handleAddClick={this.props.handleAddClick}
               handleViewClick={this.props.handleViewClick}

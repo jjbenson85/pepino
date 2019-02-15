@@ -18,6 +18,8 @@ userSchema.virtual('project', {
   foreignField: 'user'
 })
 
+
+
 //Use plugin to make sure only unique values can be used where required
 userSchema.plugin(uniqueValidator)
 

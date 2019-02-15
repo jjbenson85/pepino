@@ -44,7 +44,8 @@ class SearchBar extends React.Component{
         <div className="field has-addons">
           <div className="control field">
             <input
-              className="input"
+              autoComplete="off"
+              className="input is-skew"
               name="search"
               type="text"
               placeholder="Search"
@@ -53,7 +54,7 @@ class SearchBar extends React.Component{
             />
           </div>
           <div className="control">
-            <button className="button is-info">
+            <button className="button is-info is-skew">
               Search
             </button>
           </div>

@@ -4,6 +4,10 @@ import debounce from 'lodash/debounce'
 import Textarea from 'react-textarea-autosize'
 
 import PackageIndex from '../packages/PackageIndex'
+import TimeStamp from './TimeStamp'
+import UserInfo from './UserInfo'
+import ProjectVisibility from './ProjectVisibility'
+import PackageBox from './PackageBox'
 import InstalledPackageIndex from '../packages/InstalledPackageIndex'
 import PackageShow from '../packages/PackageShow'
 
@@ -20,12 +24,13 @@ class ProjectShow extends React.Component {
     this.state = {
       selectedPackage: null,
       error: null,
-      tab: 'about'
+      tab: 'search'
     }
 
     this.delayedCallback = debounce(this.putProject, 1000)
     this.handleAddClick = this.handleAddClick.bind(this)
     this.handleTabClick = this.handleTabClick.bind(this)
+    this.handleTagClick = this.handleTagClick.bind(this)
     this.handleViewClick = this.handleViewClick.bind(this)
     this.handlePackageDelete = this.handlePackageDelete.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -87,17 +92,19 @@ class ProjectShow extends React.Component {
   }
 
   handleTagClick(_package){
-    console.log('SCROLL',_package.name)
     this.setState({ selectedPackage: _package, tab: 'installed' })
     setTimeout(function () {
-      document.getElementById(_package.name).classList.add('glow')
-      document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'})
+      if (document.getElementById(_package.name) && document.getElementById('package-show')) {
+        document.getElementById(_package.name).classList.add('glow')
+        document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'})
+      }
     }, 100)
     setTimeout(function () {
       const el = document.getElementById(_package.name)
-      el.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'})
+
+      if (el) el.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'})
       setTimeout(function () {
-        el.classList.remove('glow')
+        if(el) el.classList.remove('glow')
       }, 1000)
     }, 500)
   }
@@ -113,6 +120,7 @@ class ProjectShow extends React.Component {
       ]
     ) : (
       this.state.project.packages
+
     )
 
     const project = {...this.state.project, packages }
@@ -121,8 +129,6 @@ class ProjectShow extends React.Component {
   }
 
   handleChange({ target: { name, value } }) {
-    console.log(this.state.project)
-    // const value = target.type === 'checkbox' ? target.checked : target.value;
     const _value = name === 'visible' ? !this.state.project.visible : value
     const project = {...this.state.project, [name]: _value }
     const errors = {...this.state.errors, [name]: null }
@@ -147,6 +153,7 @@ class ProjectShow extends React.Component {
           <div className="columns scroll">
             <div className="column is-half project">
               <input
+                autoComplete="off"
                 className="title is-1 input hidden-input"
                 placeholder="Name is required"
                 name="name"
@@ -162,75 +169,58 @@ class ProjectShow extends React.Component {
                 value={description}
                 readOnly={!loggedIn}
               />
-              <section className="box">
-                <h2 className='title is-5'>Installed packages</h2>
-                {packages.length === 0 && <div className="none">no packages yet</div>}
-                <div className="tags">
-                  {packages.map(_package =>
-                    <div
-                      className="tag"
-                      key={_package._id}
-                      id={_package._id}
-                      onClick={()=> this.handleTagClick(_package)}
-                    >
-                      {_package.name}
-                      {loggedIn && <button
-                        className="delete is-small"
-                        onClick={() => this.handlePackageDelete(_package)}>
-                      </button>}
-                    </div>
-                  )}
-                </div>
-              </section>
-              <section className="section visible">
-                <div className="control">
-                  <strong>Visible?</strong>
-                  <label className="switch">
-                    <input
-                      type="checkbox"
-                      name="visible"
-                      checked={JSON.parse(visible)=== true}
-                      onChange={this.handleChange}
-                    />
-                    <span className="slider round"></span>
-                  </label>
-                </div>
-              </section>
+              <PackageBox
+                loggedIn={loggedIn}
+                handleTagClick={this.handleTagClick}
+                handlePackageDelete={this.handlePackageDelete}
+                packages={packages} />
+              <ProjectVisibility visible={visible} handleChange={this.handleChange} loggedIn={loggedIn}/>
               <hr />
-              <div className="columns scroll">
-                <div className="column">Created at: {createdAt.split('T')[0]} </div>
-                <div className="column">Updated at: {updatedAt.split('T')[0]}</div>
-              </div>
+              {!loggedIn &&
+                <UserInfo user={user} />
+              }
+              <TimeStamp createdAt={createdAt} updatedAt={updatedAt}/ >
             </div>
             <div className="column is-half package-column">
               <div className="card is-fullheight">
-                <div className="tabs is-boxed">
+                <div id="package-index" className="tabs is-boxed">
                   <ul>
-                    {loggedIn&&<li className={this.state.tab==='search'? 'is-active': ''} ref={el => this.searchTab = el} onClick={(e)=>this.handleTabClick(e,'search')} >
+                    {loggedIn &&<li className={this.state.tab==='search'? 'is-active': ''} ref={el => this.searchTab = el} onClick={(e)=>this.handleTabClick(e,'search')} >
                       <a>Search</a>
                     </li>}
                     <li className={this.state.tab==='installed'? 'is-active': ''} ref={el => this.installedTab = el} onClick={(e)=>this.handleTabClick(e,'installed')} >
                       <a className='level'>
                         <div className='level-item'>Installed</div>
                         <div className='level-right'>
-                          <div className="level-item tag is-primary">{packages.length}</div>
+                          <div className="level-item tag is-info">{packages.length}</div>
                         </div>
                       </a>
                     </li>
-                    <li className={this.state.tab==='comments'? 'is-active': ''} ref={el => this.commentTab = el} onClick={(e)=>this.handleTabClick(e,'comments')} >
+                    <li
+                      className={this.state.tab==='comments'? 'is-active': ''}
+                      ref={el => this.commentTab = el}
+                      onClick={(e)=>this.handleTabClick(e,'comments')}
+                    >
                       <a className='level'>
                         <div className='level-item'>Comments</div>
                         <div className='level-right'>
-                          <div className="level-item tag is-primary">{comments.length}</div>
+                          <div className="level-item tag is-info">{comments.length}</div>
                         </div>
                       </a>
                     </li>
                   </ul>
                 </div>
                 <div className="card-content">
-                  {(this.state.tab==='comments')&&<div className="">
-                    <CommentInput postCommentUrl={`/api/projects/${_id}/comments`} updateThread={this.getProject}/>
-                    {comments.map((comment, i)=><CommentCard key={i} comment={comment} />)}
+                  {(this.state.tab==='comments')&&
+                  <div className="">
+                    {Auth.isAuthenticated()&&
+                      <CommentInput
+                        postCommentUrl={`/api/projects/${_id}/comments`}
+                        updateThread={this.getProject}
+                      />}
+                    {comments.map((comment, i)=>
+                      <CommentCard key={i} comment={comment} />
+                    )}
                   </div>}
                   {(this.state.tab==='installed')&&
                   <InstalledPackageIndex

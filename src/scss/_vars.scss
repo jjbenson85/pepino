@@ -1,0 +1,39 @@
+// Set your brand colors
+// $light-grey: #B8B89F;
+$grey: #52656B;
+$light-grey: #8ae9d9;
+$yellow: #CDFF00;
+$red: #FF3B77;
+$blue: #209cee;
+$white: #FFFFFF;
+// $purple: #8A4D76;
+// $pink: #FA7C91;
+// $brown: #757763;
+// $green: #00d1b2;
+$green: #00ffd9;
+// $beige-light: #D0D1CD;
+// $beige-lighter: #EFF0EB;
+
+// Update Bulma's global variables
+$family-sans-serif: "Lato", sans-serif;
+
+$info: $blue;
+$succes: $green;
+$warning: $yellow;
+$danger: darken($red, 20%);
+
+$primary: $red;
+$link: $yellow;
+
+
+// Update some of Bulma's component variables
+$body-background-color: lighten($grey, 50%);
+
+$navbar-background-color: $primary;
+$navbar-item-color: black;
+$navbar-item-hover-color: black;
+$navbar-item-active-color: black;
+
+$navbar-breakpoint: 600px;
+
+$border-radius: 5px;
