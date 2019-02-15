@@ -7,4 +7,13 @@
 7 days
 
 ## Technologies used
-
+* React.js
+* Node.js
+* JavaScript (ES6) / HTML5 / SCSS
+* Git / GitHub
+* MongoDB & Mongoose
+* BCrypt & Session Auth
+* Bulma CSS Framework & SCSS
+* Chai/Mocha/Supertest
+* Bluebird
+* request-promise/axios
