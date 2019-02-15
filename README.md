@@ -19,3 +19,7 @@
 * request-promise/axio
 
 ## External APIs
+* npms.io
+* Filestack
+
+
