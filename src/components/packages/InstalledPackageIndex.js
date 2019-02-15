@@ -2,6 +2,7 @@ import React from 'react'
 
 import axios from 'axios'
 import PackageCard from './PackageCard'
+import debounce from 'lodash/debounce'
 
 class PackageIndex extends React.Component{
   constructor(){
@@ -10,11 +11,40 @@ class PackageIndex extends React.Component{
       error: false
     }
     this.returnData = this.returnData.bind(this)
+    this.handleKeywordClick = this.handleKeywordClick.bind(this)
+    this.delayedCallback = debounce(this.searchPackages, 250)
+  }
+  searchPackages(){
+    // if(!this.state.searchValue) return
+    // const that = this
+    // const url = '/api/packages/search/'+this.state.searchValue
+    // console.log('handleSearchSubmit', url)
+    // axios
+    //   .get(url)
+    //   .then((searchData) => {
+    //     const packages = searchData.data
+    //     that.setState({ packages, error: false})
+    //   })
+    //   .catch(function (error) {
+    //     if (error.response) {
+    //       this.setState({error: true})
+    //     }
+    //   })
+    console.log('feature not yet implemented')
+
+  }
+
+  handleKeywordClick(keyword){
+    this.setState({searchValue: `keywords:${keyword}`})
+    this.delayedCallback()
+    // this.props.packageShowScroll()
+    setTimeout(function () {
+      document.getElementById('package-index').scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
+    }, 250)
   }
 
   getPackagesData(){
     const arr = this.props.packages.map( (p)=> p.name )
-    console.log('arr',arr)
     axios.post('/api/packages/multi',{
       names: arr
     })
@@ -25,6 +55,7 @@ class PackageIndex extends React.Component{
   }
 
   componentDidMount(){
+
     this.getPackagesData()
   }
 
@@ -55,6 +86,7 @@ class PackageIndex extends React.Component{
           </div>}
           {this.state.packages && this.state.packages.map( (_package,i)=>
             <PackageCard
+              handleKeywordClick={this.handleKeywordClick}
               key={i}
               package={_package}
               handleAddClick={this.props.handleAddClick}

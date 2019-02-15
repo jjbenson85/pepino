@@ -61,10 +61,10 @@ const Register  = ({ data, handleChange, handleSubmit, changeState, errors }) =>
       </div>
 
       <div className="field">
-        <button className="button is-primary home-button" >Register</button>
+        <button className="button is-primary home-button is-skew" >Register</button>
       </div>
       <div>
-        <p>Already have an account? <a  onClick={changeState}>Sign in</a>.</p>
+        <p>Already have an account? <a  onClick={changeState}><span className="button is-small is-skew is-info">Sign in</span></a>.</p>
       </div>
     </form>
   )

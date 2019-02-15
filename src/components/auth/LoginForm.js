@@ -22,8 +22,8 @@ const Login  = ({ data, handleChange, handleSubmit, changeState, errors }) =>  {
         {errors.password && <small className="help is-danger">{errors.password}</small>}
       </div>
       <div className="field">
-        <button className="button is-primary home-button" >Submit</button>
-        <button className="button is-primary home-button" onClick={changeState}>Register</button>
+        <button className="button is-primary home-button is-skew" >Submit</button>
+        <button className="button is-primary home-button is-skew" onClick={changeState}>Register</button>
 
       </div>
     </form>
