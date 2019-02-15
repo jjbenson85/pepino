@@ -23,5 +23,5 @@
 * Filestack
 
 ## Our Applicatin: Pepino - built for developpers
-![Uploading Screenshot 2019-02-15 at 13.48.23.png…]
+<img width="1440" alt="screenshot 2019-02-15 at 13 48 23" src="https://user-images.githubusercontent.com/9445433/52860850-9339c380-3128-11e9-91c7-c4577fd85508.png">
 A hosted version of this app can be found at https://wdi-pepino.herokuapp.com
