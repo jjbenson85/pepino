@@ -338,7 +338,8 @@ a {
   color: black;
 }
 .glow{
-  background-color: $yellow;
+  background-color: lighten($link, 30%);
+  box-shadow: 0px 0px 20px lighten($link, 40%);
 }
 .card{
   // transition: all 1s;
