@@ -16,7 +16,7 @@ const UsersProfile  = ({ username, email, bio, image, changeState, status}) =>  
       </div>
 
       <div>
-        {status &&  <button className="button is-primary home-button" onClick={changeState}>Edit Profile</button>}
+        {status &&  <button className="button is-primary home-button is-skew" onClick={changeState}>Edit Profile</button>}
         {!status && Auth.isAuthenticated() &&<button className="button is-primary home-button" >Follow user</button>}
       </div>
     </div>

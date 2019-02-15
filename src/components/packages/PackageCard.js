@@ -55,12 +55,12 @@ class PackageCard extends React.Component{
             </div>
           </div>
           <div className='content'><blockquote className='is-medium'>{description}</blockquote></div>
-          {keywords && <div className="tags level-item " >{keywords.map( (keyword,j)=> <div key={j} className="tag is-primary">{keyword}</div>)}</div>}
+          {keywords && <div className="tags level-item " >{keywords.map( (keyword,j)=> <div key={j} onClick={()=>this.props.handleKeywordClick(keyword)}className="tag is-primary">{keyword}</div>)}</div>}
         </div>
         <div className="card-footer">
           <div className="card-footer-item buttons has-addons is-fullwidth">
             <button
-              className="button is-success is-outlined "
+              className="button is-success is-skew "
               name="package"
               value={_id}
               onClick={() => this.props.handleAddClick(this.props.package)}
@@ -69,7 +69,7 @@ class PackageCard extends React.Component{
               +Add to project
             </button>
             <button
-              className="button is-info is-outlined"
+              className="button is-info is-skew"
               name='viewPackage'
               value={_id}
               onClick={() => this.props.handleViewClick(this.props.package)}

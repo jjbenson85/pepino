@@ -5,10 +5,10 @@ const Register  = ({ data, handleChange, handleSubmit, changeState, errors }) =>
   return(
     <form onSubmit={handleSubmit} name="register">
       <div className="field">
-        <label className="label">User Name</label>
+        <label className="label is-skew">User Name</label>
         <div className="control">
           <input
-            className="input"
+            className="input is-skew"
             type="text"
             placeholder="Username"
             name="username"
@@ -19,10 +19,10 @@ const Register  = ({ data, handleChange, handleSubmit, changeState, errors }) =>
       </div>
 
       <div className="field">
-        <label className="label">Email</label>
+        <label className="label is-skew">Email</label>
         <div className="control">
           <input
-            className="input"
+            className="input is-skew"
             type="text"
             placeholder="Email"
             name="email"
@@ -33,10 +33,10 @@ const Register  = ({ data, handleChange, handleSubmit, changeState, errors }) =>
       </div>
 
       <div className="field">
-        <label className="label">Password</label>
+        <label className="label is-skew">Password</label>
         <div className="control">
           <input
-            className="input"
+            className="input is-skew"
             type="password"
             placeholder="Password"
             name="password"
@@ -47,10 +47,10 @@ const Register  = ({ data, handleChange, handleSubmit, changeState, errors }) =>
       </div>
 
       <div className="field">
-        <label className="label">Password Confirmation</label>
+        <label className="label is-skew">Password Confirmation</label>
         <div className="control">
           <input
-            className="input"
+            className="input is-skew"
             type="password"
             placeholder="Password Confirmation"
             name="passwordConfirmation"

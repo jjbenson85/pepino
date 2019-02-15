@@ -67,7 +67,7 @@ class ProjectsIndex extends React.Component {
             <div>
               <button
                 onClick={this.handleClick}
-                className="button is-primary">
+                className="button is-primary is-skew">
                 Add project
               </button>
               <hr />

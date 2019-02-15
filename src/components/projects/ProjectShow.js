@@ -23,11 +23,12 @@ class ProjectShow extends React.Component {
     this.state = {
       selectedPackage: null,
       error: null,
-      tab: 'about'
+      tab: 'search'
     }
 
     this.delayedCallback = debounce(this.putProject, 1000)
     this.handleAddClick = this.handleAddClick.bind(this)
+    // this.packageShowScroll = this.packageShowScroll.bind(this)
     this.handleTabClick = this.handleTabClick.bind(this)
     this.handleViewClick = this.handleViewClick.bind(this)
     this.handlePackageDelete = this.handlePackageDelete.bind(this)
@@ -89,6 +90,12 @@ class ProjectShow extends React.Component {
     {this.setState({tab: val})}
   }
 
+  // packageShowScroll(){
+  //   setTimeout(function () {
+  //     document.getElementById('package-show').scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'nearest'})
+  //   }, 100)
+  // }
+
   handleTagClick(_package){
     console.log('SCROLL',_package.name)
     this.setState({ selectedPackage: _package, tab: 'installed' })
@@ -149,6 +156,7 @@ class ProjectShow extends React.Component {
           <div className="columns scroll">
             <div className="column is-half project">
               <input
+                autoComplete="off"
                 className="title is-1 input hidden-input"
                 placeholder="Name is required"
                 name="name"
@@ -168,10 +176,10 @@ class ProjectShow extends React.Component {
                 <h2 className='title is-5'>Installed packages</h2>
                 {packages.length === 0 && <div className="none">no packages yet</div>}
                 <div className="tags">
-                  {packages.map(_package =>
+                  {packages.map((_package,i) =>
                     <div
-                      className="tag"
-                      key={_package._id}
+                      className="tag is-info"
+                      key={i}
                       id={_package._id}
                       onClick={()=> this.handleTagClick(_package)}
                     >
@@ -193,7 +201,7 @@ class ProjectShow extends React.Component {
             </div>
             <div className="column is-half package-column">
               <div className="card is-fullheight">
-                <div className="tabs is-boxed">
+                <div id="package-index" className="tabs is-boxed">
                   <ul>
                     {loggedIn &&<li className={this.state.tab==='search'? 'is-active': ''} ref={el => this.searchTab = el} onClick={(e)=>this.handleTabClick(e,'search')} >
                       <a>Search</a>
@@ -202,7 +210,7 @@ class ProjectShow extends React.Component {
                       <a className='level'>
                         <div className='level-item'>Installed</div>
                         <div className='level-right'>
-                          <div className="level-item tag is-primary">{packages.length}</div>
+                          <div className="level-item tag is-info">{packages.length}</div>
                         </div>
                       </a>
                     </li>
@@ -210,7 +218,7 @@ class ProjectShow extends React.Component {
                       <a className='level'>
                         <div className='level-item'>Comments</div>
                         <div className='level-right'>
-                          <div className="level-item tag is-primary">{comments.length}</div>
+                          <div className="level-item tag is-info">{comments.length}</div>
                         </div>
                       </a>
                     </li>
@@ -229,6 +237,8 @@ class ProjectShow extends React.Component {
                     userId = {this.state.project.user._id}/>}
                   {(this.state.tab==='search')&&
                   <PackageIndex
+
+
                     handleAddClick={this.handleAddClick}
                     packages={this.state.project.packages}
                     handleViewClick={this.handleViewClick}

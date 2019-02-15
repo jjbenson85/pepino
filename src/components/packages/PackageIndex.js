@@ -17,6 +17,7 @@ class PackageIndex extends React.Component{
     }
     // this.returnData = this.returnData.bind(this)
     this.handleSearchChange = this.handleSearchChange.bind(this)
+    this.handleKeywordClick = this.handleKeywordClick.bind(this)
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
     this.delayedCallback = debounce(this.searchPackages, 250)
   }
@@ -24,6 +25,15 @@ class PackageIndex extends React.Component{
   getUsedPackagesIds() {
     return this.props.packages.map((_package)=> _package._id)
 
+  }
+
+  handleKeywordClick(keyword){
+    this.setState({searchValue: `keywords:${keyword}`})
+    this.delayedCallback()
+    // this.props.packageShowScroll()
+    setTimeout(function () {
+      document.getElementById('package-index').scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'})
+    }, 250)
   }
   //
   // returnData(searchData){
@@ -67,7 +77,7 @@ class PackageIndex extends React.Component{
   render(){
     this.getUsedPackagesIds()
     return(
-      <section className='package-index'>
+      <section id="scrollID" className='package-index'>
         <SearchBar
           handleChange={this.handleSearchChange}
           handleSubmit={this.handleSearchSubmit}
@@ -83,6 +93,7 @@ class PackageIndex extends React.Component{
           {this.state.packages && this.state.packages.map( (_package,i)=>
             <PackageCard
               key={i}
+              handleKeywordClick={this.handleKeywordClick}
               package={_package}
               handleAddClick={this.props.handleAddClick}
               handleViewClick={this.props.handleViewClick}

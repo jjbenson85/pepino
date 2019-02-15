@@ -1,46 +1,59 @@
 @charset "utf-8";
 
 // Import a Google Font
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
-// Set your brand colors
-$purple: #8A4D76;
-$red: #d02323;
-$pink: #FA7C91;
-$brown: #757763;
-$blue: #209cee;
-$green: #00d1b2;
-$beige-light: #D0D1CD;
-$beige-lighter: #EFF0EB;
-$light-grey: #dbdbdb;
+@import "vars";
+@import "cards";
 
-// Update Bulma's global variables
-$family-sans-serif: "Nunito", sans-serif;
-// $grey-dark: #446;
-// $grey-light: #ddf;
-// $primary: darken($blue, 20%);
-$primary: $green;
-$link: $blue;
-// $widescreen-enabled: false;
-// $fullhd-enabled: false;
-
-// Update some of Bulma's component variables
-// $body-background-color: lighten($primary, 50%);
-// $control-border-width: 2px;
-// $input-border-color: transparent;
-// $input-shadow: none;
-$navbar-background-color: $primary;
-$navbar-item-color: black;
-$navbar-item-hover-color: black;
-$navbar-item-active-color: black;
-// $navbar-item-background-color: darken($navbar-background-color, 20%);
-// $footer-background-color: $primary;
-// $navbar-item-active-background-color: $primary;
-
-// $navbar-dropdown-item-active-background-color: $primary;
+// // Set your brand colors
+// $purple: #8A4D76;
+// $pink: #FA7C91;
+// $brown: #757763;
+// $green: #00d1b2;
+// $beige-light: #D0D1CD;
+// $beige-lighter: #EFF0EB;
 //
-// $navbar-item-img-max-height: 2em;
-$navbar-breakpoint: 600px;
+// // Update Bulma's global variables
+// $family-sans-serif: "Lato", sans-serif;
+// // $grey-dark: #446;
+// // $grey-light: #ddf;
+// // $primary: darken($blue, 20%);
+//
+// $light-grey: #B8B89F;
+// $grey: #52656B;
+// $yellow: #CDFF00;
+// $red: #FF3B77;
+// $blue: #209cee;
+// $white: #FFFFFF;
+//
+// $info: $blue;
+// $succes: $green;
+// $warning: $yellow;
+// $danger: darken($red, 20%);
+//
+// $primary: $red;
+// $link: $yellow;
+// // $widescreen-enabled: false;
+// // $fullhd-enabled: false;
+//
+// // Update some of Bulma's component variables
+// $body-background-color: lighten($grey, 50%);
+// // $control-border-width: 2px;
+// // $input-border-color: transparent;
+// // $input-shadow: none;
+// $navbar-background-color: $primary;
+// $navbar-item-color: black;
+// $navbar-item-hover-color: black;
+// $navbar-item-active-color: black;
+// // $navbar-item-background-color: darken($navbar-background-color, 20%);
+// // $footer-background-color: $primary;
+// // $navbar-item-active-background-color: $primary;
+//
+// // $navbar-dropdown-item-active-background-color: $primary;
+// //
+// // $navbar-item-img-max-height: 2em;
+// $navbar-breakpoint: 600px;
 
 // Import only what you need from Bulma
 // @import "../../node_modules/bulma/sass/utilities/_all.sass";
@@ -68,12 +81,48 @@ $navbar-breakpoint: 600px;
 
 
 
+.is-skew,
+label.is-skew,
+input.is-skew,
+button.is-skew,
+.tag
+{
+  transform: skew(-10deg);
+  // padding-left: 8px;
+  border-radius: $border-radius;
+}
+label.label.is-skew{
+  background: $primary;
+    color: white;
+    padding-left: 8px;
+}
+a.navbar-item.is-skew,
+.navbar.link-list.is-skew{
+  // backface-visibility: hidden;
+  // font-family: sans-serif;
+  font-weight: 700;
+  border-radius: 0px;
+  border-left: 1px solid $grey;
+  &:last-child{
+    border-right: 1px solid $grey;
+  }
+}
+
+button:disabled{
+  cursor: default;
+}
+
+
+img, .card, .column{
+  border-radius: $border-radius;
+}
 
 
 
-
-
-
+.tabs li.is-active a {
+    border-bottom-color: #CDFF00;
+    color: black;
+}
 
 
 .home-button{
@@ -81,14 +130,95 @@ $navbar-breakpoint: 600px;
 }
 
 
+textarea.hidden-input:focus,
+input.hidden-input:focus{
+  background-color: white!important;
+  box-shadow: none;
+}
+.hidden-input{
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+.title.hidden-input{
+  // margin-bottom: 0;
+  // padding-bottom: 0;
+  // text-align: center;
+}
+//
+.hidden-input{
+  // border: none;
+  background-color: white;
+  text-align: center;
+  padding:0.625rem;
+  border-radius: $border-radius;
+  // box-shadow: none;
+  &:focus{
+    border: 1px solid black;
+  }
+//
+}
+// .hidden-input[readOnly] {
+//   border: none;
+//   background-color: white;
+//   box-shadow: none;
+//   color: black;
+// }
+
 .pepino-logo{
   height:30px;
-  width:10px;
+  width:5px;
   border-radius: 5px;
-  border: 1px solid green;
+  border: 1px solid $link;
+  background-color: lighten($link, 20%);
+  box-shadow: 0px 0px 10px $link;
   transform: rotate(30deg);
+  // margin:20px;
 
 }
+
+.laser-blade, .blurb{
+  width:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:$white;
+  background-color: $blue;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: $border-radius;
+  .title{
+    position: relative;
+    z-index: 1;
+  }
+  .pepino-logo{
+    position: relative;
+    z-index: 0;
+    transform: translateX(100px);
+    transform-origin: 0% 100%;
+    animation: move 10s infinite;
+    margin: 0 50px;
+    height: 100px;
+  }
+}
+
+@keyframes move{
+  0%{transform: translateX(100px) rotate(0deg);}
+  5%{transform: translateX(200px) rotate(20deg);}
+  15%{transform: translateX(300px) rotate(-20deg);}
+  25%{transform: translateX(200px) rotate(-60deg);}
+  40%{transform: translateX(400px) rotate(10deg);}
+  45%{transform: translateX(200px) rotate(30deg);}
+  60%{transform: translateX(10px) rotate(60deg);}
+  70%{transform: translateX(200px) rotate(-20deg);}
+  75%{transform: translateX(400px) rotate(30deg);}
+  80%{transform: translateX(300px) rotate(-30deg);}
+  90%{transform: translateX(200px) rotate(-40deg);}
+  100%{transform: translateX(100px) rotate(0deg);}
+}
+// .laser-blade{
+//   animation: move 10s infinite;
+// }
 
 .header{
   transition: all 1s;
@@ -97,39 +227,9 @@ $navbar-breakpoint: 600px;
   }
 }
 
-.package-index{
-  .card{
-    .field.is-grouped{
-      justify-content: space-between;
-    }
-    .control{
-      display: flex;
-    }
-    .buttons.is-fullwidth{
 
-      .button{
-        width:50%;
-      }
-    }
-    .card-header{
-      padding-right:10px;
-      padding-left:10px;
-    }
-    .card-image{
-      height: 40px;
-      width: 30px;
-      .image{
-        height:100%;
-      }
-    }
-  }
-}
 
-.title.hidden-input{
-  margin-bottom: 0;
-  padding-bottom: 0;
-  text-align: center;
-}
+
 
 hr.project {
   margin-top: 0px;
@@ -199,21 +299,7 @@ hr.project {
 }
 
 
-.hidden-input{
-  border: none;
-  background-color: white;
-  box-shadow: none;
-  &:focus{
-    border: 1px solid black;
-  }
 
-}
-.hidden-input[readOnly] {
-  border: none;
-  background-color: white;
-  box-shadow: none;
-  color: black;
-}
 
 section.visible {
   padding-left: 175px;
@@ -252,11 +338,11 @@ a {
   color: black;
 }
 .glow{
-  background-color: yellow;
+  background-color: $yellow;
 }
 .card{
-  transition: all 1s;
-  border-radius: 2px 2px 0 0;
+  // transition: all 1s;
+  // border-radius: 2px 2px 0 0;
   &.is-fullheight{
     min-height: 100%;
   }
@@ -367,6 +453,9 @@ a {
   }
 }
 
+.tags:not(:last-child) {
+    margin-bottom: 0rem;
+}
 
 .switch {
   position: relative;
@@ -408,11 +497,11 @@ a {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: $blue;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px $blue;
 }
 
 input:checked + .slider:before {
@@ -432,8 +521,8 @@ input:checked + .slider:before {
 
 
 .usersearch-result {
-    .image.profile{
-      height: 200px;
+    .image.profile, .user-card-image{
+      height: 100px;
       width: auto;
       margin-left: auto;
       margin-right: auto;
@@ -465,4 +554,46 @@ input:checked + .slider:before {
   margin-top: 20px;
   margin-bottom: 20px;
 
+}
+.username{
+  margin-left: 8px;
+}
+.user-card-image, {
+  // height:100%;
+  // width:100%;
+  overflow:hidden;
+  .image{
+    border-radius: 50px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+  }
+}
+
+.card-content{
+  padding:0.5em;
+}
+
+.tag.is-half{
+  overflow: hidden;
+      white-space: nowrap;
+      width: 50%;
+      text-overflow: ellipsis;
+  // width:50%;
+}
+.control.is-fullwidth{
+  width:100%;
+}
+blockquote.description{
+  overflow: scroll;
+}
+
+.navbar-dropdown.dropdown-right {
+  // left: calc(-100% + 4px);
+ }
+
+.navbar-menu{
+  padding-right: 20px;
 }
