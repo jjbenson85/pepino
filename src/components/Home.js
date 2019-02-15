@@ -32,7 +32,7 @@ class Home extends React.Component{
       .post('api/register', this.state.data)
       .then(res => {
         Flash.setMessage('success', res.data.message)
-        this.setState({...this.state,  data: {}})
+        this.setState({...this.state,  data: {}, register: false})
         this.props.history.push('/')
       })
       .catch(err =>this.setState({...this.state, error: err.response.data }))
@@ -49,11 +49,9 @@ class Home extends React.Component{
     else this.loginFunction()
   }
 
-  // componentDidMount(){
-  //   if(Auth.isAuthenticated()) this.props.history.push(`/users/${Auth.getUserID()}`)
-  //   this.setState({...this.state, register: this.props.register })
-  //
-  // }
+  componentDidMount(){
+    this.setState({...this.state, register: this.props.register })
+  }
 
   render(){
     console.log(Auth.isAuthenticated())
@@ -63,8 +61,16 @@ class Home extends React.Component{
         <section className="section">
           <div className="container">
             <div className="columns">
-              <div className="column is-half">
-                <h2>Built for Developers</h2>
+              <div className="column is-half authorisation">
+                <div className="title is-1">Pepino</div>
+                <h2  className="title is-2">Built for developers</h2>
+                <div  className="homeText">If you want to manage your projects, see what packages are out there and find out what other users are doing.</div>
+                <div  className="homeText">
+                Connect with other developers, Explore all possibilities.
+                </div>
+                <div  className="homeText">
+                  Join Today.
+                </div>
               </div>
               <div className="column is-half  authorisation">
                 {this.state.register &&  <RegisterForm

@@ -44,7 +44,6 @@ class UsersIndex extends React.Component{
     if(this.state.search.trim() !== ''){
       axios.get(`/api/users/search/${this.state.search.trim()}`)
         .then(res => {
-          console.log('searchUser',res)
           this.setState({ ...this.state, users: res.data})
         })
         .catch((err)=>console.log(err.response.data))
