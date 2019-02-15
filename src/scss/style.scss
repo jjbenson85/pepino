@@ -597,3 +597,17 @@ blockquote.description{
 .navbar-menu{
   padding-right: 20px;
 }
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+	opacity: 1;
+  animation: fadeInOpacity 2s;
+}
