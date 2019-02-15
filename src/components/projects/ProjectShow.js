@@ -1,10 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import debounce from 'lodash/debounce'
 import Textarea from 'react-textarea-autosize'
 
 import PackageIndex from '../packages/PackageIndex'
+import TimeStamp from './TimeStamp'
+import UserInfo from './UserInfo'
+import ProjectVisibility from './ProjectVisibility'
 import InstalledPackageIndex from '../packages/InstalledPackageIndex'
 import PackageShow from '../packages/PackageShow'
 
@@ -182,35 +184,12 @@ class ProjectShow extends React.Component {
                   )}
                 </div>
               </section>
-              <section className="section visible">
-                <div className="control">
-                  <strong>Visible?</strong>
-                  <label className="switch">
-                    <input
-                      type="checkbox"
-                      name="visible"
-                      checked={JSON.parse(visible)=== true}
-                      onChange={this.handleChange}
-                    />
-                    <span className="slider round"></span>
-                  </label>
-                </div>
-              </section>
+              <ProjectVisibility visible={visible} handleChange={this.handleChange}/>
               <hr />
               {!loggedIn &&
-                <Link to={`/users/${user._id}`}>
-                  <div className="user">
-                    <div className="projectUsername">Created by: {user.username}</div>
-                    <figure className="image is-48x48">
-                      <img src={user.image} />
-                    </figure>
-                  </div>
-                </Link>
+                <UserInfo user={user} />
               }
-              <div className="columns scroll">
-                <div className="column">Created at: {createdAt.split('T')[0]} </div>
-                <div className="column">Updated at: {updatedAt.split('T')[0]}</div>
-              </div>
+              <TimeStamp createdAt={createdAt} updatedAt={updatedAt}/ >
             </div>
             <div className="column is-half package-column">
               <div className="card is-fullheight">
