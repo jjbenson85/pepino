@@ -338,13 +338,17 @@ a {
   color: black;
 }
 .glow{
-  background-color: $yellow;
+  background-color: lighten($link, 30%);
+  box-shadow: 0px 0px 20px lighten($link, 40%);
 }
 .card{
   // transition: all 1s;
   // border-radius: 2px 2px 0 0;
   &.is-fullheight{
     min-height: 100%;
+  }
+  &.package-index-card{
+    margin: 8px;
   }
 }
 .tabs.is-boxed{
@@ -575,7 +579,9 @@ input:checked + .slider:before {
     width: 50px;
   }
 }
-
+p.is-fullwidth{
+  width:100%;
+}
 .card-content{
   padding:0.5em;
 }
@@ -604,4 +610,18 @@ blockquote.description{
 
 .homeText{
   margin-bottom: 10px;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+	opacity: 1;
+  animation: fadeInOpacity 2s;
 }

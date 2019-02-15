@@ -29,7 +29,7 @@ const ProjectForm = ({ data, handleChange, handleSubmit, error }) => {
             />
           </div>
         </div>
-        <button className="button is-primary">Submit</button>
+        <button className="button is-primary is-skew">Submit</button>
       </form>
       <hr />
     </div>

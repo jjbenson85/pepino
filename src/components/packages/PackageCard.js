@@ -1,14 +1,9 @@
 import React from 'react'
-
-// import axios from 'axios'
 import Auth from '../../lib/Auth'
-
-// import SearchBar from '../common/SearchBar'
 
 class PackageCard extends React.Component{
 
   render(){
-    console.log(this.props.package)
     const { name, icon, version, comments, score, description, keywords, _id } = this.props.package
     return(
       <div id={name} className='card'>
