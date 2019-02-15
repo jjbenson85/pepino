@@ -5,6 +5,8 @@ import axios from 'axios'
 import CommentCard from '../common/CommentCard'
 import CommentInput from '../common/CommentInput'
 
+import Auth from '../../lib/Auth'
+
 
 class PackageShow extends React.Component{
 
@@ -221,7 +223,7 @@ class PackageShow extends React.Component{
           </div>
         </div>}
         {(this.state.tab==='comments')&&<div className="card-content">
-          <CommentInput postCommentUrl={`/api/packages/${name}`} updateThread={this.getPackageData}/>
+          {Auth.isAuthenticated()&&<CommentInput postCommentUrl={`/api/packages/${name}`} updateThread={this.getPackageData}/>}
           {comments.map((comment, i)=><CommentCard key={i} comment={comment} />)}
           {/* <CommentInput postCommentUrl={`/api/packages/${this.props.match.params.id}`}/>*/}
         </div>}
