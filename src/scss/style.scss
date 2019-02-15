@@ -257,7 +257,11 @@ hr.project {
 
   .timeStamp {
     height: 100px;
-    .column {
+    .column.createdAt {
+      height: 100px;
+    }
+
+    .column.updatedAt {
       height: 100px;
     }
   }
