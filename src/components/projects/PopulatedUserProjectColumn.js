@@ -6,7 +6,7 @@ const PopulatedUserProjectColumn = ({projects, handleDelete, logged}) => {
     <div>
       {projects.length > 0 && <div className="columns is-multiline">
         {projects.map(project => {
-          if (project.visible || this.props.logged) {
+          if (project.visible || logged) {
             return (
               <div key={project._id} className="column is-one-third">
                 <ProjectCard
