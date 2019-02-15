@@ -347,6 +347,9 @@ a {
   &.is-fullheight{
     min-height: 100%;
   }
+  &.package-index-card{
+    margin: 8px;
+  }
 }
 .tabs.is-boxed{
   ul{
@@ -572,7 +575,9 @@ input:checked + .slider:before {
     width: 50px;
   }
 }
-
+p.is-fullwidth{
+  width:100%;
+}
 .card-content{
   padding:0.5em;
 }
