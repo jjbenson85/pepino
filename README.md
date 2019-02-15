@@ -23,4 +23,4 @@
 * Filestack
 
 ## Our Applicatin: Pepino - built for developpers
-A hosted version of this app can be found at [https://wdi-pepino.herokuapp.com/projects/5c66a555afadc8002165ce2b]
+A hosted version of this app can be found at https://wdi-pepino.herokuapp.com/projects/5c66a555afadc8002165ce2b
