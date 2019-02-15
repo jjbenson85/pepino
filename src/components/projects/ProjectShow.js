@@ -213,10 +213,14 @@ class ProjectShow extends React.Component {
                 <div className="card-content">
                   {(this.state.tab==='comments')&&
                   <div className="">
-                    <CommentInput
-                      postCommentUrl={`/api/projects/${_id}/comments`}
-                      updateThread={this.getProject}/>
-                    {comments.map((comment, i)=><CommentCard key={i} comment={comment} />)}
+                    {Auth.isAuthenticated()&&
+                      <CommentInput
+                        postCommentUrl={`/api/projects/${_id}/comments`}
+                        updateThread={this.getProject}
+                      />}
+                    {comments.map((comment, i)=>
+                      <CommentCard key={i} comment={comment} />
+                    )}
                   </div>}
                   {(this.state.tab==='installed')&&
                   <InstalledPackageIndex
