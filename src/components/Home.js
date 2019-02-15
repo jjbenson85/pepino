@@ -92,8 +92,11 @@ class Home extends React.Component{
       return (
         <section className="section">
           <div className="container">
-            <div className="pepino-logo"></div>
-            <div>If you want to manage your projects, see what packages are out there and find out what other users are doing blah blah blah </div>
+            <div className="laser-blade">
+              <div className="pepino-logo"></div>
+              <div className="title is-1">LASER-BLADE</div>
+            </div>
+            <div className="blurb">If you want to manage your projects, see what packages are out there and find out what other users are doing blah blah blah </div>
           </div>
         </section>
       )

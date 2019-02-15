@@ -40,7 +40,7 @@ const UsersEditForm  = ({ data, handleChange, handleSubmit, error, status }) => 
             }}
             onError={(e) => console.log(e)}
             buttonText={'Add An Image'}
-            buttonClass={'button is-rounded'}
+            buttonClass={'button is-rounded is-skew'}
           />
         </div>
       </div>

@@ -55,7 +55,7 @@ class CommentInput extends React.Component{
           </div>
           <div className="control">
             <button
-              className="button is-link"
+              className="button is-primary"
               onClick={this.sendMessage}
             >Send</button>
           </div>
