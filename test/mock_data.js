@@ -17,6 +17,19 @@ const packageData = [{
 
 }]
 
+const projectData =[{
+  name: 'Beautiful Project',
+  description: 'The most beautiful project',
+  // packages: [],
+  // visible: true
+  comments: []
+},{
+  name: 'Health & Tasty',
+  description: 'Super healthy',
+  comments: []
+
+}]
+
 const userData = {
   username: 'James',
   password: 'pass',
@@ -33,5 +46,6 @@ const userData = {
 // }
 module.exports = {
   packageData,
+  projectData,
   userData
 }

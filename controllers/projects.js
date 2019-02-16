@@ -51,7 +51,7 @@ function updateRoute(req, res, next) {
     .findById(req.params.id)
     .then(project => project.set(req.body))
     .then(project => project.save())
-    .then(project => res.status(200).json(project))
+    .then(project => res.status(201).json(project))
     .catch(next)
 }
 

@@ -20,7 +20,7 @@ describe('GET /packages/:name', () => {
 
   it('should return a 200 response', done => {
     api
-      .get('/api/packages')
+      .get(`/api/packages/${_package.name}`)
       .expect(200, done)
   })
 

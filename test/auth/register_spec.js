@@ -7,7 +7,7 @@ describe('POST /register', () => {
     User.remove({})
       .then(() => done())
   })
-  it('should return a message and stauts 201', done => {
+  it('should return a message and status 201', done => {
     api
       .post('/api/register')
       .send(userData)
@@ -17,7 +17,7 @@ describe('POST /register', () => {
       })
   })
 
-  it('should return a stauts 422 and message password doesnot match', done => {
+  it('should return a stauts 422 and message password does not match', done => {
     const badData = Object.assign({}, userData, { password: 'bad', username: 'siddant' })
     api
       .post('/api/register')
