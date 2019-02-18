@@ -185,9 +185,9 @@ class ProjectShow extends React.Component {
               <div className="card is-fullheight">
                 <div id="package-index" className="tabs is-boxed">
                   <ul>
-                    {loggedIn &&<li className={this.state.tab==='search'? 'is-active': ''} ref={el => this.searchTab = el} onClick={(e)=>this.handleTabClick(e,'search')} >
+                    <li className={this.state.tab==='search'? 'is-active': ''} ref={el => this.searchTab = el} onClick={(e)=>this.handleTabClick(e,'search')} >
                       <a>Search</a>
-                    </li>}
+                    </li>
                     <li className={this.state.tab==='installed'? 'is-active': ''} ref={el => this.installedTab = el} onClick={(e)=>this.handleTabClick(e,'installed')} >
                       <a className='level'>
                         <div className='level-item'>Installed</div>
