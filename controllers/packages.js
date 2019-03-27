@@ -22,7 +22,7 @@ function searchRoute(req, res, next){
       return Promise.map(data.results, data => {
         const {name, description, version, links, keywords, author} = data.package
         const score = data.score.final
-        // console.log('searchROute', data )
+
         return Package
           .findOne({name})
           .then( foundPackage => {

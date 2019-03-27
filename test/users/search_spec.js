@@ -4,7 +4,7 @@ const User = require('../../models/user')
 
 const { userData } = require('../mock_data')
 
-describe('GET /users/searc/:search', () => {
+describe('GET /users/search/:search', () => {
   beforeEach(done => {
     User.remove({})
       .then(() => User.create(userData))
